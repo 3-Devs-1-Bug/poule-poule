@@ -17,7 +17,9 @@ const Button: FC<ButtonProps> = ({ primary, className, ...other }) => {
   // Using the `classnames` function, we merge our Button's classes with
   // the ones we received from the parent component.
   // We can use an object to conditionnaly add classes (e.g. `Button-primary`).
-  const classes = classnames(className, 'Button', { 'Button-primary': primary })
+  const classes = classnames(className, 'Button', {
+    'Button-primary': primary
+  })
   return <button {...other} className={classes} />
 }
 
