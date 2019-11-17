@@ -18,7 +18,6 @@ const Button: FC<ButtonProps> = ({ primary, className, ...other }) => {
   // the ones we received from the parent component.
   // We can use an object to conditionnaly add classes (e.g. `Button-primary`).
   const classes = classnames(className, 'Button', { 'Button-primary': primary })
-  console.log(classes)
   return <button {...other} className={classes} />
 }
 
