@@ -1,3 +1,5 @@
+@import 'styles/variables';
+
 $background-color: white;
 $background-color-primary: green;
 
@@ -5,8 +7,8 @@ $background-color-primary: green;
   border: 2px solid black;
   background-color: $background-color;
   cursor: pointer;
-  min-height: 40px;
-  padding: 0 16px;
+  min-height: $base-spacing * 8;
+  padding: 0 $spacing-regular;
 
   &:active {
     background-color: darken($background-color, 10%);
