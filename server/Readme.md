@@ -8,7 +8,7 @@ This project is a REST Api made with dotnet core 3.0
 
 `dotnet run`
 
-Listens on http://localhost:5000 and https://localhost:5001
+Listens on [http://localhost:5000](http://localhost:5000) or [https://localhost:5001](https://localhost:5001).
 
 To test the api, call route http://localhost:5000/values
 
