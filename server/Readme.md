@@ -1,6 +1,7 @@
 This project is a REST Api made with dotnet core 3.0
 
 ## Prerequisites
+
 * [Dotnet Core 3.0 SDK](https://dotnet.microsoft.com/download).
 
 ## Running the project
