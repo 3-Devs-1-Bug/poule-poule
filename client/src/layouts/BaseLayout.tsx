@@ -1,6 +1,8 @@
 import React, { FC } from 'react'
 import { Link } from '@reach/router'
 
+import Header from '../components/Header'
+
 const BaseLayout: FC = ({ children }) => (
   <>
     <nav>
@@ -16,7 +18,11 @@ const BaseLayout: FC = ({ children }) => (
         </li>
       </ul>
     </nav>
-    <h1>Poule Poule</h1>
+    <Header
+      logoSrc='https://picsum.photos/id/69/125'
+      title='Poule poule'
+      subtitle="Il ne faut pas compter les oeufs au popotin d'une poule."
+    />
     {children}
   </>
 )
