@@ -1,0 +1,58 @@
+// TODO: add *actual* style
+@import 'styles/mixins';
+@import 'styles/variables';
+
+$checkmark-size: $base-spacing * 3;
+$checkmark-tick-size: $base-spacing;
+
+.Radio {
+  display: flex;
+  align-items: center;
+  position: relative;
+  user-select: none;
+  cursor: pointer;
+  padding-left: $checkmark-size + $spacing-regular;
+  min-height: $checkmark-size;
+  margin-bottom: $spacing-small;
+
+  &__input {
+    @include hide();
+  }
+
+  &__checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: $checkmark-size;
+    height: $checkmark-size;
+    background-color: #eee;
+    border-radius: 50%;
+    border: 1px solid #888;
+
+    &::after {
+      content: '';
+      position: absolute;
+      display: none;
+
+      top: 50%;
+      left: 50%;
+      width: $checkmark-tick-size;
+      height: $checkmark-tick-size;
+      border-radius: 100%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+    }
+
+    .Radio__input:checked ~ & {
+      background-color: steelblue;
+    }
+
+    .Radio__input:hover ~ & {
+      background-color: #ccc;
+    }
+
+    .Radio__input:checked ~ &::after {
+      display: block;
+    }
+  }
+}
