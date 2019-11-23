@@ -1,4 +1,10 @@
 .Header {
+  &__image {
+    width: 125px;
+    height: 125px;
+    background-color: #ccc;
+  }
+
   &__titles {
     &__title {
     }

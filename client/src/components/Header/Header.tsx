@@ -14,7 +14,7 @@ const Header: FC<HeaderProps> = ({ logoSrc, title, subtitle, className }) => {
   const classes = classnames(className, 'Header')
   return (
     <header className={classes}>
-      <img src={logoSrc} alt='' />
+      <img src={logoSrc} alt='' className='Header__image' />
       <div className='Header__titles'>
         <h1 className='Header__titles__title'>{title}</h1>
         <p className='Header__titles__subtitle'>{subtitle}</p>
