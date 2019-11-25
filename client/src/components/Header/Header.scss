@@ -1,0 +1,22 @@
+@import 'styles/variables';
+@import 'styles/mixins';
+
+.Header {
+  display: flex;
+
+  @include mobile {
+    display: block;
+  }
+
+  .Header--Icon {
+    margin-right: $spacing-regular;
+
+    @include mobile {
+      width: $spacing-larger;
+    }
+  }
+
+  .Header--Subtitle {
+    font-size: $font-size-medium;
+  }
+}
