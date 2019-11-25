@@ -35,3 +35,45 @@ If using Postman, deactivate SSL certificate verification.
 └── Migrations/ # Entity framework generated code for updating the database.
 └── Services/ # Business logic (eg. database calls).
 ```
+
+## Routes (WIP)
+
+- POST https://localhost:5001/game: create a game
+
+```json
+{
+    "id": 3,
+    "hostId": "b76ce637-1549-45e0-8268-551d39f91ae5",
+    "status": 1,
+    "creationDate": "2019-11-25T22:43:14.2937504Z",
+    "playerIds": [
+        "b76ce637-1549-45e0-8268-551d39f91ae5"
+    ]
+}
+```
+
+- GET https://localhost:5001/game/3: get game 3 details
+
+```json
+{
+    "id": 3,
+    "hostId": "b76ce637-1549-45e0-8268-551d39f91ae5",
+    "status": 1,
+    "creationDate": "2019-11-25T22:43:14.2937504",
+    "playerIds": [
+        "1a706910-b52f-45f4-a374-91633986c652",
+        "6be25ae1-68b5-4609-92cc-966391fd1141",
+        "70da2d92-313c-47bb-9ed0-9402d3b301ea",
+        "ad91f360-a4a9-43d3-9a84-d29fcfcb3acc",
+        "b76ce637-1549-45e0-8268-551d39f91ae5"
+    ]
+}
+```
+
+- POST https://localhost:5001/game/3/player: add player to game 3
+
+```json
+{
+    "playerId": "ad91f360-a4a9-43d3-9a84-d29fcfcb3acc"
+}
+```

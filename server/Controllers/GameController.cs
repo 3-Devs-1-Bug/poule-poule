@@ -33,5 +33,12 @@ namespace Api.Controllers
       var gameDto = new GameDTO(game);
       return Ok(gameDto);
     }
+
+    [HttpPost("{gameId}/player")]
+    public ActionResult AddPlayer(int gameId)
+    {
+      string playerId = _gameService.AddPlayer(gameId);
+      return Ok(new { playerId = playerId });
+    }
   }
 }
