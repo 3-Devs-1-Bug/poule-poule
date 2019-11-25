@@ -2,8 +2,8 @@ namespace Api
 {
   public enum GameStatus
   {
-    PendingStart,
-    InProgress,
-    Ended
+    PendingStart = 1,
+    InProgress = 2,
+    Ended = 3
   }
 }

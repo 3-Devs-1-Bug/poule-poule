@@ -11,7 +11,8 @@ namespace server.Migrations
                 name: "Game",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     HostId = table.Column<string>(nullable: true),
                     Status = table.Column<int>(nullable: false),
                     CreationDate = table.Column<DateTime>(nullable: false)
@@ -27,24 +28,23 @@ namespace server.Migrations
                 {
                     Id = table.Column<string>(nullable: false),
                     CreationDate = table.Column<DateTime>(nullable: false),
-                    GameId = table.Column<int>(nullable: false),
-                    GameId1 = table.Column<string>(nullable: true)
+                    GameId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Player", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Player_Game_GameId1",
-                        column: x => x.GameId1,
+                        name: "FK_Player_Game_GameId",
+                        column: x => x.GameId,
                         principalTable: "Game",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Player_GameId1",
+                name: "IX_Player_GameId",
                 table: "Player",
-                column: "GameId1");
+                column: "GameId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

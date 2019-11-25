@@ -10,7 +10,6 @@ namespace Api.Data.Entities
     public string Id { get; set; }
     public DateTime CreationDate { get; set; }
 
-    public int GameId { get; set; }
     public Game Game { get; set; }
   }
 }

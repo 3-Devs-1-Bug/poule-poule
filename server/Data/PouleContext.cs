@@ -20,6 +20,10 @@ namespace Api.Data
       // prevent pluralization of table names
       modelBuilder.Entity<Game>().ToTable("Game");
       modelBuilder.Entity<Player>().ToTable("Player");
+
+      modelBuilder.Entity<Game>()
+        .HasMany(g => g.Players)
+        .WithOne(p => p.Game);
     }
   }
 }

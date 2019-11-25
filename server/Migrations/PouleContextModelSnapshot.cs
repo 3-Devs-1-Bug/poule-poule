@@ -21,8 +21,10 @@ namespace server.Migrations
 
             modelBuilder.Entity("Api.Data.Entities.Game", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
@@ -46,15 +48,12 @@ namespace server.Migrations
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("GameId")
+                    b.Property<int?>("GameId")
                         .HasColumnType("int");
-
-                    b.Property<string>("GameId1")
-                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GameId1");
+                    b.HasIndex("GameId");
 
                     b.ToTable("Player");
                 });
@@ -62,8 +61,8 @@ namespace server.Migrations
             modelBuilder.Entity("Api.Data.Entities.Player", b =>
                 {
                     b.HasOne("Api.Data.Entities.Game", "Game")
-                        .WithMany()
-                        .HasForeignKey("GameId1");
+                        .WithMany("Players")
+                        .HasForeignKey("GameId");
                 });
 #pragma warning restore 612, 618
         }
