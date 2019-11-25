@@ -1,8 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+
+import store from './store'
 import './index.scss'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
+
+import { add } from './store/actions'
+
+console.log(store.getState())
+
+store.dispatch(add(5))
 
 ReactDOM.render(<App />, document.getElementById('root'))
 
