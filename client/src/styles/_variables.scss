@@ -1,6 +1,19 @@
-$base-spacing: 8px;
+$base-spacing: 0.5rem;
 
 $spacing-smaller: $base-spacing / 2;
 $spacing-small: $base-spacing;
 $spacing-regular: $base-spacing * 2;
 $spacing-large: $base-spacing * 4;
+$spacing-larger: $base-spacing * 8;
+
+$font-family-regular: Roboto, Arial, sans-serif;
+
+$font-size-regular: 1rem;
+$font-size-medium: 1.25rem;
+$font-size-large: 1.75rem;
+$font-size-larger: 2.25rem;
+
+$font-weight-bold: 700;
+$font-weight-regular: 400;
+
+$breakpoint-mobile: 800px;
