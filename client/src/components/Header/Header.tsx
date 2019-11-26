@@ -11,7 +11,7 @@ export interface HeaderProps {
 const Header: FC<HeaderProps> = ({ title, subtitle }) => (
   <header className='Header'>
     <img className='Header--Icon' src={icon} alt='Logo de Poule poule' />
-    <div className='Header--Content'>
+    <div>
       <h1>{title}</h1>
       <span className='Header--Subtitle'>{subtitle}</span>
     </div>
