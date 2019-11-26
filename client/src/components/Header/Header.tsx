@@ -10,7 +10,7 @@ export interface HeaderProps {
 
 const Header: FC<HeaderProps> = ({ title, subtitle }) => (
   <header className='Header'>
-    <img className='Header__Icon' src={icon} alt='Poule poule' />
+    <img className='Header__Icon' src={icon} alt='' />
     <div>
       <h1>{title}</h1>
       <span className='Header__Subtitle'>{subtitle}</span>
