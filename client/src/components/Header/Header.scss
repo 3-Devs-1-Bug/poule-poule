@@ -4,11 +4,11 @@
   display: flex;
   flex-wrap: wrap;
 
-  .Header--Icon {
+  &__Icon {
     margin-right: $spacing-regular;
   }
 
-  .Header--Subtitle {
+  &__Subtitle {
     font-size: $font-size-medium;
   }
 }

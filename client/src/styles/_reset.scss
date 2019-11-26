@@ -37,13 +37,13 @@ body {
   line-height: 1.5;
 }
 
-/* Remove list styles on ul, ol elements with a class attribute */
+/* Remove list styles on ul and ol elements */
 ul,
 ol {
   list-style: none;
 }
 
-/* A elements that don't have a class get default styles */
+/* a elements get default styles */
 a {
   text-decoration-skip-ink: auto;
 }
