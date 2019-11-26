@@ -3,8 +3,8 @@ import icon from '../../images/icon.svg'
 import './Header.scss'
 
 export interface HeaderProps {
-  title?: string
-  subtitle?: string
+  title: string
+  subtitle: string
 }
 
 const Header: FC<HeaderProps> = ({ title, subtitle }) => (
