@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, getByText } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import Header from './Header'
 
 describe('Header', () => {
@@ -15,13 +15,13 @@ describe('Header', () => {
 
   it('renders the title prop', () => {
     const { getByText } = render(<Header title='title' subtitle='subtitle' />)
-    const title = getByText(container, 'title')
+    const title = getByText('title')
     expect(title).toHaveTextContent('title')
   })
 
   it('renders the subtitle prop', () => {
     const { getByText } = render(<Header title='title' subtitle='subtitle' />)
-    const subtitle = getByText(container, 'subtitle')
+    const subtitle = getByText('subtitle')
     expect(subtitle).toHaveTextContent('subtitle')
   })
 })
