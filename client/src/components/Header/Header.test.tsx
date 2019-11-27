@@ -14,14 +14,14 @@ describe('Header', () => {
   })
 
   it('renders the title prop', () => {
-    const { getByText } = render(<Header title='title' subtitle='subtitle' />)
-    const title = getByText('title')
+    const { getByRole } = render(<Header title='title' subtitle='subtitle' />)
+    const title = getByRole('heading')
     expect(title).toHaveTextContent('title')
   })
 
   it('renders the subtitle prop', () => {
-    const { getByText } = render(<Header title='title' subtitle='subtitle' />)
-    const subtitle = getByText('subtitle')
+    const { container } = render(<Header title='title' subtitle='subtitle' />)
+    const subtitle = container.querySelector('.Header__Subtitle')
     expect(subtitle).toHaveTextContent('subtitle')
   })
 })
