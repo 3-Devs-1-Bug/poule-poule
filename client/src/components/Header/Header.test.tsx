@@ -14,7 +14,7 @@ describe('Header', () => {
   })
 
   it('renders the title prop', () => {
-    const { container } = render(<Header title='title' subtitle='subtitle' />)
+    const { getByText } = render(<Header title='title' subtitle='subtitle' />)
     const title = getByText(container, 'title')
     expect(title).toHaveTextContent('title')
   })
