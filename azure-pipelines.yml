@@ -6,8 +6,17 @@
 variables:
   clientFolder: client
 
+# Disabled CI on every branches...
 trigger:
-  - '*'
+  branches:
+    exclude:
+      - '*' 
+
+# ...but enable CI on every PRs
+pr:
+  branches:
+    include:
+      - '*'
 
 jobs:
   - job: client_testing
@@ -39,5 +48,4 @@ jobs:
       - task: PublishCodeCoverageResults@1
         inputs:
           codeCoverageTool: Cobertura
-          summaryFileLocation: '$(clientFolder)/**/*coverage.xml'
-          reportDirectory: '$(clientFolder)/**/coverage'
+          summaryFileLocation: '$(clientFolder)/coverage/coverage.xml'
