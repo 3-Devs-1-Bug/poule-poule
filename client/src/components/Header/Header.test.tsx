@@ -20,8 +20,8 @@ describe('Header', () => {
   })
 
   it('renders the subtitle prop', () => {
-    const { container } = render(<Header title='title' subtitle='subtitle' />)
-    const subtitle = container.querySelector('.Header__Subtitle')
-    expect(subtitle).toHaveTextContent('subtitle')
+    const { getByText } = render(<Header title='title' subtitle='subtitle' />)
+    const subtitle = getByText('subtitle')
+    expect(subtitle).toBeDefined()
   })
 })
