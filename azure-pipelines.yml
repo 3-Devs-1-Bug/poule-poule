@@ -19,7 +19,7 @@ steps:
     workingDirectory: client
     displayName: 'Install dependencies'
 
-  - script: CI=true yarn test --reporters=default --reporterss=jest-junit
+  - script: CI=true yarn test --reporters=default --reporters=jest-junit
     workingDirectory: client
     displayName: 'Run tests'
 
