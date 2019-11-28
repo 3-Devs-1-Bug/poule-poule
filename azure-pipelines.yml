@@ -4,29 +4,27 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- task/setup-pipeline
+  - task/setup-pipeline
 
 pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '10.x'
+    displayName: 'Install Node.js'
 
-- script: yarn install
-  workingDirectory: client
-  displayName: 'Dependencies installation'
+  - script: yarn install
+    workingDirectory: client
+    displayName: 'Install dependencies'
 
-- script: yarn test --ci --reporters=default --reporterss=jest-junit
+  - script: CI=true yarn test --reporters=default --reporterss=jest-junit
+    workingDirectory: client
+    displayName: 'Run tests'
 
-  workingDirectory: client
-  displayName: 'Testing'
-
-
-- task: PublishTestResults@2
-  condition: succeededOrFailed()
-  inputs:
-    testRunner: JUnit
-    testResultsFiles: '**/junit.xml'
+  - task: PublishTestResults@2
+    condition: succeededOrFailed()
+    inputs:
+      testRunner: JUnit
+      testResultsFiles: '**/junit.xml'
