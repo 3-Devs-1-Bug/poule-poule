@@ -15,7 +15,9 @@ steps:
       versionSpec: '10.x'
     displayName: 'Install Node.js'
 
-  - script: yarn install
+  - script: |
+      yarn install
+      yarn add -D jest-junit
     workingDirectory: client
     displayName: 'Install dependencies'
 
