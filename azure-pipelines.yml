@@ -3,30 +3,41 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
+variables:
+  clientFolder: client
+
 trigger:
-  - task/setup-pipeline
+  - '*'
 
-pool:
-  vmImage: 'ubuntu-latest'
+jobs:
+  - job: client_testing
+    displayName: Client App Testing
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '10.x'
+        displayName: 'Install Node.js'
 
-steps:
-  - task: NodeTool@0
-    inputs:
-      versionSpec: '10.x'
-    displayName: 'Install Node.js'
+      - script: |
+          yarn install
+          yarn add -D jest-junit
+        workingDirectory: $(clientFolder)
+        displayName: 'Install dependencies'
 
-  - script: |
-      yarn install
-      yarn add -D jest-junit
-    workingDirectory: client
-    displayName: 'Install dependencies'
+      - script: CI=true yarn test --reporters=default --reporters=jest-junit --coverageReporters=cobertura
+        workingDirectory: $(clientFolder)
+        displayName: 'Run tests'
 
-  - script: CI=true yarn test --reporters=default --reporters=jest-junit
-    workingDirectory: client
-    displayName: 'Run tests'
-
-  - task: PublishTestResults@2
-    condition: succeededOrFailed()
-    inputs:
-      testRunner: JUnit
-      testResultsFiles: '**/junit.xml'
+      - task: PublishTestResults@2
+        condition: succeededOrFailed()
+        inputs:
+          testRunner: JUnit
+          testResultsFiles: '$(clientFolder)/junit.xml'
+      
+      - task: PublishCodeCoverageResults@1
+        inputs:
+          codeCoverageTool: Cobertura
+          summaryFileLocation: '$(clientFolder)/coverage/cobertura-coverage.xml'
+          reportDirectory: '$(clientFolder)/coverage'
