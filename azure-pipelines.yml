@@ -39,5 +39,5 @@ jobs:
       - task: PublishCodeCoverageResults@1
         inputs:
           codeCoverageTool: Cobertura
-          summaryFileLocation: '$(clientFolder)/coverage/cobertura-coverage.xml'
-          reportDirectory: '$(clientFolder)/coverage'
+          summaryFileLocation: '$(clientFolder)/**/*coverage.xml'
+          reportDirectory: '$(clientFolder)/**/coverage'
