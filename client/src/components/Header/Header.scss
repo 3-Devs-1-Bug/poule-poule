@@ -1,0 +1,14 @@
+@import 'styles/variables';
+
+.Header {
+  display: flex;
+  flex-wrap: wrap;
+
+  &__Icon {
+    margin-right: $spacing-regular;
+  }
+
+  &__Subtitle {
+    font-size: $font-size-medium;
+  }
+}
