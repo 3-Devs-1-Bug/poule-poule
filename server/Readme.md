@@ -8,6 +8,8 @@ This project is a REST Api made with dotnet core 3.0
 
 Update the database `dotnet ef database update`
 
+Restore packages `dotnet restore`
+
 Run the project `dotnet run`
 
 Listens on [http://localhost:5000](http://localhost:5000) or [https://localhost:5001](https://localhost:5001).
@@ -38,13 +40,15 @@ If using Postman, deactivate SSL certificate verification.
 
 ## Routes (WIP)
 
-- POST https://localhost:5001/game: create a game
+Follow naming conventions from [here](https://restfulapi.net/resource-naming/)
+
+- POST https://localhost:5001/games: create a game
 
 ```json
 {
     "id": 3,
     "hostId": "b76ce637-1549-45e0-8268-551d39f91ae5",
-    "status": 1,
+    "status": "PENDING_START",
     "creationDate": "2019-11-25T22:43:14.2937504Z",
     "playerIds": [
         "b76ce637-1549-45e0-8268-551d39f91ae5"
@@ -52,13 +56,13 @@ If using Postman, deactivate SSL certificate verification.
 }
 ```
 
-- GET https://localhost:5001/game/3: get game 3 details
+- GET https://localhost:5001/games/3: get game 3 details
 
 ```json
 {
     "id": 3,
     "hostId": "b76ce637-1549-45e0-8268-551d39f91ae5",
-    "status": 1,
+    "status": "IN_PROGRESS",
     "creationDate": "2019-11-25T22:43:14.2937504",
     "playerIds": [
         "1a706910-b52f-45f4-a374-91633986c652",
@@ -70,7 +74,7 @@ If using Postman, deactivate SSL certificate verification.
 }
 ```
 
-- POST https://localhost:5001/game/3/player: add player to game 3
+- POST https://localhost:5001/games/3/players: add player to game 3
 
 ```json
 {

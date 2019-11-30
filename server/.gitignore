@@ -3,6 +3,7 @@
 *.user
 *.userosscache
 *.sln.docstates
+.vscode
 
 # Build results
 [Dd]ebug/
@@ -15,3 +16,6 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+
+# Production config file
+appsettings.Production.json

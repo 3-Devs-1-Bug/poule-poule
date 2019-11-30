@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Api.Controllers
 {
   [ApiController]
-  [Route("[controller]")]
+  [Route("games")]
   public class GameController : ControllerBase
   {
     private readonly IGameService _gameService;
@@ -34,11 +34,18 @@ namespace Api.Controllers
       return Ok(gameDto);
     }
 
-    [HttpPost("{gameId}/player")]
+    [HttpPost("{gameId}/players")]
     public ActionResult AddPlayer(int gameId)
     {
-      string playerId = _gameService.AddPlayer(gameId);
-      return Ok(new { playerId = playerId });
+      try
+      {
+        string playerId = _gameService.AddPlayer(gameId);
+        return Ok(new { playerId = playerId });
+      }
+      catch (InvalidOperationException exception)
+      {
+        return BadRequest(new { error = exception.Message });
+      }
     }
   }
 }

@@ -17,13 +17,13 @@ namespace Api.DTO
     {
       id = game.Id;
       hostId = game.HostId;
-      status = game.Status.GetHashCode();
+      status = game.Status.ToString();
       creationDate = game.CreationDate.ToString("o", CultureInfo.InvariantCulture);
       playerIds = game.Players.Select(p => p.Id).ToArray();
     }
     public int id { get; set; }
     public string hostId { get; set; }
-    public int status { get; set; }
+    public string status { get; set; }
     public string creationDate { get; set; }
     public string[] playerIds { get; set; }
   }
