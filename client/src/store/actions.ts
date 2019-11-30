@@ -1,18 +1,19 @@
-import { createAction /* createAsyncAction */ } from 'typesafe-actions'
+import { createAction, createAsyncAction } from 'typesafe-actions'
 
 import {
   ADD,
-  TOGGLE
-  // FETCH_FOO_REQUEST,
-  // FETCH_FOO_FAILURE,
-  // FETCH_FOO_SUCCESS
+  TOGGLE,
+  CREATE_ROOM_REQUEST,
+  CREATE_ROOM_FAILURE,
+  CREATE_ROOM_SUCCESS
 } from './constants'
+import { CreateRoomResponse } from '../utils/api'
 
 export const add = createAction(ADD)<number>()
 export const toggle = createAction(TOGGLE)()
 
-// export const fetchFoo = createAsyncAction(
-//   FETCH_FOO_REQUEST,
-//   FETCH_FOO_SUCCESS,
-//   FETCH_FOO_FAILURE
-// )<string, any[], Error>()
+export const createRoomAsync = createAsyncAction(
+  CREATE_ROOM_REQUEST,
+  CREATE_ROOM_SUCCESS,
+  CREATE_ROOM_FAILURE
+)<void, CreateRoomResponse, Error>()

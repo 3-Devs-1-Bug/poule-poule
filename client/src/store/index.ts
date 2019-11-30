@@ -1,11 +1,16 @@
 import { createStore, applyMiddleware, Middleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
+import thunkMiddleware, { ThunkDispatch } from 'redux-thunk'
 
-import rootReducer from './reducers'
-import { initialState } from './state'
+import rootReducer, { Action } from './reducers'
+import { initialState, State } from './state'
 
-const middlewares: Middleware[] = []
-const enhancer = composeWithDevTools(applyMiddleware(...middlewares))
+type DispatchFunctionType = ThunkDispatch<State, undefined, Action>
+
+const middlewares: Middleware[] = [thunkMiddleware]
+const enhancer = composeWithDevTools(
+  applyMiddleware<DispatchFunctionType, State>(...middlewares)
+)
 
 const store = createStore(rootReducer, initialState, enhancer)
 

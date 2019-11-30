@@ -6,11 +6,12 @@ import './index.scss'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 
-import { add } from './store/actions'
+import { createRoom } from './store/thunks'
 
 console.log(store.getState())
 
-store.dispatch(add(5))
+store.dispatch({ type: 'ADD', payload: 4 })
+store.dispatch(createRoom())
 
 ReactDOM.render(<App />, document.getElementById('root'))
 
