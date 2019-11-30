@@ -1,25 +1,22 @@
 @import 'styles/variables';
 
-$background-color: white;
-$background-color-primary: green;
-
 .Button {
-  border: 2px solid black;
-  background-color: $background-color;
-  cursor: pointer;
-  min-height: $base-spacing * 8;
-  padding: 0 $spacing-regular;
+  background: $color-white;
+  border: $color-black solid 1px;
+  border-radius: $radius-regular;
+  color: $color-black;
+  display: block;
+  font-size: $font-size-medium;
+  font-weight: $font-weight-bold;
+  padding: $spacing-regular $spacing-small;
+  width: 100%;
 
-  &:active {
-    background-color: darken($background-color, 10%);
+  &:hover {
+    cursor: pointer;
   }
 
-  &-primary {
-    background-color: $background-color-primary;
-    color: white;
-
-    &:active {
-      background-color: darken($background-color-primary, 10%);
-    }
+  &--Primary {
+    background: $color-primary;
+    border-color: $color-primary;
   }
 }
