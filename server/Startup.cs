@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Api.Hubs;
 
 namespace server
 {
@@ -32,6 +33,19 @@ namespace server
       ));
       services.AddTransient<IGameService, GameService>();
       services.AddControllers();
+
+      services.AddSignalR(options => options.EnableDetailedErrors = true);
+
+      services.AddCors(options =>
+      {
+        options.AddPolicy("default", policy =>
+        {
+          policy.WithOrigins("http://localhost:3000")
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials();
+        });
+      });
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -55,9 +69,14 @@ namespace server
 
       app.UseRouting();
 
+      // CORS middleware must be configured to execute between the calls to UseRouting and UseEndpoints.
+      // ie. don't move this line.
+      app.UseCors("default");
+
       app.UseEndpoints(endpoints =>
       {
         endpoints.MapControllers();
+        endpoints.MapHub<GameHub>("/gameHub");
       });
     }
   }
