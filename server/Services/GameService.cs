@@ -63,6 +63,9 @@ namespace Api.Services
       game.Players.Add(player);
       _dbContext.SaveChanges();
 
+      // todo broadcast
+      // Clients.All.playerJoined(new PlayerDTO(player));
+
       return player;
     }
 
