@@ -12,6 +12,7 @@ export interface LobbyProps extends RouteComponentProps {
 
 const Lobby: FC<LobbyProps> = (props: LobbyProps) => {
   const [game, setGame] = useState<Game>()
+  
   useEffect(() => {
     axios.get(`/games/${props.id}`).then(response => {
       setGame(response.data as Game)
