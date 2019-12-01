@@ -2,7 +2,7 @@
 
 .Button {
   background: $color-white;
-  border: $color-black solid 1px;
+  border: $border-regular solid $color-black;
   border-radius: $radius-regular;
   color: $color-black;
   display: block;
