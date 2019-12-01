@@ -5,6 +5,7 @@ import { Game } from '../../types/Game'
 import * as moment from 'moment'
 
 import connectToGameHub from '../../utils/signalrConnector'
+import Settings from '../../containers/Settings'
 
 import './Lobby.scss'
 import PlayerBox from '../../components/PlayerBox'
@@ -52,6 +53,7 @@ const Lobby: FC<LobbyProps> = (props: LobbyProps) => {
     <div className='Lobby'>
       {game && (
         <>
+          <Settings />
           <h1>Details de la partie ({game.id})</h1>
           <h2>{`Créé ${moment.utc(game.creationDate).fromNow()}`}</h2>
           <div className='Players'>

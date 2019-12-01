@@ -9,3 +9,15 @@ h1 {
   font-size: $font-size-larger;
   font-weight: $font-weight-bold;
 }
+
+h2 {
+  font-size: $font-size-large;
+  font-weight: $font-weight-medium;
+}
+
+label,
+legend {
+  color: $color-black-70;
+  font-size: $font-size-regular;
+  font-weight: $font-weight-medium;
+}

@@ -1,0 +1,28 @@
+@import 'styles/variables';
+
+.Settings {
+  h2 {
+    margin-bottom: $spacing-regular;
+  }
+
+  &__Setting {
+    & + .Settings__Setting {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: $spacing-large;
+
+      > label {
+        flex-basis: 100%;
+        margin-bottom: $spacing-small;
+      }
+    }
+
+    select {
+      margin-right: $spacing-small;
+    }
+
+    legend {
+      margin-bottom: $spacing-small;
+    }
+  }
+}
