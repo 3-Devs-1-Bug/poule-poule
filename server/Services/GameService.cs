@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Api.Data.Entities;
 using Api.Data;
+using System.IO;
 
 namespace Api.Services
 {
@@ -11,7 +12,7 @@ namespace Api.Services
   {
     Game Create();
     Game Get(int gameId);
-    string AddPlayer(int gameId, string playerId = null);
+    Player AddPlayer(int gameId, string playerId = null);
   }
 
   public class GameService : IGameService
@@ -47,21 +48,32 @@ namespace Api.Services
       return game;
     }
 
-    public string AddPlayer(int gameId, string playerId = null)
+    public Player AddPlayer(int gameId, string playerId = null)
     {
       var game = _dbContext.Games.Find(gameId);
 
-      if(game.Status != GameStatus.PENDING_START)
+      if (game.Status != GameStatus.PENDING_START)
         throw new InvalidOperationException("You can't join a game that has already started");
 
       var player = new Player();
       player.Id = playerId ?? Guid.NewGuid().ToString();
+      player.Name = GetRandomName();
       player.CreationDate = DateTime.UtcNow;
 
       game.Players.Add(player);
       _dbContext.SaveChanges();
 
-      return player.Id;
+      return player;
+    }
+
+    private string GetRandomName()
+    {
+      Random random = new Random();
+      string filePath = Path.Combine(Environment.CurrentDirectory, "Data/random-names.txt");
+      List<string> names = File.ReadLines(filePath).ToList();
+      int randomInt = random.Next(0, names.Count);
+      string randomName = names[randomInt];
+      return randomName;
     }
   }
 }

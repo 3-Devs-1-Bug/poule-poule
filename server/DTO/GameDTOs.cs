@@ -19,12 +19,23 @@ namespace Api.DTO
       hostId = game.HostId;
       status = game.Status.ToString();
       creationDate = game.CreationDate.ToString("o", CultureInfo.InvariantCulture);
-      playerIds = game.Players.Select(p => p.Id).ToArray();
+      players = game.Players.Select(p => new PlayerDTO(p)).ToArray();
     }
     public int id { get; set; }
     public string hostId { get; set; }
     public string status { get; set; }
     public string creationDate { get; set; }
-    public string[] playerIds { get; set; }
+    public PlayerDTO[] players { get; set; }
+  }
+
+  public class PlayerDTO
+  {
+    public PlayerDTO(Player player)
+    {
+       id = player.Id;
+       name = player.Name;
+    }
+    public string id { get; set; }
+    public string name { get; set; }
   }
 }
