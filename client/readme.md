@@ -8,7 +8,7 @@
     ├── containers/ # Components with business logic.
     ├── layouts/ # Layout for pages.
     ├── pages/ # Route components
-    ├── styles/ # Shared SCSS code (variables, utility classes, ...)
+    ├── styles/ # Shared Sass code (variables, utility classes, ...)
     └── utils/ # Various miscelanous code.
 ```
 
