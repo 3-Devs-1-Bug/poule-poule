@@ -6,8 +6,6 @@ This project is a REST Api made with dotnet core 3.0
 
 ## Running the project
 
-Update the database `dotnet ef database update`
-
 Restore packages `dotnet restore`
 
 Run the project `dotnet run`
@@ -18,11 +16,30 @@ To test the API, call route [http://localhost:5000/values](http://localhost:5000
 
 If using Postman, deactivate SSL certificate verification.
 
+## Switching environments
+
+From a Powershell terminal, you can change environments with the following commands: 
+- `$Env:ASPNETCORE_ENVIRONMENT = "Development"`
+- `$Env:ASPNETCORE_ENVIRONMENT = "Production"`
+
+## Database setup
+
+* Get Sql Server installer from link above from [here](https://go.microsoft.com/fwlink/?linkid=853017).
+* Launch installer.
+* Click on Download media/ LocalDB (45mo) and install.
+* Database is created on Api project startup.
+
+To run ef commands you need the install dotnet-ef globally. Due to [this bug](https://github.com/aspnet/EntityFrameworkCore/issues/18977) you need to specify the version.
+`dotnet tool install --global dotnet-ef --version 3.0.0`
+
+### Gotchas
+[CREATE FILE encountered operating system error 5](https://github.com/aspnet/EntityFrameworkCore/issues/11329)
+
 ## Updating the database
 
-1. Modify data classes in server/Data/Entities
-2. Generate the migration script `dotnet ef migrations add [migration_name]`
-3. Update the database `dotnet ef database update`
+1. Modify data classes in server/Data/Entities.
+2. Generate the migration script `dotnet ef migrations add [migration_name]`.
+3. Update the database `dotnet ef database update`.
 
 ## Project structure
 
@@ -40,7 +57,7 @@ If using Postman, deactivate SSL certificate verification.
 
 ## Routes (WIP)
 
-Follow naming conventions from [here](https://restfulapi.net/resource-naming/)
+We will use the naming conventions from [here](https://restfulapi.net/resource-naming/).
 
 - POST https://localhost:5001/games: create a game
 
