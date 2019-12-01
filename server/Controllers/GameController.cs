@@ -39,8 +39,9 @@ namespace Api.Controllers
     {
       try
       {
-        string playerId = _gameService.AddPlayer(gameId);
-        return Ok(new { playerId = playerId });
+        var player = _gameService.AddPlayer(gameId);
+        var playerDto = new PlayerDTO(player);
+        return Ok(playerDto);
       }
       catch (InvalidOperationException exception)
       {

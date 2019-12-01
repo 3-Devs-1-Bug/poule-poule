@@ -8,6 +8,7 @@ namespace Api.Data.Entities
   {
     [Key]
     public string Id { get; set; }
+    public string Name { get; set; }
     public DateTime CreationDate { get; set; }
 
     public Game Game { get; set; }
