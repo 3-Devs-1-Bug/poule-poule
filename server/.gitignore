@@ -3,7 +3,6 @@
 *.user
 *.userosscache
 *.sln.docstates
-.vscode
 
 # Build results
 [Dd]ebug/

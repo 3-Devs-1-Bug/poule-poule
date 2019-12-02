@@ -13,6 +13,7 @@ namespace Api.Services
     Game Create();
     Game Get(int gameId);
     Player AddPlayer(int gameId, string playerId = null);
+    void RemovePlayer(string playerId);
   }
 
   public class GameService : IGameService
@@ -33,8 +34,6 @@ namespace Api.Services
 
       _dbContext.Games.Add(game);
       _dbContext.SaveChanges();
-
-      this.AddPlayer(game.Id, game.HostId);
 
       return game;
     }
@@ -63,16 +62,22 @@ namespace Api.Services
       game.Players.Add(player);
       _dbContext.SaveChanges();
 
-      // todo broadcast
-      // Clients.All.playerJoined(new PlayerDTO(player));
-
       return player;
+    }
+
+    public void RemovePlayer(string playerId)
+    {
+      var player = _dbContext.Players.Find(playerId);
+      if (player == null)
+        throw new ArgumentException($"The playerId {playerId} was not found.");
+      _dbContext.Players.Remove(player);
+      _dbContext.SaveChanges();
     }
 
     private string GetRandomName()
     {
       Random random = new Random();
-      string filePath = Path.Combine(Environment.CurrentDirectory, "Data/random-names.txt");
+      string filePath = Path.Combine(Environment.CurrentDirectory, "Data/video-game-characters.txt");
       List<string> names = File.ReadLines(filePath).ToList();
       int randomInt = random.Next(0, names.Count);
       string randomName = names[randomInt];
