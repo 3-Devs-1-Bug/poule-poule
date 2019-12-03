@@ -19,7 +19,7 @@ namespace Api.DTO
       hostId = game.HostId;
       status = game.Status.ToString();
       creationDate = game.CreationDate.ToString("o", CultureInfo.InvariantCulture);
-      players = game.Players.Select(p => new PlayerDTO(p)).ToArray();
+      players = game.Players.OrderBy(p => p.CreationDate).Select(player => new PlayerDTO(player)).ToArray();
     }
     public int id { get; set; }
     public string hostId { get; set; }

@@ -4,7 +4,7 @@ $background-color: #f8de96;
   .Players {
     margin-top: 1rem;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     flex-wrap: wrap;
     .Player {
       display: flex;

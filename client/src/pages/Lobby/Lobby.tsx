@@ -22,8 +22,7 @@ const Lobby: FC<LobbyProps> = (props: LobbyProps) => {
       const getGameResponse: AxiosResponse<Game> = await axios.get(
         `/games/${props.id}`
       )
-      const game = getGameResponse.data
-      return game
+      return getGameResponse.data
     }
     const onLoad = async () => {
       var game = await loadGame()
@@ -44,21 +43,23 @@ const Lobby: FC<LobbyProps> = (props: LobbyProps) => {
     onLoad()
   }, [props.id])
 
+  // The oldest member of the lobby is the host
+  const isGameHost = (game: Game, playerId: string | undefined) => {
+    return game.players && game.players[0].id === playerId
+  }
+
   return (
     <div className='Lobby'>
       {game && (
         <>
           <h1>Details de la partie ({game.id})</h1>
           <h2>{`Créé ${moment.utc(game.creationDate).fromNow()}`}</h2>
-          <h3>Statut {game.status}</h3>
-          <br></br>
-          <h4>Joueurs</h4>
           <div className='Players'>
             {game.players.map(player => (
               <PlayerBox
                 name={player.name}
                 isSelf={currentPlayerId === player.id || false}
-                isHost={game.hostId === player.id}
+                isHost={isGameHost(game, player.id)}
               />
             ))}
           </div>

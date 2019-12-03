@@ -13,11 +13,6 @@ const connectToGameHub = (
     .configureLogging(SignalR.LogLevel.Debug)
     .build()
 
-  // connection
-  //   .start()
-  //   .then(() => onStart && onStart())
-  //   .catch(err => console.log(err))
-
   return connection
 }
 

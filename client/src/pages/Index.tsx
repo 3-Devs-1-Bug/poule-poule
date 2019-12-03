@@ -12,7 +12,6 @@ const Index: FC<IndexProps> = () => {
   const createGame = async () => {
     const postGameResponse: AxiosResponse<Game> = await axios.post(`/games`)
     const game = postGameResponse.data
-    localStorage.setItem(`poule-poule-${game.id}`, game.hostId)
     navigate(`/lobby/${game.id}`)
   }
 
