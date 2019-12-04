@@ -5,8 +5,12 @@
     margin-bottom: $spacing-regular;
   }
 
+  legend {
+    margin-bottom: $spacing-small;
+  }
+
   &__Setting {
-    & + .Settings__Setting {
+    & + & {
       display: flex;
       flex-wrap: wrap;
       margin-top: $spacing-large;
@@ -17,12 +21,12 @@
       }
     }
 
-    select {
-      margin-right: $spacing-small;
+    label + label {
+      margin-top: $spacing-small;
     }
 
-    legend {
-      margin-bottom: $spacing-small;
+    select {
+      margin-right: $spacing-small;
     }
   }
 }

@@ -49,11 +49,17 @@ const Lobby: FC<LobbyProps> = (props: LobbyProps) => {
     return game.players && game.players[0].id === playerId
   }
 
+  const settings = {
+    difficulty: 'easy',
+    duration: 5,
+    speed: 2
+  }
+
   return (
     <div className='Lobby'>
       {game && (
         <>
-          <Settings />
+          <Settings settings={settings} />
           <h1>Details de la partie ({game.id})</h1>
           <h2>{`Créé ${moment.utc(game.creationDate).fromNow()}`}</h2>
           <div className='Players'>

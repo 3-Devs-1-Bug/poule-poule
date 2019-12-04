@@ -1,13 +1,28 @@
 import React, { FC } from 'react'
 import classnames from 'classnames'
 
+import Radio from '../../components/Radio'
+
 import './Settings.scss'
 
+const difficulties = [
+  { value: 'easy', label: 'Facile' },
+  { value: 'medium', label: 'Intermédiaire' },
+  { value: 'hard', label: 'Difficile' }
+]
+
+export interface SettingsObject {
+  difficulty: string
+  duration: number
+  speed: number
+}
+
 export interface SettingsProps {
+  settings: SettingsObject
   className?: string
 }
 
-const Settings: FC<SettingsProps> = ({ className }) => {
+const Settings: FC<SettingsProps> = ({ settings, className }) => {
   const classes = classnames(className, 'Settings')
 
   return (
@@ -15,12 +30,13 @@ const Settings: FC<SettingsProps> = ({ className }) => {
       <h2>Paramètres de la partie</h2>
       <fieldset className='Settings__Setting Settings__Setting--Difficulty'>
         <legend>Niveau de difficulté</legend>
-        <label htmlFor='easy'>Facile</label>
-        <input type='radio' name='difficulty' id='easy' value='easy' />
-        <label htmlFor='medium'>Intermédiaire</label>
-        <input type='radio' name='difficulty' id='medium' value='medium' />
-        <label htmlFor='hard'>Difficile</label>
-        <input type='radio' name='difficulty' id='hard' value='hard' />
+        {difficulties.map(d => (
+          <Radio
+            key={d.value}
+            label={d.label}
+            checked={d.value === settings.difficulty}
+          />
+        ))}
       </fieldset>
 
       <div className='Settings__Setting Settings__Setting--Duration'>
