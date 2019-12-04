@@ -1,6 +1,23 @@
 // Custom focus styles
-*:focus {
+@mixin focusStyles {
   outline: 0;
   box-shadow: 0 0 0 0.2rem rgba($color-primary, 0.75);
   transition: box-shadow 0.25s;
+}
+
+// Apply focus styles
+*:focus {
+  @include focusStyles();
+}
+
+// Visually hide element
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }

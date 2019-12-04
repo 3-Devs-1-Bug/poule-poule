@@ -1,0 +1,32 @@
+@import 'styles/variables';
+@import 'styles/helpers';
+
+.Radio {
+  position: relative;
+
+  .Radio__Label {
+    color: $color-black;
+    padding-left: $spacing-large;
+  }
+
+  .Radio__Input + .Radio__Label::before {
+    border: $border-regular solid $color-black;
+    border-radius: 50%;
+    content: '';
+    display: block;
+    height: $spacing-regular;
+    left: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: $spacing-regular;
+  }
+
+  .Radio__Input:checked + .Radio__Label::before {
+    background: $color-black;
+  }
+
+  .Radio__Input:focus + .Radio__Label::before {
+    @include focusStyles();
+  }
+}
