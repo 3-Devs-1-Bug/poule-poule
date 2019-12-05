@@ -57,6 +57,7 @@ const Lobby: FC<LobbyProps> = (props: LobbyProps) => {
           <div className='Players'>
             {game.players.map(player => (
               <PlayerBox
+                key={player.id}
                 name={player.name}
                 isSelf={currentPlayerId === player.id || false}
                 isHost={isGameHost(game, player.id)}

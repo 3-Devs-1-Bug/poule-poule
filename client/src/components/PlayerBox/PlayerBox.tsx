@@ -4,11 +4,11 @@ import './PlayerBox.scss'
 
 export interface PlayerProps {
   name: string
-  isHost: boolean
-  isSelf: boolean
+  isHost?: boolean
+  isSelf?: boolean
 }
 
-const Player: FC<PlayerProps> = (props: PlayerProps) => {
+const Player: FC<PlayerProps> = props => {
   return (
     <div className='PlayerBox'>
       <div>
