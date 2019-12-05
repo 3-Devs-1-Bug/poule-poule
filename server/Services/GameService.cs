@@ -30,7 +30,7 @@ namespace Api.Services
       var game = new Game();
       game.CreationDate = DateTime.UtcNow;
       game.HostId = Guid.NewGuid().ToString();
-      game.Status = GameStatus.PENDING_START;
+      game.Status = GameStatus.PendingStart;
 
       _dbContext.Games.Add(game);
       _dbContext.SaveChanges();
@@ -51,7 +51,7 @@ namespace Api.Services
     {
       var game = _dbContext.Games.Find(gameId);
 
-      if (game.Status != GameStatus.PENDING_START)
+      if (game.Status != GameStatus.PendingStart)
         throw new InvalidOperationException("You can't join a game that has already started");
 
       var player = new Player();

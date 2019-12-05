@@ -11,6 +11,9 @@ namespace Api.Data.Entities
     public string HostId { get; set; }
     public GameStatus Status { get; set; }
     public DateTime CreationDate { get; set; }
+    public Difficulty Difficulty { get; set; }
+    public TimeSpan Duration { get; set; }
+    public TimeSpan CardSpeed { get; set; }
 
     public ICollection<Player> Players { get; } = new List<Player>();
   }
