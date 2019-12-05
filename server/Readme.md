@@ -2,7 +2,7 @@ This project is a REST Api made with dotnet core 3.0
 
 ## Prerequisites
 
-* [Dotnet Core 3.0 SDK](https://dotnet.microsoft.com/download).
+- [Dotnet Core 3.0 SDK](https://dotnet.microsoft.com/download).
 
 ## Running the project
 
@@ -18,21 +18,23 @@ If using Postman, deactivate SSL certificate verification.
 
 ## Switching environments
 
-From a Powershell terminal, you can change environments with the following commands: 
+From a Powershell terminal, you can change environments with the following commands:
+
 - `$Env:ASPNETCORE_ENVIRONMENT = "Development"`
 - `$Env:ASPNETCORE_ENVIRONMENT = "Production"`
 
 ## Database setup
 
-* Get Sql Server installer from link above from [here](https://go.microsoft.com/fwlink/?linkid=853017).
-* Launch installer.
-* Click on Download media/ LocalDB (45mo) and install.
-* Database is created on Api project startup.
+- Get Sql Server installer from link above from [here](https://go.microsoft.com/fwlink/?linkid=853017).
+- Launch installer.
+- Click on Download media/ LocalDB (45mo) and install.
+- Database is created on Api project startup.
 
 To run ef commands you need the install dotnet-ef globally. Due to [this bug](https://github.com/aspnet/EntityFrameworkCore/issues/18977) you need to specify the version.
 `dotnet tool install --global dotnet-ef --version 3.0.0`
 
 ### Gotchas
+
 [CREATE FILE encountered operating system error 5](https://github.com/aspnet/EntityFrameworkCore/issues/11329)
 
 ## Updating the database
@@ -63,13 +65,16 @@ We will use the naming conventions from [here](https://restfulapi.net/resource-n
 
 ```json
 {
-    "id": 3,
-    "hostId": "b76ce637-1549-45e0-8268-551d39f91ae5",
-    "status": "PENDING_START",
-    "creationDate": "2019-11-25T22:43:14.2937504Z",
-    "playerIds": [
-        "b76ce637-1549-45e0-8268-551d39f91ae5"
-    ]
+  "id": 3,
+  "hostId": "b76ce637-1549-45e0-8268-551d39f91ae5",
+  "status": "PENDING_START",
+  "creationDate": "2019-11-25T22:43:14.2937504Z",
+  "playerIds": [
+      {
+        "id": "7739c775-11db-4bb4-9e22-3d1ccf47ca8a",
+        "name": "Clint"
+      }
+  ]
 }
 ```
 
@@ -77,16 +82,19 @@ We will use the naming conventions from [here](https://restfulapi.net/resource-n
 
 ```json
 {
-    "id": 3,
-    "hostId": "b76ce637-1549-45e0-8268-551d39f91ae5",
-    "status": "IN_PROGRESS",
-    "creationDate": "2019-11-25T22:43:14.2937504",
-    "playerIds": [
-        "1a706910-b52f-45f4-a374-91633986c652",
-        "6be25ae1-68b5-4609-92cc-966391fd1141",
-        "70da2d92-313c-47bb-9ed0-9402d3b301ea",
-        "ad91f360-a4a9-43d3-9a84-d29fcfcb3acc",
-        "b76ce637-1549-45e0-8268-551d39f91ae5"
+    "id": 2,
+    "hostId": "63a4cc39-fa9d-4096-87b9-bb302fa15449",
+    "status": "PENDING_START",
+    "creationDate": "2019-12-01T12:05:22.5023072",
+    "players": [
+        {
+            "id": "63a4cc39-fa9d-4096-87b9-bb302fa15449",
+            "name": "Lin"
+        },
+        {
+            "id": "7739c775-11db-4bb4-9e22-3d1ccf47ca8a",
+            "name": "Clint"
+        }
     ]
 }
 ```
@@ -95,6 +103,7 @@ We will use the naming conventions from [here](https://restfulapi.net/resource-n
 
 ```json
 {
-    "playerId": "ad91f360-a4a9-43d3-9a84-d29fcfcb3acc"
+    "id": "ac2e5cad-d5a4-422f-b1de-8002d1fb25f2",
+    "name": "Emmy"
 }
 ```

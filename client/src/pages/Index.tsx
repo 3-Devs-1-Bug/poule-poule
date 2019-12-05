@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
 import { RouteComponentProps, navigate } from '@reach/router'
 
 import Button from '../components/Button'
@@ -9,11 +9,10 @@ import { Game } from '../types/Game'
 export interface IndexProps extends RouteComponentProps {}
 
 const Index: FC<IndexProps> = () => {
-  const createGame = () => {
-    axios.post('/games').then(response => {
-      const game = response.data as Game
-      navigate(`/lobby/${game.id}`)
-    })
+  const createGame = async () => {
+    const postGameResponse: AxiosResponse<Game> = await axios.post(`/games`)
+    const game = postGameResponse.data
+    navigate(`/lobby/${game.id}`)
   }
 
   return (

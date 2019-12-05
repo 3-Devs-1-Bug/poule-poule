@@ -1,0 +1,12 @@
+@import 'styles/variables';
+
+$background-color: rgb(37, 153, 138);
+
+.PlayerBox {
+  border: 2px solid black;
+  background-color: $background-color;
+  color: white;
+  padding: 1rem;
+  margin: 1rem;
+  min-width: 10rem;
+}
