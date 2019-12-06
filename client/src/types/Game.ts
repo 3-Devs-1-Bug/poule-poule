@@ -5,5 +5,8 @@ export interface Game {
   hostId: string
   status: 'PENDING_START' | 'IN_PROGRESS' | 'ENDED'
   creationDate: string
+  difficulty: string
+  cardSpeed: Number
+  roundsToWin: Number
   players: Array<Player>
 }

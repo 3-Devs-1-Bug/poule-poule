@@ -12,8 +12,8 @@ namespace Api.Data.Entities
     public GameStatus Status { get; set; }
     public DateTime CreationDate { get; set; }
     public Difficulty Difficulty { get; set; }
-    public TimeSpan Duration { get; set; }
     public TimeSpan CardSpeed { get; set; }
+    public int RoundsToWin { get; set; }
 
     public ICollection<Player> Players { get; } = new List<Player>();
   }

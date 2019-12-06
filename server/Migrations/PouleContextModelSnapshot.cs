@@ -35,11 +35,11 @@ namespace server.Migrations
                     b.Property<int>("Difficulty")
                         .HasColumnType("int");
 
-                    b.Property<TimeSpan>("Duration")
-                        .HasColumnType("time");
-
                     b.Property<string>("HostId")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RoundsToWin")
+                        .HasColumnType("int");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");

@@ -63,6 +63,9 @@ const Lobby: FC<LobbyProps> = (props: LobbyProps) => {
           <Settings settings={defaultSettings} />
           <h1>Details de la partie ({game.id})</h1>
           <h2>{`Créé ${moment.utc(game.creationDate).fromNow()}`}</h2>
+          <h2>Niveau de difficulté: {game.difficulty}</h2>
+          <h2>Temps entre chaque carte: {game.cardSpeed} secondes</h2>
+          <h2>Nombre de manches pour gagner: {game.roundsToWin}</h2>
           <div className='Players'>
             {game.players.map(player => (
               <PlayerBox

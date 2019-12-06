@@ -19,11 +19,11 @@ namespace server.Migrations
                 nullable: false,
                 defaultValue: 0);
 
-            migrationBuilder.AddColumn<TimeSpan>(
-                name: "Duration",
+            migrationBuilder.AddColumn<int>(
+                name: "RoundsToWin",
                 table: "Game",
                 nullable: false,
-                defaultValue: new TimeSpan(0, 0, 0, 0, 0));
+                defaultValue: 0);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -37,7 +37,7 @@ namespace server.Migrations
                 table: "Game");
 
             migrationBuilder.DropColumn(
-                name: "Duration",
+                name: "RoundsToWin",
                 table: "Game");
         }
     }

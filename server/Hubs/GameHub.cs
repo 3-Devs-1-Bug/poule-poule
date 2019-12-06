@@ -24,11 +24,11 @@ namespace Api.Hubs
 
     private int GetGameId()
     {
-        int gameId = 0;
-        if (!int.TryParse(Context.GetHttpContext().Request.Query["gameId"], out gameId))
-          throw new InvalidOperationException("Game id is missing from query string");
+      int gameId = 0;
+      if (!int.TryParse(Context.GetHttpContext().Request.Query["gameId"], out gameId))
+        throw new InvalidOperationException("Game id is missing from query string");
 
-        return gameId;
+      return gameId;
     }
 
     public override Task OnConnectedAsync()
@@ -44,6 +44,7 @@ namespace Api.Hubs
 
       return base.OnConnectedAsync();
     }
+
     public override Task OnDisconnectedAsync(Exception exception)
     {
       string playerId = GetPlayerId();
@@ -56,6 +57,19 @@ namespace Api.Hubs
       Clients.Group(groupName).SendAsync("refreshGame");
 
       return base.OnDisconnectedAsync(exception);
+    }
+
+    public Task UpdateGameSettings(SettingsDTO settings)
+    {
+      int gameId = GetGameId();
+      string groupName = "game-" + gameId;
+
+      Enum.TryParse(settings.difficulty, out Difficulty difficulty);
+      var cardSpeed = TimeSpan.FromSeconds(settings.cardSpeed);
+
+      _gameService.UpdateSettings(settings.gameId, difficulty, cardSpeed, settings.roundsToWin);
+
+      return Clients.Group(groupName).SendAsync("refreshGame");
     }
   }
 }

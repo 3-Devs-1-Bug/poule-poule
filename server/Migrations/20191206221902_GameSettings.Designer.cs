@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace server.Migrations
 {
     [DbContext(typeof(PouleContext))]
-    [Migration("20191204183550_GameSettings")]
+    [Migration("20191206221902_GameSettings")]
     partial class GameSettings
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,11 +37,11 @@ namespace server.Migrations
                     b.Property<int>("Difficulty")
                         .HasColumnType("int");
 
-                    b.Property<TimeSpan>("Duration")
-                        .HasColumnType("time");
-
                     b.Property<string>("HostId")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RoundsToWin")
+                        .HasColumnType("int");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
