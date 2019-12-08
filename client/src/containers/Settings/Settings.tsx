@@ -53,7 +53,7 @@ class Settings extends Component<SettingsProps, SettingsState> {
     return (
       <div className='Settings'>
         <h2>Paramètres de la partie</h2>
-        <fieldset className='Settings__Setting Settings__Setting--Difficulty'>
+        <fieldset className='Settings__Field'>
           <legend>Niveau de difficulté</legend>
           {difficulties.map(({ value, label }) => (
             <Radio
@@ -67,7 +67,7 @@ class Settings extends Component<SettingsProps, SettingsState> {
           ))}
         </fieldset>
 
-        <div className='Settings__Setting Settings__Setting--Duration'>
+        <div className='Settings__Field'>
           <label htmlFor='duration'>Durée de la partie :</label>
           <select
             name='duration'
@@ -84,7 +84,7 @@ class Settings extends Component<SettingsProps, SettingsState> {
           <span>manches de jeu.</span>
         </div>
 
-        <div className='Settings__Setting Settings__Setting--Speed'>
+        <div className='Settings__Field'>
           <label htmlFor='speed'>Vitesse de la partie</label>
           <select
             name='speed'
