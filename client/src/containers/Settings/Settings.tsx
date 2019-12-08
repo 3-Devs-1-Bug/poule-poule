@@ -10,8 +10,8 @@ const difficulties = [
   { value: Difficulties.MEDIUM, label: 'Intermédiaire' },
   { value: Difficulties.HARD, label: 'Difficile' }
 ]
-const durations = [3, 5, 10]
-const speeds = [1.5, 2, 2.5]
+const roundsToWin = [3, 5, 10]
+const cardSpeeds = [1.5, 2, 2.5]
 
 export interface SettingsProps {
   settings: SettingsType
@@ -20,15 +20,15 @@ export interface SettingsProps {
 
 export interface SettingsState {
   difficulty: string
-  duration: number
-  speed: number
+  roundsToWin: number
+  cardSpeed: number
 }
 
 class Settings extends Component<SettingsProps, SettingsState> {
   state: SettingsState = {
     difficulty: this.props.settings.difficulty,
-    duration: this.props.settings.roundsToWin,
-    speed: this.props.settings.cardSpeed
+    roundsToWin: this.props.settings.roundsToWin,
+    cardSpeed: this.props.settings.cardSpeed
   }
 
   handleDifficultyChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -37,15 +37,15 @@ class Settings extends Component<SettingsProps, SettingsState> {
     })
   }
 
-  handleDurationChange = (e: ChangeEvent<HTMLSelectElement>) => {
+  handleRoundsToWinChange = (e: ChangeEvent<HTMLSelectElement>) => {
     this.setState({
-      duration: parseFloat(e.target.value)
+      roundsToWin: parseFloat(e.target.value)
     })
   }
 
-  handleSpeedChange = (e: ChangeEvent<HTMLSelectElement>) => {
+  handleCardSpeedChange = (e: ChangeEvent<HTMLSelectElement>) => {
     this.setState({
-      speed: parseFloat(e.target.value)
+      cardSpeed: parseFloat(e.target.value)
     })
   }
 
@@ -72,12 +72,12 @@ class Settings extends Component<SettingsProps, SettingsState> {
           <select
             name='duration'
             id='duration'
-            value={this.state.duration}
-            onChange={this.handleDurationChange}
+            value={this.state.roundsToWin}
+            onChange={this.handleRoundsToWinChange}
           >
-            {durations.map(duration => (
-              <option key={duration} value={duration}>
-                {duration}
+            {roundsToWin.map(round => (
+              <option key={round} value={round}>
+                {round}
               </option>
             ))}
           </select>
@@ -89,10 +89,10 @@ class Settings extends Component<SettingsProps, SettingsState> {
           <select
             name='speed'
             id='speed'
-            value={this.state.speed}
-            onChange={this.handleSpeedChange}
+            value={this.state.cardSpeed}
+            onChange={this.handleCardSpeedChange}
           >
-            {speeds.map(speed => (
+            {cardSpeeds.map(speed => (
               <option key={speed} value={speed}>
                 {speed}
               </option>
