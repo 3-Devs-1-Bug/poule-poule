@@ -2,13 +2,13 @@ import React, { Component, ChangeEvent } from 'react'
 
 import Radio from '../../components/Radio'
 import { Settings as SettingsType } from '../../types/Settings'
-import { Difficulties } from '../../types/Difficulties'
+import { Difficulty } from '../../types/Difficulty'
 import './Settings.scss'
 
 const difficulties = [
-  { value: Difficulties.EASY, label: 'Facile' },
-  { value: Difficulties.MEDIUM, label: 'Intermédiaire' },
-  { value: Difficulties.HARD, label: 'Difficile' }
+  { value: Difficulty.EASY, label: 'Facile' },
+  { value: Difficulty.MEDIUM, label: 'Intermédiaire' },
+  { value: Difficulty.HARD, label: 'Difficile' }
 ]
 
 export interface SettingsProps {

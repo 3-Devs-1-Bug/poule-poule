@@ -6,7 +6,7 @@ import { RouteComponentProps } from '@reach/router'
 import connectToGameHub from '../../utils/signalrConnector'
 import { Game } from '../../types/Game'
 import { Settings as SettingsType } from '../../types/Settings'
-import { Difficulties } from '../../types/Difficulties'
+import { Difficulty } from '../../types/Difficulty'
 import Settings from '../../containers/Settings'
 import './Lobby.scss'
 import PlayerBox from '../../components/PlayerBox'
@@ -51,7 +51,7 @@ const Lobby: FC<LobbyProps> = (props: LobbyProps) => {
   }
 
   const defaultSettings: SettingsType = {
-    difficulty: Difficulties.EASY,
+    difficulty: Difficulty.EASY,
     roundsToWin: 10,
     cardSpeed: 1.5
   }
