@@ -1,12 +1,13 @@
 import React, { FC, useEffect, useState } from 'react'
 import axios, { AxiosResponse } from 'axios'
+import moment from 'moment'
 import { RouteComponentProps } from '@reach/router'
-import { Game } from '../../types/Game'
-import * as moment from 'moment'
 
 import connectToGameHub from '../../utils/signalrConnector'
+import { Game } from '../../types/Game'
+import { SettingsType } from '../../types/Settings'
+import { Difficulties } from '../../types/Difficulties'
 import Settings from '../../containers/Settings'
-
 import './Lobby.scss'
 import PlayerBox from '../../components/PlayerBox'
 
@@ -49,17 +50,17 @@ const Lobby: FC<LobbyProps> = (props: LobbyProps) => {
     return game.players && game.players[0].id === playerId
   }
 
-  const settings = {
-    difficulty: 'easy',
-    duration: 5,
-    speed: 2
+  const defaultSettings: SettingsType = {
+    difficulty: Difficulties.EASY,
+    duration: 10,
+    speed: 1.5
   }
 
   return (
     <div className='Lobby'>
       {game && (
         <>
-          <Settings settings={settings} />
+          <Settings settings={defaultSettings} />
           <h1>Details de la partie ({game.id})</h1>
           <h2>{`Créé ${moment.utc(game.creationDate).fromNow()}`}</h2>
           <div className='Players'>
