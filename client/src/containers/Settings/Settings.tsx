@@ -10,8 +10,6 @@ const difficulties = [
   { value: Difficulties.MEDIUM, label: 'Intermédiaire' },
   { value: Difficulties.HARD, label: 'Difficile' }
 ]
-const roundsToWin = [3, 5, 10]
-const cardSpeeds = [1.5, 2, 2.5]
 
 export interface SettingsProps {
   settings: SettingsType
@@ -20,15 +18,15 @@ export interface SettingsProps {
 
 export interface SettingsState {
   difficulty: string
-  roundsToWin: number
-  cardSpeed: number
+  roundsToWin: string
+  cardSpeed: string
 }
 
 class Settings extends Component<SettingsProps, SettingsState> {
   state: SettingsState = {
     difficulty: this.props.settings.difficulty,
-    roundsToWin: this.props.settings.roundsToWin,
-    cardSpeed: this.props.settings.cardSpeed
+    roundsToWin: this.props.settings.roundsToWin.toString(),
+    cardSpeed: this.props.settings.cardSpeed.toString()
   }
 
   handleDifficultyChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -37,15 +35,15 @@ class Settings extends Component<SettingsProps, SettingsState> {
     })
   }
 
-  handleRoundsToWinChange = (e: ChangeEvent<HTMLSelectElement>) => {
+  handleRoundsToWinChange = (e: ChangeEvent<HTMLInputElement>) => {
     this.setState({
-      roundsToWin: parseFloat(e.target.value)
+      roundsToWin: e.target.value
     })
   }
 
-  handleCardSpeedChange = (e: ChangeEvent<HTMLSelectElement>) => {
+  handleCardSpeedChange = (e: ChangeEvent<HTMLInputElement>) => {
     this.setState({
-      cardSpeed: parseFloat(e.target.value)
+      cardSpeed: e.target.value
     })
   }
 
@@ -68,36 +66,24 @@ class Settings extends Component<SettingsProps, SettingsState> {
         </fieldset>
 
         <div className='Settings__Field'>
-          <label htmlFor='duration'>Durée de la partie :</label>
-          <select
-            name='duration'
-            id='duration'
+          <label htmlFor='roundsToWin'>Durée de la partie :</label>
+          <input
+            type='number'
+            id='roundsToWin'
             value={this.state.roundsToWin}
             onChange={this.handleRoundsToWinChange}
-          >
-            {roundsToWin.map(round => (
-              <option key={round} value={round}>
-                {round}
-              </option>
-            ))}
-          </select>
+          />
           <span>manches de jeu.</span>
         </div>
 
         <div className='Settings__Field'>
-          <label htmlFor='speed'>Vitesse de la partie</label>
-          <select
-            name='speed'
-            id='speed'
+          <label htmlFor='cardSpeed'>Vitesse de la partie</label>
+          <input
+            type='number'
+            id='cardSpeed'
             value={this.state.cardSpeed}
             onChange={this.handleCardSpeedChange}
-          >
-            {cardSpeeds.map(speed => (
-              <option key={speed} value={speed}>
-                {speed}
-              </option>
-            ))}
-          </select>
+          />
           <span>secondes entre chaque carte.</span>
         </div>
       </div>
