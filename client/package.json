@@ -51,6 +51,5 @@
       "prettier --write",
       "git add"
     ]
-  },
-  "proxy": "http://local-backend:4000"
+  }
 }
