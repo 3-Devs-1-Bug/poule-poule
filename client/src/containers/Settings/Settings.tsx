@@ -1,7 +1,7 @@
 import React, { Component, ChangeEvent } from 'react'
 
 import Radio from '../../components/Radio'
-import { SettingsType } from '../../types/Settings'
+import { Settings as SettingsType } from '../../types/Settings'
 import { Difficulties } from '../../types/Difficulties'
 import './Settings.scss'
 
@@ -27,8 +27,8 @@ export interface SettingsState {
 class Settings extends Component<SettingsProps, SettingsState> {
   state: SettingsState = {
     difficulty: this.props.settings.difficulty,
-    duration: this.props.settings.duration,
-    speed: this.props.settings.speed
+    duration: this.props.settings.roundsToWin,
+    speed: this.props.settings.cardSpeed
   }
 
   handleDifficultyChange = (e: ChangeEvent<HTMLInputElement>) => {

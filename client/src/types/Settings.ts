@@ -1,7 +1,7 @@
 import { Difficulties } from './Difficulties'
 
-export interface SettingsType {
+export interface Settings {
   difficulty: Difficulties
-  duration: 3 | 5 | 10
-  speed: 1.5 | 2 | 2.5
+  roundsToWin: 3 | 5 | 10
+  cardSpeed: 1.5 | 2 | 2.5
 }
