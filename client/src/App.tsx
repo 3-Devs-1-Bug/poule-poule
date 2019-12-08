@@ -8,7 +8,7 @@ import Lobby from './pages/Lobby'
 import axios from 'axios'
 
 const App: React.FC = () => {
-  axios.defaults.baseURL = 'https://localhost:5001'
+  axios.defaults.baseURL = 'http://localhost:5000'
 
   return (
     <BaseLayout>
