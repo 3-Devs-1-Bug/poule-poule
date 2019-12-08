@@ -1,0 +1,32 @@
+@import 'styles/variables';
+
+.Settings {
+  h2 {
+    margin-bottom: $spacing-regular;
+  }
+
+  legend {
+    margin-bottom: $spacing-small;
+  }
+
+  &__Field {
+    & + & {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: $spacing-large;
+
+      > label {
+        flex-basis: 100%;
+        margin-bottom: $spacing-small;
+      }
+    }
+
+    label + label {
+      margin-top: $spacing-small;
+    }
+
+    [type='number'] {
+      margin-right: $spacing-small;
+    }
+  }
+}

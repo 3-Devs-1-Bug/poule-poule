@@ -9,6 +9,7 @@ $spacing-larger: $base-spacing * 8;
 $color-primary: #cfcfcf;
 $color-white: #ffffff;
 $color-black: #050505;
+$color-black-70: rgba($color-black, 0.7);
 
 $radius-regular: 0.3125rem;
 
@@ -22,4 +23,5 @@ $font-size-large: 1.75rem;
 $font-size-larger: 2.25rem;
 
 $font-weight-bold: 700;
+$font-weight-medium: 500;
 $font-weight-regular: 400;
