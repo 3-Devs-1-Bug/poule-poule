@@ -5,12 +5,12 @@
   display: block;
   position: relative;
 
-  .Radio__Label {
+  &__Label {
     color: $color-black;
     padding-left: $spacing-large;
   }
 
-  .Radio__Input + .Radio__Label::before {
+  &__Input + &__Label::before {
     border: $border-regular solid $color-black;
     border-radius: 50%;
     content: '';
@@ -23,11 +23,11 @@
     width: $spacing-regular;
   }
 
-  .Radio__Input:checked + .Radio__Label::before {
+  &__Input:checked + &__Label::before {
     background: $color-black;
   }
 
-  .Radio__Input:focus + .Radio__Label::before {
+  &__Input:focus + &__Label::before {
     @include focusStyles();
   }
 }

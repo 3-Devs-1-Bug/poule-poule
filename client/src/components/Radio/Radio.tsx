@@ -13,7 +13,7 @@ export interface RadioProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const Radio: FC<RadioProps> = ({
   label,
-  checked = false,
+  checked,
   value,
   onChange,
   className,
