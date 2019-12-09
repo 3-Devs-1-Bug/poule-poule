@@ -31,10 +31,10 @@ namespace Api.Services
       var game = new Game();
       game.CreationDate = DateTime.UtcNow;
       game.HostId = Guid.NewGuid().ToString();
-      game.Status = GameStatus.PendingStart;
+      game.Status = GameStatus.PENDING_START;
 
       game.CardSpeed = new TimeSpan(0, 0, 0, 1, 500);
-      game.Difficulty = Difficulty.Easy;
+      game.Difficulty = Difficulty.EASY;
       game.RoundsToWin = 3;
 
       _dbContext.Games.Add(game);
@@ -65,7 +65,7 @@ namespace Api.Services
     {
       var game = _dbContext.Games.Find(gameId);
 
-      if (game.Status != GameStatus.PendingStart)
+      if (game.Status != GameStatus.PENDING_START)
         throw new InvalidOperationException("You can't join a game that has already started");
 
       var player = new Player();

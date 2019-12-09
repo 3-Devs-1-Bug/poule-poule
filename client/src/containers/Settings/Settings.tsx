@@ -3,6 +3,7 @@ import React, { Component, ChangeEvent } from 'react'
 import Radio from '../../components/Radio'
 import { Settings as SettingsType } from '../../types/Settings'
 import { Difficulty } from '../../types/Difficulty'
+
 import './Settings.scss'
 
 const difficulties = [
@@ -11,12 +12,12 @@ const difficulties = [
   { value: Difficulty.HARD, label: 'Difficile' }
 ]
 
-export interface SettingsProps {
-  settings: SettingsType
+type SettingsProps = SettingsType & {
   className?: string
+  updateSettings: (settings: SettingsType) => void
 }
 
-export interface SettingsState {
+interface SettingsState {
   difficulty: string
   roundsToWin: string
   cardSpeed: string
@@ -24,27 +25,48 @@ export interface SettingsState {
 
 class Settings extends Component<SettingsProps, SettingsState> {
   state: SettingsState = {
-    difficulty: this.props.settings.difficulty,
-    roundsToWin: this.props.settings.roundsToWin.toString(),
-    cardSpeed: this.props.settings.cardSpeed.toString()
+    difficulty: this.props.difficulty.toString(),
+    roundsToWin: this.props.roundsToWin.toString(),
+    cardSpeed: this.props.cardSpeed.toString()
   }
 
   handleDifficultyChange = (e: ChangeEvent<HTMLInputElement>) => {
     this.setState({
       difficulty: e.target.value
     })
+    const { roundsToWin, cardSpeed } = this.props
+    const settings: SettingsType = {
+      difficulty: Difficulty[e.target.value as keyof typeof Difficulty],
+      roundsToWin,
+      cardSpeed
+    }
+    this.props.updateSettings(settings)
   }
 
   handleRoundsToWinChange = (e: ChangeEvent<HTMLInputElement>) => {
     this.setState({
       roundsToWin: e.target.value
     })
+    const { difficulty, cardSpeed } = this.props
+    const settings: SettingsType = {
+      difficulty,
+      roundsToWin: Number(e.target.value),
+      cardSpeed
+    }
+    this.props.updateSettings(settings)
   }
 
   handleCardSpeedChange = (e: ChangeEvent<HTMLInputElement>) => {
     this.setState({
       cardSpeed: e.target.value
     })
+    const { difficulty, roundsToWin } = this.props
+    const settings: SettingsType = {
+      difficulty,
+      roundsToWin,
+      cardSpeed: Number(e.target.value)
+    }
+    this.props.updateSettings(settings)
   }
 
   render() {

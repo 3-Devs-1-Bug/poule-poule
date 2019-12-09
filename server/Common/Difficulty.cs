@@ -2,8 +2,8 @@ namespace Api
 {
   public enum Difficulty
   {
-    Easy,
-    Medium,
-    Hard
+    EASY,
+    MEDIUM,
+    HARD
   }
 }

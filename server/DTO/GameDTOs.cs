@@ -36,7 +36,6 @@ namespace Api.DTO
 
   public class SettingsDTO
   {
-    public int gameId { get; set; }
     public string difficulty { get; set; }
     public double cardSpeed { get; set; }
     public int roundsToWin { get; set; }

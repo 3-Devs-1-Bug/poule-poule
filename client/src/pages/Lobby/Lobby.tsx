@@ -2,14 +2,13 @@ import React, { FC, useEffect, useState } from 'react'
 import axios, { AxiosResponse } from 'axios'
 import moment from 'moment'
 import { RouteComponentProps } from '@reach/router'
-
+import { Settings as SettingsType } from '../../types/Settings'
 import connectToGameHub from '../../utils/signalrConnector'
 import { Game } from '../../types/Game'
-import { Settings as SettingsType } from '../../types/Settings'
-import { Difficulty } from '../../types/Difficulty'
 import Settings from '../../containers/Settings'
 import './Lobby.scss'
 import PlayerBox from '../../components/PlayerBox'
+import { HubConnection } from '@microsoft/signalr'
 
 export interface LobbyProps extends RouteComponentProps {
   id?: string
@@ -17,6 +16,7 @@ export interface LobbyProps extends RouteComponentProps {
 
 const Lobby: FC<LobbyProps> = (props: LobbyProps) => {
   const [game, setGame] = useState<Game>()
+  const [hubConnection, setHubConnection] = useState<HubConnection>()
   const [currentPlayerId, setCurrentPlayerId] = useState<string>()
 
   useEffect(() => {
@@ -31,14 +31,14 @@ const Lobby: FC<LobbyProps> = (props: LobbyProps) => {
       setGame(game)
 
       if (game.status === 'PENDING_START') {
-        const hubConnection = connectToGameHub(game.id)
-        hubConnection.start().then(() => {
-          hubConnection.connectionId &&
-            setCurrentPlayerId(hubConnection.connectionId)
+        const connection = connectToGameHub(game.id)
+        connection.start().then(() => {
+          connection.connectionId && setCurrentPlayerId(connection.connectionId)
         })
-        hubConnection.on('refreshGame', () => {
+        connection.on('refreshGame', () => {
           loadGame().then(game => setGame(game))
         })
+        setHubConnection(connection)
       }
     }
 
@@ -50,23 +50,36 @@ const Lobby: FC<LobbyProps> = (props: LobbyProps) => {
     return game.players && game.players[0].id === playerId
   }
 
-  const defaultSettings: SettingsType = {
-    difficulty: Difficulty.EASY,
-    roundsToWin: 10,
-    cardSpeed: 1.5
-  }
-
   return (
     <div className='Lobby'>
-      {game && (
+      {game && hubConnection && (
         <>
-          <Settings settings={defaultSettings} />
           <h1>Details de la partie ({game.id})</h1>
           <h2>{`Créé ${moment.utc(game.creationDate).fromNow()}`}</h2>
-          <h2>Niveau de difficulté: {game.difficulty}</h2>
-          <h2>Temps entre chaque carte: {game.cardSpeed} secondes</h2>
-          <h2>Nombre de manches pour gagner: {game.roundsToWin}</h2>
-          <div className='Players'>
+          {isGameHost(game, currentPlayerId) ? (
+            <Settings
+              difficulty={game.difficulty}
+              roundsToWin={game.roundsToWin}
+              cardSpeed={game.cardSpeed}
+              updateSettings={(settings: SettingsType) =>
+                hubConnection.invoke('UpdateGameSettings', settings)
+              }
+            />
+          ) : (
+            <ul>
+              <li>
+                Niveau de difficulté: <b>{game.difficulty}</b>
+              </li>
+              <li>
+                Nombre de manches pour gagner: <b>{game.roundsToWin}</b>
+              </li>
+              <li>
+                Temps entre chaque carte: <b>{game.cardSpeed}</b> secondes
+              </li>
+            </ul>
+          )}
+
+          <div className='PlaisGameHost(game, player.id)yers'>
             {game.players.map(player => (
               <PlayerBox
                 key={player.id}

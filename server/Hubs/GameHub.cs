@@ -67,7 +67,7 @@ namespace Api.Hubs
       Enum.TryParse(settings.difficulty, out Difficulty difficulty);
       var cardSpeed = TimeSpan.FromSeconds(settings.cardSpeed);
 
-      _gameService.UpdateSettings(settings.gameId, difficulty, cardSpeed, settings.roundsToWin);
+      _gameService.UpdateSettings(gameId, difficulty, cardSpeed, settings.roundsToWin);
 
       return Clients.Group(groupName).SendAsync("refreshGame");
     }
