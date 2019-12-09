@@ -35,8 +35,8 @@ const Lobby: FC<LobbyProps> = (props: LobbyProps) => {
         connection.start().then(() => {
           connection.connectionId && setCurrentPlayerId(connection.connectionId)
         })
-        connection.on('refreshGame', () => {
-          loadGame().then(game => setGame(game))
+        connection.on('refreshGame', (game: Game) => {
+          setGame(game)
         })
         setHubConnection(connection)
       }
@@ -52,7 +52,7 @@ const Lobby: FC<LobbyProps> = (props: LobbyProps) => {
 
   return (
     <div className='Lobby'>
-      {game && hubConnection && (
+      {game && game.players.length && hubConnection && (
         <>
           <h1>Details de la partie ({game.id})</h1>
           <h2>{`Créé ${moment.utc(game.creationDate).fromNow()}`}</h2>

@@ -39,8 +39,11 @@ namespace Api.Hubs
 
       _gameService.AddPlayer(gameId, playerId);
 
+      var game = _gameService.Get(gameId);
+      var gameDto = new GameDTO(game);
+
       Groups.AddToGroupAsync(Context.ConnectionId, groupName);
-      Clients.Group(groupName).SendAsync("refreshGame");
+      Clients.Group(groupName).SendAsync("refreshGame", gameDto);
 
       return base.OnConnectedAsync();
     }
@@ -54,7 +57,10 @@ namespace Api.Hubs
       Groups.RemoveFromGroupAsync(Context.ConnectionId, groupName);
       _gameService.RemovePlayer(playerId);
 
-      Clients.Group(groupName).SendAsync("refreshGame");
+      var game = _gameService.Get(gameId);
+      var gameDto = new GameDTO(game);
+
+      Clients.Group(groupName).SendAsync("refreshGame", gameDto);
 
       return base.OnDisconnectedAsync(exception);
     }
@@ -67,9 +73,10 @@ namespace Api.Hubs
       Enum.TryParse(settings.difficulty, out Difficulty difficulty);
       var cardSpeed = TimeSpan.FromSeconds(settings.cardSpeed);
 
-      _gameService.UpdateSettings(gameId, difficulty, cardSpeed, settings.roundsToWin);
+      var game = _gameService.UpdateSettings(gameId, difficulty, cardSpeed, settings.roundsToWin);
+      var gameDto = new GameDTO(game);
 
-      return Clients.Group(groupName).SendAsync("refreshGame");
+      return Clients.Group(groupName).SendAsync("refreshGame", gameDto);
     }
   }
 }
