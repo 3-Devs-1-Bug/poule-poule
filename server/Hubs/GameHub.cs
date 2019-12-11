@@ -70,7 +70,15 @@ namespace Api.Hubs
       int gameId = GetGameId();
       string groupName = "game-" + gameId;
 
-      Enum.TryParse(settings.difficulty, out Difficulty difficulty);
+      if (!Enum.TryParse(settings.difficulty, out Difficulty difficulty))
+        throw new ArgumentException("Difficulty has an invalid value");
+
+      if (settings.cardSpeed <= 0)
+        throw new ArgumentException("Card speed must be a positive value");
+
+      if (settings.roundsToWin <= 0)
+        throw new ArgumentException("Rounds to win must be a positive value");
+
       var cardSpeed = TimeSpan.FromSeconds(settings.cardSpeed);
 
       var game = _gameService.UpdateSettings(gameId, difficulty, cardSpeed, settings.roundsToWin);

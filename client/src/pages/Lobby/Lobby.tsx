@@ -36,6 +36,7 @@ const Lobby: FC<LobbyProps> = (props: LobbyProps) => {
           connection.connectionId && setCurrentPlayerId(connection.connectionId)
         })
         connection.on('refreshGame', (game: Game) => {
+          console.log('setGame(game)')
           setGame(game)
         })
         setHubConnection(connection)

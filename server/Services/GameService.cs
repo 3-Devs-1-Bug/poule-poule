@@ -54,7 +54,7 @@ namespace Api.Services
 
     public Game UpdateSettings(int gameId, Difficulty difficulty, TimeSpan cardSpeed, int roundsToWin)
     {
-      var game = _dbContext.Games.Find(gameId);
+      var game = this.Get(gameId);
       game.CardSpeed = cardSpeed;
       game.Difficulty = difficulty;
       game.RoundsToWin = roundsToWin;
