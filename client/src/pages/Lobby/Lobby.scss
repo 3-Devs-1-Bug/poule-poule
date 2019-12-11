@@ -1,20 +1,8 @@
 @import 'styles/variables';
-$background-color: #f8de96;
 .Lobby {
   .Players {
-    margin-top: 1rem;
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    .Player {
-      display: flex;
-      border: 1px solid black;
-      background-color: $background-color;
-      cursor: pointer;
-      min-height: $base-spacing * 8;
-      min-width: $base-spacing * 30;
-      padding-top: 1rem;
-      justify-content: center;
-    }
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-gap: $spacing-regular;
   }
 }
