@@ -1,12 +1,25 @@
 @import 'styles/variables';
 
-$background-color: rgb(37, 153, 138);
+.Player {
+  align-items: center;
+  display: flex;
 
-.PlayerBox {
-  border: 2px solid black;
-  background-color: $background-color;
-  color: white;
-  padding: 1rem;
-  margin: 1rem;
-  min-width: 10rem;
+  &__Avatar {
+    background: $color-primary;
+    border-radius: $radius-regular;
+    height: $spacing-large;
+    margin-right: $spacing-regular;
+    position: relative;
+    width: $spacing-large;
+  }
+
+  &__Badge {
+    background: $color-black;
+    border-radius: 50%;
+    position: absolute;
+    top: calc(#{$spacing-small} / -2);
+    right: calc(#{$spacing-small} / -2);
+    height: $spacing-small;
+    width: $spacing-small;
+  }
 }
