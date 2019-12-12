@@ -71,7 +71,7 @@ class Settings extends Component<SettingsProps, SettingsState> {
 
   render() {
     return (
-      <div className='Settings'>
+      <div className={this.props.className + ' Settings'}>
         <h2>Paramètres de la partie</h2>
         <fieldset className='Settings__Field'>
           <legend>Niveau de difficulté</legend>
