@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import classnames from 'classnames'
 
-import './PlayerBox.scss'
+import './PlayerItem.scss'
 
 export interface PlayerProps {
   name: string
@@ -10,7 +10,7 @@ export interface PlayerProps {
   className?: string
 }
 
-const Player: FC<PlayerProps> = ({ name, isHost, isSelf, className }) => {
+const PlayerItem: FC<PlayerProps> = ({ name, isHost, isSelf, className }) => {
   const classes = classnames(className, 'Player', {
     Player__Host: isHost,
     Player__Self: isSelf
@@ -25,4 +25,4 @@ const Player: FC<PlayerProps> = ({ name, isHost, isSelf, className }) => {
   )
 }
 
-export default Player
+export default PlayerItem

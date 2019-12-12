@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import classnames from 'classnames'
 
 import { Player } from '../../types/Player'
-import PlayerBox from '../../components/PlayerBox'
+import PlayerItem from '../../components/PlayerItem'
 import './PlayersList.scss'
 
 export interface PlayersListProps {
@@ -23,7 +23,7 @@ const PlayersList: FC<PlayersListProps> = ({
       <ul className='PlayersList__Grid'>
         {players.map(player => (
           <li key={player.id} className='PlayersList__GridItem'>
-            <PlayerBox
+            <PlayerItem
               name={player.name}
               isSelf={currentPlayerId === player.id || false}
               isHost={players[0].id === player.id}
