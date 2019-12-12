@@ -8,8 +8,8 @@ import { Settings as SettingsType } from '../../types/Settings'
 import connectToGameHub from '../../utils/signalrConnector'
 import { Game } from '../../types/Game'
 import Settings from '../../containers/Settings'
+import PlayersList from '../../containers/PlayersList'
 import './Lobby.scss'
-import PlayerBox from '../../components/PlayerBox'
 import { GameStatus } from '../../types/GameStatus'
 
 export interface LobbyProps extends RouteComponentProps {
@@ -49,16 +49,15 @@ const Lobby: FC<LobbyProps> = (props: LobbyProps) => {
   }, [props.id])
 
   // The oldest member of the lobby is the host
-  const isGameHost = (game: Game, playerId: string | undefined) => {
-    return game.players && game.players[0].id === playerId
+  const isGameHost = (game: Game, playerId: string) => {
+    return game.players[0].id === playerId
   }
 
   return (
     <div className='Lobby'>
-      {game && game.players.length && hubConnection && (
+      {game && currentPlayerId && game.players.length && hubConnection && (
         <>
-          <h1>Details de la partie ({game.id})</h1>
-          <h2>{`Créé ${moment.utc(game.creationDate).fromNow()}`}</h2>
+          <strong>{`Créé ${moment.utc(game.creationDate).fromNow()}`}</strong>
           {isGameHost(game, currentPlayerId) ? (
             <Settings
               difficulty={game.difficulty}
@@ -84,16 +83,10 @@ const Lobby: FC<LobbyProps> = (props: LobbyProps) => {
             </ul>
           )}
 
-          <div className='Players'>
-            {game.players.map(player => (
-              <PlayerBox
-                key={player.id}
-                name={player.name}
-                isSelf={currentPlayerId === player.id || false}
-                isHost={isGameHost(game, player.id)}
-              />
-            ))}
-          </div>
+            <PlayersList
+              players={game.players}
+              currentPlayerId={currentPlayerId}
+            />
         </>
       )}
     </div>
