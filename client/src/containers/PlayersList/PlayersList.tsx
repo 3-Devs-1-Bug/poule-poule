@@ -26,7 +26,7 @@ const PlayersList: FC<PlayersListProps> = ({
             key={player.id}
             className='PlayersList__GridItem'
             name={player.name}
-            isSelf={currentPlayerId === player.id || false}
+            isSelf={currentPlayerId === player.id}
             isHost={players[0].id === player.id}
           />
         ))}
