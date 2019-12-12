@@ -1,4 +1,5 @@
 import React, { Component, ChangeEvent } from 'react'
+import classnames from 'classnames'
 
 import Radio from '../../components/Radio'
 import { Settings as SettingsType } from '../../types/Settings'
@@ -70,8 +71,9 @@ class Settings extends Component<SettingsProps, SettingsState> {
   }
 
   render() {
+    const classes = classnames(this.props.className, 'Settings')
     return (
-      <div className='Settings'>
+      <div className={classes}>
         <h2>Paramètres de la partie</h2>
         <fieldset className='Settings__Field'>
           <legend>Niveau de difficulté</legend>

@@ -2,7 +2,7 @@
 
 .Settings {
   h2 {
-    margin-bottom: $spacing-regular;
+    margin-bottom: $spacing-small;
   }
 
   legend {
@@ -13,7 +13,7 @@
     & + & {
       display: flex;
       flex-wrap: wrap;
-      margin-top: $spacing-large;
+      margin-top: $spacing-regular;
 
       > label {
         flex-basis: 100%;

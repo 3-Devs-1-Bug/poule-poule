@@ -60,6 +60,7 @@ const Lobby: FC<LobbyProps> = (props: LobbyProps) => {
           <strong>{`Créé ${moment.utc(game.creationDate).fromNow()}`}</strong>
           {isGameHost(game, currentPlayerId) ? (
             <Settings
+              className='Lobby__Settings'
               difficulty={game.difficulty}
               roundsToWin={game.roundsToWin}
               cardSpeed={game.cardSpeed}
@@ -84,6 +85,7 @@ const Lobby: FC<LobbyProps> = (props: LobbyProps) => {
           )}
 
           <PlayersList
+            className='Lobby__Players'
             players={game.players}
             currentPlayerId={currentPlayerId}
           />

@@ -1,0 +1,8 @@
+@import 'styles/variables';
+
+.Lobby {
+  &__Settings,
+  &__Players {
+    margin-top: $spacing-large;
+  }
+}
