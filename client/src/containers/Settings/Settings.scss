@@ -6,7 +6,7 @@
   }
 
   legend {
-    margin-bottom: $spacing-small;
+    margin-bottom: $spacing-smaller;
   }
 
   &__Field {
@@ -17,7 +17,7 @@
 
       > label {
         flex-basis: 100%;
-        margin-bottom: $spacing-small;
+        margin-bottom: $spacing-smaller;
       }
     }
 
