@@ -5,7 +5,7 @@ import PlayerItem from './PlayerItem'
 describe('PlayerItem', () => {
   it('renders without crashing', () => {
     const { container } = render(<PlayerItem name='Martin' />)
-    expect(container.firstElementChild).toBeInTheDocument()
+    expect(container).toBeInTheDocument()
   })
 
   it('identifies myself if isSelf is true', () => {
