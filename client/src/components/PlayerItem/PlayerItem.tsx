@@ -16,12 +16,12 @@ const PlayerItem: FC<PlayerProps> = ({ name, isHost, isSelf, className }) => {
     Player__Self: isSelf
   })
   return (
-    <div className={classes}>
+    <li className={classes}>
       <div className='Player__Avatar'>
         {isHost && <div className='Player__Badge' />}
       </div>
       {name} {isSelf && ' (you)'}
-    </div>
+    </li>
   )
 }
 
