@@ -11,6 +11,6 @@ describe('PlayerItem', () => {
   it('identifies myself if isSelf is true', () => {
     const { getByRole } = render(<PlayerItem name='Martin' isSelf={true} />)
     const fullName = getByRole('listitem')
-    expect(fullName).toHaveTextContent('Martin (you)')
+    expect(fullName).toHaveTextContent('Martin (moi)')
   })
 })
