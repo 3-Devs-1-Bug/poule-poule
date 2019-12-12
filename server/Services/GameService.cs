@@ -14,6 +14,7 @@ namespace Api.Services
     Game Get(int gameId);
     Player AddPlayer(int gameId, string playerId = null);
     void RemovePlayer(string playerId);
+    Game UpdateSettings(int gameId, Difficulty difficulty, TimeSpan cardSpeed, int roundsToWin);
   }
 
   public class GameService : IGameService
@@ -32,6 +33,10 @@ namespace Api.Services
       game.HostId = Guid.NewGuid().ToString();
       game.Status = GameStatus.PENDING_START;
 
+      game.CardSpeed = new TimeSpan(0, 0, 0, 1, 500);
+      game.Difficulty = Difficulty.EASY;
+      game.RoundsToWin = 3;
+
       _dbContext.Games.Add(game);
       _dbContext.SaveChanges();
 
@@ -44,6 +49,16 @@ namespace Api.Services
         .Include(g => g.Players)
         .Where(game => game.Id == gameId)
         .FirstOrDefault();
+      return game;
+    }
+
+    public Game UpdateSettings(int gameId, Difficulty difficulty, TimeSpan cardSpeed, int roundsToWin)
+    {
+      var game = this.Get(gameId);
+      game.CardSpeed = cardSpeed;
+      game.Difficulty = difficulty;
+      game.RoundsToWin = roundsToWin;
+      _dbContext.SaveChanges();
       return game;
     }
 

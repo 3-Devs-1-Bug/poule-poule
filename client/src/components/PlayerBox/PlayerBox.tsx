@@ -20,7 +20,7 @@ const Player: FC<PlayerProps> = ({ name, isHost, isSelf, className }) => {
       <div className='Player__Avatar'>
         {isHost && <div className='Player__Badge' />}
       </div>
-      {name} {isSelf && ' (this is you)'}
+      {name} {isSelf && ' (you)'}
     </div>
   )
 }
