@@ -1,6 +1,5 @@
 import React, { FC, useEffect, useState } from 'react'
 import axios, { AxiosResponse } from 'axios'
-import moment from 'moment'
 import { RouteComponentProps } from '@reach/router'
 import { HubConnection } from '@microsoft/signalr'
 
@@ -57,7 +56,12 @@ const Lobby: FC<LobbyProps> = (props: LobbyProps) => {
     <div className='Lobby'>
       {game && currentPlayerId && game.players.length && hubConnection && (
         <>
-          <strong>{`Créé ${moment.utc(game.creationDate).fromNow()}`}</strong>
+          <p className='Lobby__Intro'>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio
+            tempore nihil ut amet suscipit quis ab dolorem ipsam repellat quidem
+            quaerat sunt necessitatibus eum, earum sed consectetur eligendi
+            cupiditate laborum.
+          </p>
           {isGameHost(game, currentPlayerId) ? (
             <Settings
               className='Lobby__Settings'
