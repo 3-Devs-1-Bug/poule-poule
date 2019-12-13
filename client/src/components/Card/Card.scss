@@ -1,0 +1,34 @@
+@import 'styles/variables';
+
+.Card {
+  &__Container {
+    // TEMPORARY
+    margin: $base-spacing * 2;
+
+    width: $base-spacing * 25;
+    border: $border-large solid $color-primary;
+    border-radius: $radius-regular;
+    box-shadow: $box-shadow;
+  }
+
+  &__AspectRatio {
+    width: 100%;
+    padding-top: 100%;
+    position: relative;
+  }
+
+  &__Content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  &__Emoji {
+    font-size: 500%;
+  }
+}
