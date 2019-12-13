@@ -7,6 +7,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "lint": "eslint \"src/**/*.{ts,tsx}\" --max-warnings 0",
+    "lint:style": "stylelint \"src/**/*.scss\"",
     "format": "prettier \"src/**/*.{ts,tsx,scss}\" --write"
   },
   "dependencies": {
@@ -34,6 +35,9 @@
     "node-sass": "^4.13.0",
     "prettier": "^1.19.1",
     "react-scripts": "3.2.0",
+    "stylelint": "^12.0.0",
+    "stylelint-config-recommended-scss": "^4.1.0",
+    "stylelint-scss": "^3.13.0",
     "typescript": "3.7.2"
   },
   "husky": {
@@ -47,7 +51,12 @@
       "eslint --max-warnings 0",
       "git add"
     ],
-    "src/**/*.{scss,md}": [
+    "src/**/*.scss": [
+      "prettier --write",
+      "stylelint --fix",
+      "git add"
+    ],
+    "src/**/*.md": [
       "prettier --write",
       "git add"
     ]
