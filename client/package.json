@@ -50,7 +50,12 @@
       "eslint --max-warnings 0",
       "git add"
     ],
-    "src/**/*.{scss,md}": [
+    "src/**/*.scss": [
+      "prettier --write",
+      "stylelint --fix",
+      "git add"
+    ],
+    "src/**/*.md": [
       "prettier --write",
       "git add"
     ]
