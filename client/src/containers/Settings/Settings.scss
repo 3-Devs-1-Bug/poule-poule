@@ -10,6 +10,10 @@
   }
 
   &__Field {
+    label + label {
+      margin-top: $spacing-small;
+    }
+
     & + & {
       display: flex;
       flex-wrap: wrap;
@@ -19,10 +23,6 @@
         flex-basis: 100%;
         margin-bottom: $spacing-smaller;
       }
-    }
-
-    label + label {
-      margin-top: $spacing-small;
     }
 
     [type='number'] {
