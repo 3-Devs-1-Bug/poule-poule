@@ -6,7 +6,7 @@ import { Card } from '../../types/Card'
 import './CardPile.scss'
 
 export interface CardPileProps {
-  cards: Card[]
+  cards: Array<Card>
   className?: string
 }
 
