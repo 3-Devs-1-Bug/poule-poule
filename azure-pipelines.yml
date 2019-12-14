@@ -34,6 +34,12 @@ jobs:
           yarn add -D jest-junit
         workingDirectory: $(clientFolder)
         displayName: 'Install dependencies'
+      
+      - script : |
+          yarn lint
+          yarn lint:style
+        workingDirectory: $(clientFolder)
+        displayName: 'Lint code'
 
       - script: CI=true yarn test --reporters=default --reporters=jest-junit --coverage --coverageReporters=cobertura
         workingDirectory: $(clientFolder)
