@@ -1,11 +1,19 @@
 @import 'styles/variables';
+@import 'styles/helpers';
 
 .Header {
   display: flex;
-  flex-wrap: wrap;
+
+  @include mobile {
+    display: block;
+  }
 
   &__Icon {
+    border-radius: $radius-regular;
+    height: $base-spacing * 12;
     margin-right: $spacing-regular;
+    object-fit: cover;
+    width: $base-spacing * 12;
   }
 
   &__Subtitle {
