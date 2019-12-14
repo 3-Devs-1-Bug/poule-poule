@@ -1,5 +1,6 @@
-export enum Card {
-  EGG,
-  CHICKEN,
-  FOX
+import { CardType } from './CardType'
+
+export interface Card {
+  type: CardType
+  id: string
 }

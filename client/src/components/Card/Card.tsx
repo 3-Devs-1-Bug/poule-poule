@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 
 import './Card.scss'
-import { Card as CardType } from '../../types/Card'
+import { CardType } from '../../types/CardType'
 
 const cardToEmoji = (card: CardType) => {
   let emoji

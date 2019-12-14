@@ -4,18 +4,19 @@ import { uniqueId } from 'lodash-es'
 
 import CardPile from '../components/CardPile'
 
-import { Card as CardType } from '../types/Card'
+import { CardType } from '../types/CardType'
+import { Card } from '../types/Card'
 import { useEffect } from 'react'
 
 export interface DemoProps extends RouteComponentProps {}
 
 const Demo: FC<DemoProps> = () => {
-  const [cards, setCards] = useState<
+  const [cards, setCards] = useState<Card[]>([
     {
-      type: CardType
-      id: string
-    }[]
-  >([{ type: CardType.FOX, id: '00' }])
+      type: CardType.FOX,
+      id: '00'
+    }
+  ])
 
   useEffect(() => {
     setInterval(() => {
