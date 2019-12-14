@@ -8,7 +8,7 @@ import NotFound from './pages/NotFound'
 import Game from './pages/Game'
 
 const App: React.FC = () => {
-  axios.defaults.baseURL = process.env.REACT_APP_API_URL
+  axios.defaults.baseURL = '/api'
 
   return (
     <BaseLayout>

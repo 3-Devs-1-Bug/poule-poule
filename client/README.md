@@ -22,6 +22,12 @@ yarn install
 yarn start
 ```
 
+### Backend
+
+Every HTTP/WS requests starting with `/api` (`/api/games/123`) are proxied to the locally running server.
+
+If you wish to connect to another server, change the `API_URL` environment variable before starting the dev server (e.g. `API_URL=example.com yarn start`).
+
 ### Lint and format code before committing
 
 Normally, the code is automatically linted and formatted before commits.
