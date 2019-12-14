@@ -1,0 +1,26 @@
+@import 'styles/variables';
+
+.CardPile {
+  position: relative;
+  width: $base-spacing * 25;
+  height: $base-spacing * 25;
+
+  &__Card {
+    position: absolute;
+  }
+
+  .card-animation {
+    &-enter,
+    &-appear {
+      opacity: 0;
+      transform: scale(2);
+    }
+
+    &-enter-active,
+    &-appear-active {
+      opacity: 1;
+      transform: scale(1);
+      transition: opacity 250ms, transform 250ms;
+    }
+  }
+}

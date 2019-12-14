@@ -2,13 +2,11 @@
 
 .Card {
   &__Container {
-    // TEMPORARY
-    margin: $base-spacing * 2;
-
     width: $base-spacing * 25;
     border: $border-large solid $color-primary;
     border-radius: $radius-regular;
     box-shadow: $box-shadow;
+    background-color: $color-white;
   }
 
   &__AspectRatio {

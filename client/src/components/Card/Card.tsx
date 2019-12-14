@@ -29,11 +29,13 @@ const cardToEmoji = (card: CardType) => {
 
 export interface CardProps {
   type: CardType
+  className?: string
 }
 
-const Card: FC<CardProps> = ({ type }) => {
+const Card: FC<CardProps> = ({ type, className }) => {
+  const classes = 'Card__Container ' + className
   return (
-    <div className='Card__Container'>
+    <div className={classes}>
       <div className='Card__AspectRatio'>
         <div className='Card__Content'>{cardToEmoji(type)}</div>
       </div>
