@@ -32,9 +32,11 @@ namespace server
           options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")
       ));
       services.AddTransient<IGameService, GameService>();
+      services.AddTransient<IGameManager, GameManager>();
       services.AddControllers();
 
       services.AddSignalR(options => options.EnableDetailedErrors = true);
+
 
       services.AddCors(options =>
       {

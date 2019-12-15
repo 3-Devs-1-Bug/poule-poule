@@ -9,6 +9,7 @@ import { Game } from '../../types/Game'
 import Settings from '../../containers/Settings'
 import PlayersList from '../../containers/PlayersList'
 import './Lobby.scss'
+import Button from '../../components/Button'
 import { GameStatus } from '../../types/GameStatus'
 
 export interface LobbyProps extends RouteComponentProps {
@@ -19,6 +20,8 @@ const Lobby: FC<LobbyProps> = (props: LobbyProps) => {
   const [game, setGame] = useState<Game>()
   const [hubConnection, setHubConnection] = useState<HubConnection>()
   const [currentPlayerId, setCurrentPlayerId] = useState<string>()
+  const [card, setCard] = useState<string>('Nothing')
+  const [count, setCount] = useState<number>(0)
 
   useEffect(() => {
     const loadGame = async () => {
@@ -37,9 +40,17 @@ const Lobby: FC<LobbyProps> = (props: LobbyProps) => {
           connection.connectionId && setCurrentPlayerId(connection.connectionId)
         })
         connection.on('refreshGame', (game: Game) => {
-          console.log('setGame(game)')
           setGame(game)
         })
+        connection.on('roundStart', () => console.log('roundStart'))
+        connection.on('receiveCard', (receivedCard: string) =>
+          setCard(receivedCard)
+        )
+        connection.on('roundEnded', (result: number) => {
+          console.log('roundEnded', result)
+          setCount(result)
+        })
+
         setHubConnection(connection)
       }
     }
@@ -93,6 +104,21 @@ const Lobby: FC<LobbyProps> = (props: LobbyProps) => {
             players={game.players}
             currentPlayerId={currentPlayerId}
           />
+          <div>
+            <h4>Cartes</h4>
+            {card}
+            <h4>Count</h4>
+            {count}
+          </div>
+          {game.status === GameStatus.PENDING_START &&
+            isGameHost(game, currentPlayerId) && (
+              <Button onClick={() => hubConnection.invoke('StartGame')}>
+                Commencer la partie
+              </Button>
+            )}
+          <Button onClick={() => hubConnection.invoke('HitPile')}>
+            Taper sur le tas
+          </Button>
         </>
       )}
     </div>
