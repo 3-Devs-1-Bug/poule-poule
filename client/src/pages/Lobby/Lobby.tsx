@@ -11,6 +11,8 @@ import PlayersList from '../../containers/PlayersList'
 import './Lobby.scss'
 import Button from '../../components/Button'
 import { GameStatus } from '../../types/GameStatus'
+import { RoundResult } from '../../types/RoundResult'
+import { Player } from '../../types/Player'
 
 export interface LobbyProps extends RouteComponentProps {
   id?: string
@@ -20,8 +22,8 @@ const Lobby: FC<LobbyProps> = (props: LobbyProps) => {
   const [game, setGame] = useState<Game>()
   const [hubConnection, setHubConnection] = useState<HubConnection>()
   const [currentPlayerId, setCurrentPlayerId] = useState<string>()
-  const [card, setCard] = useState<string>('Nothing')
-  const [count, setCount] = useState<number>(0)
+  const [cards, setCards] = useState<Array<string>>([])
+  const [result, setResult] = useState<RoundResult>()
 
   useEffect(() => {
     const loadGame = async () => {
@@ -42,13 +44,15 @@ const Lobby: FC<LobbyProps> = (props: LobbyProps) => {
         connection.on('refreshGame', (game: Game) => {
           setGame(game)
         })
-        connection.on('roundStart', () => console.log('roundStart'))
+        connection.on('roundStart', () => {
+          setResult(undefined)
+          setCards([])
+        })
         connection.on('receiveCard', (receivedCard: string) =>
-          setCard(receivedCard)
+          setCards(cards => cards.concat(receivedCard))
         )
-        connection.on('roundEnded', (result: number) => {
-          console.log('roundEnded', result)
-          setCount(result)
+        connection.on('roundEnded', (result: RoundResult) => {
+          setResult(result)
         })
 
         setHubConnection(connection)
@@ -61,6 +65,23 @@ const Lobby: FC<LobbyProps> = (props: LobbyProps) => {
   // The oldest member of the lobby is the host
   const isGameHost = (game: Game, playerId: string) => {
     return game.players[0].id === playerId
+  }
+
+  const buildResultText = (
+    result: RoundResult,
+    players: Array<Player>
+  ): string => {
+    if (!result.playerId) return `Personne n'a tapé sur la pile`
+    else {
+      let firstPart = ''
+      if (result.playerId === currentPlayerId) {
+        firstPart = 'Vous avez'
+      } else {
+        const player = players.find(player => player.id === result.playerId)
+        firstPart = `${(player && player.name) || 'Ta mère'} a`
+      }
+      return `${firstPart} ${result.hasWon ? 'gagné' : 'perdu'}`
+    }
   }
 
   return (
@@ -106,9 +127,17 @@ const Lobby: FC<LobbyProps> = (props: LobbyProps) => {
           />
           <div>
             <h4>Cartes</h4>
-            {card}
-            <h4>Count</h4>
-            {count}
+            {cards.map((card, index) => (
+              <span key={index} style={{ paddingRight: '1rem' }}>
+                {card}
+              </span>
+            ))}
+            {result && (
+              <>
+                <h4>{buildResultText(result, game.players)}</h4>
+                <h4>{`Il y avait ${result.count} oeuf(s).`}</h4>
+              </>
+            )}
           </div>
           {game.status === GameStatus.PENDING_START &&
             isGameHost(game, currentPlayerId) && (
@@ -116,9 +145,11 @@ const Lobby: FC<LobbyProps> = (props: LobbyProps) => {
                 Commencer la partie
               </Button>
             )}
-          <Button onClick={() => hubConnection.invoke('HitPile')}>
-            Taper sur le tas
-          </Button>
+          {game.status === GameStatus.IN_PROGRESS && (
+            <Button onClick={() => hubConnection.invoke('HitPile')}>
+              Taper sur le tas
+            </Button>
+          )}
         </>
       )}
     </div>

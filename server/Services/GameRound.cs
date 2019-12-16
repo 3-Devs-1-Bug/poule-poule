@@ -1,15 +1,11 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using Api.Data.Entities;
 using Api.Hubs;
-using System.IO;
 using Api.Extensions;
 using System.Threading;
 using Microsoft.AspNetCore.SignalR;
-using System.Threading.Tasks;
-using System.Collections.Concurrent;
+using Api.DTO;
 
 namespace Api.Services
 {
@@ -21,14 +17,10 @@ namespace Api.Services
 
     private Timer GameTimer;
 
-    public List<Card> Deck { get; set; }
-    private List<Card> Pile { get; set; }
+    private List<CardType> Deck { get; set; }
+    private List<CardType> Pile { get; set; }
 
-    // Amount of eggs, taking into account the amount of hens and foxes
-    public int Count { get; private set; }
-
-    public bool RoundOver { get; private set; }
-    public bool CorrectCount { get { return Count == 5; } }
+    private bool CorrectCount(int count) { return count == 5; }
 
     private IHubContext<GameHub> Hub { get; set; }
 
@@ -39,31 +31,33 @@ namespace Api.Services
       Hub = hub;
       GameId = gameId;
 
-      Deck = new List<Card>();
-      Pile = new List<Card>();
+      Hub.Clients.Group($"game-{gameId}").SendAsync("roundStart");
+
+      Deck = new List<CardType>();
+      Pile = new List<CardType>();
 
       for (int i = 0; i < EggCards; i++)
-        Deck.Add(Card.EGG);
+        Deck.Add(CardType.EGG);
 
       for (int i = 0; i < HenCards; i++)
-        Deck.Add(Card.HEN);
+        Deck.Add(CardType.HEN);
 
       for (int i = 0; i < FoxCards; i++)
-        Deck.Add(Card.FOX);
+        Deck.Add(CardType.FOX);
 
       Deck.Shuffle();
 
-      Hub.Clients.Group($"game-{gameId}").SendAsync("roundStart");
-
-      int delay = (int)cardSpeed.TotalMilliseconds;
-
+      int delay = Convert.ToInt32(cardSpeed.TotalMilliseconds);
       GameTimer = new Timer(state => DrawCard(), null, delay, delay);
     }
 
-    public void DrawCard()
+    private void DrawCard()
     {
       if (Deck.Count <= 0)
-        throw new InvalidOperationException("Deck is empty");
+      {
+        EndRound(null);
+        return;
+      }
 
       var card = Deck[0];
       Deck.RemoveAt(0);
@@ -72,11 +66,11 @@ namespace Api.Services
       Hub.Clients.Group($"game-{GameId}").SendAsync("receiveCard", card.ToString());
     }
 
-    public void EndRound()
+    public void EndRound(string playerId)
     {
       GameTimer.Dispose();
-      RoundOver = true;
-      int eggs = 0;
+      // amount of eggs taking into account hens and foxes
+      int count = 0;
       int activeChickens = 0;
       int activeFoxes = 0;
 
@@ -84,35 +78,32 @@ namespace Api.Services
       {
         switch (card)
         {
-          case Card.EGG:
-            eggs++;
+          case CardType.EGG:
+            count++;
             break;
-          case Card.HEN:
-            if (eggs > 0)
+          case CardType.HEN:
+            if (count > 0)
             {
-              eggs--;
+              count--;
               activeChickens++;
             }
             break;
-          case Card.FOX:
+          case CardType.FOX:
             if (activeChickens > 0)
             {
               activeFoxes++;
-              eggs++;
+              count++;
               activeChickens--;
             }
             break;
         }
       });
-      Count = eggs;
-      Hub.Clients.Group($"game-{GameId}").SendAsync("roundEnded", Count);
+      var result = new RoundResultDTO();
+      result.count = count;
+      result.playerId = playerId;
+      result.hasWon = CorrectCount(count);
+      
+      Hub.Clients.Group($"game-{GameId}").SendAsync("roundEnded", result);
     }
-  }
-
-  public enum Card
-  {
-    EGG,
-    HEN,
-    FOX
   }
 }

@@ -16,7 +16,7 @@ namespace Api.Services
   public interface IGameManager
   {
     Task StartRound(int gameId);
-    void EndRound(int gameId);
+    void HitPile(int gameId, string playerId);
   }
 
   public class GameManager : IGameManager
@@ -39,10 +39,10 @@ namespace Api.Services
       return Task.CompletedTask;
     }
 
-    public void EndRound(int gameId)
+    public void HitPile(int gameId, string playerId)
     {
       Rounds.TryGetValue(gameId, out var round);
-      round.EndRound();
+      round.EndRound(playerId);
     }
   }
 }

@@ -99,7 +99,12 @@ namespace Api.Hubs
       int gameId = GetGameId();
       string groupName = "game-" + gameId;
 
-      _gameManager.EndRound(gameId);
+      _gameManager.HitPile(gameId, playerId);
+
+      var game = _gameService.Get(gameId);
+      _gameService.UpdateStatus(gameId, GameStatus.PENDING_START);
+      var gameDto = new GameDTO(game);
+      Clients.Group(groupName).SendAsync("refreshGame", gameDto);
 
       return Task.CompletedTask;
     }
