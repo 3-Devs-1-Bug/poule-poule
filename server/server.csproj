@@ -5,7 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="random-names.txt" CopyToOutputDirectory="PreserveNewest" />
+    <Content Update="Data/video-game-characters.txt">
+    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+  </Content>
   </ItemGroup>
 
   <ItemGroup>
