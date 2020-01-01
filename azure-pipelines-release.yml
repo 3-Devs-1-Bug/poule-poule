@@ -1,0 +1,49 @@
+# This script will run tests, create production build, zip it and publish the build artefact
+
+variables:
+  clientFolder: client
+
+trigger:
+  - master
+
+jobs:
+  - job: client_testing
+    displayName: Client App Testing
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '10.x'
+        displayName: 'Install Node.js'
+
+      - script: |
+          yarn install
+          yarn add -D jest-junit
+        workingDirectory: $(clientFolder)
+        displayName: 'Install dependencies'
+      
+      - script : |
+          yarn lint
+          yarn lint:style
+        workingDirectory: $(clientFolder)
+        displayName: 'Lint code'
+
+      - script: CI=true yarn test --reporters=default --reporters=jest-junit --coverage --coverageReporters=cobertura
+        workingDirectory: $(clientFolder)
+        displayName: 'Run tests'
+
+      - script: yarn build
+        workingDirectory: $(clientFolder)
+        displayName: 'Build project'
+
+      - task: ArchiveFiles@2
+        inputs:
+          rootFolderOrFile: '$(clientFolder)/build'
+          archiveType: 'zip'
+          archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+          replaceExistingArchive: true
+        displayName: 'Archive files'
+
+      - task: PublishBuildArtifacts@1
+        displayName: 'Publish build artifacts'
