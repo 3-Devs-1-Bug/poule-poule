@@ -14,7 +14,7 @@ const Game: FC<GameProps> = (props: GameProps) => {
 
   useEffect(() => {
     const connection = new SignalR.HubConnectionBuilder()
-      .withUrl('https://localhost:5001/gameHub')
+      .withUrl(process.env.REACT_APP_API_URL || '')
       .withAutomaticReconnect()
       .configureLogging(SignalR.LogLevel.Debug)
       .build()

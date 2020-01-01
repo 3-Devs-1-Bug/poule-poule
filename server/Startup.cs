@@ -19,28 +19,30 @@ namespace server
 {
   public class Startup
   {
+    private IConfiguration _config { get; }
+
     public Startup(IConfiguration configuration)
     {
-      Configuration = configuration;
+      _config = configuration;
     }
-
-    public IConfiguration Configuration { get; }
 
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddDbContext<PouleContext>(options =>
-          options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")
-      ));
+          options.UseSqlServer(_config.GetConnectionString("DefaultConnection"))
+      );
       services.AddTransient<IGameService, GameService>();
       services.AddControllers();
 
       services.AddSignalR(options => options.EnableDetailedErrors = true);
 
+      var allowedOrigins = _config["AllowedOrigins"].Split(',');
+
       services.AddCors(options =>
       {
         options.AddPolicy("default", policy =>
         {
-          policy.WithOrigins("http://localhost:3000")
+          policy.WithOrigins(allowedOrigins)
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials();
