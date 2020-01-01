@@ -8,7 +8,7 @@ trigger:
 
 jobs:
   - job: client_testing
-    displayName: Client App Testing
+    displayName: Client App Production Build
     pool:
       vmImage: 'ubuntu-latest'
     steps:
