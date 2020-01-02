@@ -4,14 +4,16 @@ using Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace server.Migrations
 {
     [DbContext(typeof(PouleContext))]
-    partial class PouleContextModelSnapshot : ModelSnapshot
+    [Migration("20200102225838_sayings")]
+    partial class sayings
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,9 +64,6 @@ namespace server.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Score")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

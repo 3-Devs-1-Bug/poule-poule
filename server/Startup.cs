@@ -33,6 +33,7 @@ namespace server
       );
       services.AddTransient<IGameService, GameService>();
       services.AddTransient<IGameManager, GameManager>();
+      services.AddTransient<ISayingService, SayingService>();
       services.AddControllers();
 
       services.AddSignalR(options => options.EnableDetailedErrors = true);

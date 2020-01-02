@@ -1,16 +1,16 @@
-import React, { FC } from 'react'
+import React, { FC, ReactNode } from 'react'
 import Header from '../components/Header'
+import { RouteComponentProps } from '@reach/router'
 
-import './BaseLayout.scss'
-
-const BaseLayout: FC = ({ children }) => (
+export interface LayoutProps extends RouteComponentProps {
+  subtitle: string
+  children: ReactNode
+}
+const BaseLayout: FC<LayoutProps> = ({ subtitle, children }) => (
   <div className='BaseLayout'>
     <main className='BaseLayout__Content'>
-      <Header
-        title='Poule poule'
-        subtitle='Il ne faut pas compter les oeufs au popotin d’une poule.'
-      />
-      {children}
+    <Header title='Poule poule' subtitle={subtitle} />
+    {children}
     </main>
     <div className='BaseLayout__Background' />
   </div>
