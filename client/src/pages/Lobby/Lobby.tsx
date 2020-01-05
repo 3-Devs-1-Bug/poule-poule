@@ -78,7 +78,7 @@ const Lobby: FC<LobbyProps> = (props: LobbyProps) => {
         firstPart = 'Vous avez'
       } else {
         const player = players.find(player => player.id === result.playerId)
-        firstPart = `${(player && player.name) || 'Ta mère'} a`
+        firstPart = `${(player && player.name) || 'Un joueur inconnu'} a`
       }
       return `${firstPart} ${result.hasWon ? 'gagné' : 'perdu'}`
     }
@@ -126,7 +126,7 @@ const Lobby: FC<LobbyProps> = (props: LobbyProps) => {
             currentPlayerId={currentPlayerId}
           />
           <div>
-            <h4>Cartes</h4>
+            <h2>Cartes</h2>
             {cards.map((card, index) => (
               <span key={index} style={{ paddingRight: '1rem' }}>
                 {card}
@@ -134,8 +134,12 @@ const Lobby: FC<LobbyProps> = (props: LobbyProps) => {
             ))}
             {result && (
               <>
-                <h4>{buildResultText(result, game.players)}</h4>
-                <h4>{`Il y avait ${result.count} oeuf(s).`}</h4>
+                <div>
+                  <strong>{buildResultText(result, game.players)}</strong>
+                </div>
+                <div>
+                  <strong>{`Il y avait ${result.count} oeuf(s).`}</strong>
+                </div>
               </>
             )}
           </div>

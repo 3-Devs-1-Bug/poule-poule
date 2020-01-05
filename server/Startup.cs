@@ -37,7 +37,6 @@ namespace server
 
       services.AddSignalR(options => options.EnableDetailedErrors = true);
 
-
       services.AddCors(options =>
       {
         options.AddPolicy("default", policy =>

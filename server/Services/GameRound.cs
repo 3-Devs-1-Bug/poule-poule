@@ -11,16 +11,16 @@ namespace Api.Services
 {
   public class GameRound
   {
-    private readonly int EggCards = 10;
-    private readonly int HenCards = 5;
-    private readonly int FoxCards = 5;
+    private readonly int EggCards = 19;
+    private readonly int HenCards = 10;
+    private readonly int FoxCards = 10;
 
     private Timer GameTimer;
 
     private List<CardType> Deck { get; set; }
     private List<CardType> Pile { get; set; }
 
-    private bool CorrectCount(int count) { return count == 5; }
+    private bool CorrectCount(int count) { return count >= 5; }
 
     private IHubContext<GameHub> Hub { get; set; }
 
@@ -71,7 +71,7 @@ namespace Api.Services
       GameTimer.Dispose();
       // amount of eggs taking into account hens and foxes
       int count = 0;
-      int activeChickens = 0;
+      int activeHens = 0;
       int activeFoxes = 0;
 
       Pile.ForEach(card =>
@@ -85,15 +85,15 @@ namespace Api.Services
             if (count > 0)
             {
               count--;
-              activeChickens++;
+              activeHens++;
             }
             break;
           case CardType.FOX:
-            if (activeChickens > 0)
+            if (activeHens > 0)
             {
               activeFoxes++;
               count++;
-              activeChickens--;
+              activeHens--;
             }
             break;
         }
