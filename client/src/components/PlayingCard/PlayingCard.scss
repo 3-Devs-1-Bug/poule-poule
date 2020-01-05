@@ -1,0 +1,19 @@
+@import 'styles/variables';
+
+.Card {
+  &__Container {
+    align-items: center;
+    background-color: $color-white;
+    border: $border-large solid $color-primary;
+    border-radius: $radius-regular;
+    box-shadow: $box-shadow;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__Emoji {
+    font-size: 500%;
+  }
+}

@@ -25,7 +25,9 @@ const Index: FC<IndexProps> = () => {
       </p>
 
       <Button>Rejoindre une partie</Button>
-      <Button primary onClick={createGame}>Créer une nouvelle partie</Button>
+      <Button primary onClick={createGame}>
+        Créer une nouvelle partie
+      </Button>
     </>
   )
 }
