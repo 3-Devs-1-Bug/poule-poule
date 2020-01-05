@@ -134,12 +134,8 @@ const Lobby: FC<LobbyProps> = (props: LobbyProps) => {
             ))}
             {result && (
               <>
-                <div>
-                  <strong>{buildResultText(result, game.players)}</strong>
-                </div>
-                <div>
-                  <strong>{`Il y avait ${result.count} oeuf(s).`}</strong>
-                </div>
+                <p>{buildResultText(result, game.players)}</p>
+                <p>{`Il y avait ${result.count} oeuf(s).`}</p>
               </>
             )}
           </div>
