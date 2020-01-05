@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
-import CardComponent from '../Card'
+import PlayingCard from '../PlayingCard'
 import { Card } from '../../types/Card'
 import './CardPile.scss'
 
@@ -24,7 +24,7 @@ const CardPile: FC<CardPileProps> = ({ cards, className }) => {
           timeout={{ appear: 250, enter: 250, exit: 0 }}
           classNames='card-animation'
         >
-          <CardComponent type={type} className='CardPile__Card' />
+          <PlayingCard type={type} className='CardPile__Card' />
         </CSSTransition>
       ))}
     </TransitionGroup>

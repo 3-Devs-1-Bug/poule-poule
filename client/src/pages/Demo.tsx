@@ -33,6 +33,7 @@ const Demo: FC<DemoProps> = () => {
   return (
     <>
       <CardPile cards={cards} />
+      <p>Test paragraph</p>
     </>
   )
 }

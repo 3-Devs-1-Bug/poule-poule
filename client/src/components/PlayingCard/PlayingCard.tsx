@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 
-import './Card.scss'
+import './PlayingCard.scss'
 import { CardType } from '../../types/CardType'
 
 const cardToEmoji = (card: CardType) => {
@@ -34,13 +34,7 @@ export interface CardProps {
 
 const Card: FC<CardProps> = ({ type, className }) => {
   const classes = 'Card__Container ' + className
-  return (
-    <div className={classes}>
-      <div className='Card__AspectRatio'>
-        <div className='Card__Content'>{cardToEmoji(type)}</div>
-      </div>
-    </div>
-  )
+  return <div className={classes}>{cardToEmoji(type)}</div>
 }
 
 export default Card
