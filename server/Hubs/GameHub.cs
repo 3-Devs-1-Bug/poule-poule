@@ -2,19 +2,25 @@ using Api.DTO;
 using Api.Services;
 using Microsoft.AspNetCore.SignalR;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Channels;
 using System.Threading.Tasks;
+using Api.Extensions;
 
 namespace Api.Hubs
 {
   public class GameHub : Hub
   {
     private readonly IGameService _gameService;
+    private readonly IGameManager _gameManager;
+    private readonly static ConcurrentDictionary<int, GameRound> Rounds = new ConcurrentDictionary<int, GameRound>();
 
-    public GameHub(IGameService gameService)
+    public GameHub(IGameService gameService, IGameManager gameManager)
     {
       _gameService = gameService;
+      _gameManager = gameManager;
     }
 
     private string GetPlayerId()
@@ -85,6 +91,35 @@ namespace Api.Hubs
       var gameDto = new GameDTO(game);
 
       return Clients.Group(groupName).SendAsync("refreshGame", gameDto);
+    }
+
+    public Task HitPile()
+    {
+      string playerId = GetPlayerId();
+      int gameId = GetGameId();
+      string groupName = "game-" + gameId;
+
+      _gameManager.HitPile(gameId, playerId);
+
+      var game = _gameService.Get(gameId);
+      _gameService.UpdateStatus(gameId, GameStatus.PENDING_START);
+      var gameDto = new GameDTO(game);
+      Clients.Group(groupName).SendAsync("refreshGame", gameDto);
+
+      return Task.CompletedTask;
+    }
+
+    public Task StartGame()
+    {
+      int gameId = GetGameId();
+      var game = _gameService.UpdateStatus(gameId, GameStatus.IN_PROGRESS);
+      string groupName = "game-" + gameId;
+      var gameDto = new GameDTO(game);
+      Clients.Group(groupName).SendAsync("refreshGame", gameDto);
+
+      _gameManager.StartRound(gameId);
+
+      return Task.CompletedTask;
     }
   }
 }

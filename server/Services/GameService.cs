@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Api.Data.Entities;
 using Api.Data;
 using System.IO;
+using Api.Extensions;
 
 namespace Api.Services
 {
@@ -15,6 +16,7 @@ namespace Api.Services
     Player AddPlayer(int gameId, string playerId = null);
     void RemovePlayer(string playerId);
     Game UpdateSettings(int gameId, Difficulty difficulty, TimeSpan cardSpeed, int roundsToWin);
+    Game UpdateStatus(int gameId, GameStatus status);
   }
 
   public class GameService : IGameService
@@ -62,6 +64,14 @@ namespace Api.Services
       return game;
     }
 
+    public Game UpdateStatus(int gameId, GameStatus status)
+    {
+      var game = this.Get(gameId);
+      game.Status = status;
+      _dbContext.SaveChanges();
+      return game;
+    }
+
     public Player AddPlayer(int gameId, string playerId = null)
     {
       var game = _dbContext.Games.Find(gameId);
@@ -94,9 +104,8 @@ namespace Api.Services
       Random random = new Random();
       string filePath = Path.Combine(Environment.CurrentDirectory, "Data/video-game-characters.txt");
       List<string> names = File.ReadLines(filePath).ToList();
-      int randomInt = random.Next(0, names.Count);
-      string randomName = names[randomInt];
-      return randomName;
+      names.Shuffle();
+      return names[0];
     }
   }
 }

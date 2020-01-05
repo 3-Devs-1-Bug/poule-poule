@@ -19,7 +19,7 @@ namespace Api.DTO
       hostId = game.HostId;
       status = game.Status.ToString();
       creationDate = game.CreationDate.ToString("o", CultureInfo.InvariantCulture);
-      difficulty  = game.Difficulty.ToString();
+      difficulty = game.Difficulty.ToString();
       cardSpeed = game.CardSpeed.TotalSeconds;
       roundsToWin = game.RoundsToWin;
       players = game.Players.OrderBy(p => p.CreationDate).Select(player => new PlayerDTO(player)).ToArray();
@@ -45,10 +45,17 @@ namespace Api.DTO
   {
     public PlayerDTO(Player player)
     {
-       id = player.Id;
-       name = player.Name;
+      id = player.Id;
+      name = player.Name;
     }
     public string id { get; set; }
     public string name { get; set; }
+  }
+
+  public class RoundResultDTO
+  {
+    public int count { get; set; }
+    public string playerId { get; set; }
+    public bool hasWon { get; set; }
   }
 }
