@@ -17,6 +17,7 @@ namespace Api.Services
     void RemovePlayer(string playerId);
     Game UpdateSettings(int gameId, Difficulty difficulty, TimeSpan cardSpeed, int roundsToWin);
     Game UpdateStatus(int gameId, GameStatus status);
+    void UpdatePlayerScore(string playerId, int value);
   }
 
   public class GameService : IGameService
@@ -97,6 +98,18 @@ namespace Api.Services
         throw new ArgumentException($"The playerId {playerId} was not found.");
       _dbContext.Players.Remove(player);
       _dbContext.SaveChanges();
+    }
+
+    // A player can win or lose points
+    // If the player can't be found, it means he has left the game: do nothing
+    public void UpdatePlayerScore(string playerId, int value)
+    {
+      var player = _dbContext.Players.Find(playerId);
+      if (player != null)
+      {
+        player.Score = player.Score + value;
+        _dbContext.SaveChanges();
+      }
     }
 
     private string GetRandomName()

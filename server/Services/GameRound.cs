@@ -19,19 +19,16 @@ namespace Api.Services
 
     private List<CardType> Deck { get; set; }
     private List<CardType> Pile { get; set; }
-
     private bool CorrectCount(int count) { return count >= 5; }
-
     private IHubContext<GameHub> Hub { get; set; }
-
-    private int GameId { get; set; }
+    private string GroupName { get; set; }
 
     public GameRound(IHubContext<GameHub> hub, int gameId, TimeSpan cardSpeed)
     {
       Hub = hub;
-      GameId = gameId;
+      GroupName = $"game-{gameId}";
 
-      Hub.Clients.Group($"game-{gameId}").SendAsync("roundStart");
+      Hub.Clients.Group(GroupName).SendAsync("roundStart");
 
       Deck = new List<CardType>();
       Pile = new List<CardType>();
@@ -63,10 +60,10 @@ namespace Api.Services
       Deck.RemoveAt(0);
       Pile.Add(card);
 
-      Hub.Clients.Group($"game-{GameId}").SendAsync("receiveCard", card.ToString());
+      Hub.Clients.Group(GroupName).SendAsync("receiveCard", card.ToString());
     }
 
-    public void EndRound(string playerId)
+    public int EndRound(string playerId)
     {
       GameTimer.Dispose();
       // amount of eggs taking into account hens and foxes
@@ -102,8 +99,11 @@ namespace Api.Services
       result.count = count;
       result.playerId = playerId;
       result.hasWon = CorrectCount(count);
-      
-      Hub.Clients.Group($"game-{GameId}").SendAsync("roundEnded", result);
+
+      Hub.Clients.Group(GroupName).SendAsync("roundEnded", result);
+
+      int scoreToAdd = result.hasWon ? 1 : -1;
+      return scoreToAdd;
     }
   }
 }

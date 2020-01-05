@@ -47,9 +47,11 @@ namespace Api.DTO
     {
       id = player.Id;
       name = player.Name;
+      score = player.Score;
     }
     public string id { get; set; }
     public string name { get; set; }
+    public int score { get; set; }
   }
 
   public class RoundResultDTO
