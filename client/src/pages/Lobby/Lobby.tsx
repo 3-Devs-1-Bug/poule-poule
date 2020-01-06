@@ -7,8 +7,8 @@ import { uniqueId } from 'lodash-es'
 import { Settings as SettingsType } from '../../types/Settings'
 import connectToGameHub from '../../utils/signalrConnector'
 import { Game } from '../../types/Game'
-import Settings from '../../containers/Settings'
-import PlayersList from '../../containers/PlayersList'
+import Settings from '../../components/Settings'
+import PlayerList from '../../components/PlayerList'
 import './Lobby.scss'
 import Button from '../../components/Button'
 import CardPile from '../../components/CardPile'
@@ -126,7 +126,7 @@ const Lobby: FC<LobbyProps> = (props: LobbyProps) => {
             </ul>
           )}
 
-          <PlayersList
+          <PlayerList
             className='Lobby__Players'
             players={game.players}
             currentPlayerId={currentPlayerId}

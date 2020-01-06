@@ -2,29 +2,29 @@ import React, { FC } from 'react'
 import classnames from 'classnames'
 
 import { Player } from '../../types/Player'
-import PlayerItem from '../../components/PlayerItem'
-import './PlayersList.scss'
+import PlayerItem from '../PlayerItem'
+import './PlayerList.scss'
 
-export interface PlayersListProps {
+export interface PlayerListProps {
   players: Array<Player>
   currentPlayerId: string
   className?: string
 }
 
-const PlayersList: FC<PlayersListProps> = ({
+const PlayerList: FC<PlayerListProps> = ({
   players,
   currentPlayerId,
   className
 }) => {
-  const classes = classnames(className, 'PlayersList')
+  const classes = classnames(className, 'PlayerList')
   return (
     <div className={classes}>
       <h2>Joueurs</h2>
-      <ul className='PlayersList__Grid'>
+      <ul className='PlayerList__Grid'>
         {players.map(player => (
           <PlayerItem
             key={player.id}
-            className='PlayersList__GridItem'
+            className='PlayerList__GridItem'
             name={player.name}
             isSelf={currentPlayerId === player.id}
             isHost={players[0].id === player.id}
@@ -35,4 +35,4 @@ const PlayersList: FC<PlayersListProps> = ({
   )
 }
 
-export default PlayersList
+export default PlayerList
