@@ -2,6 +2,7 @@ import React, { FC, useEffect, useState } from 'react'
 import axios, { AxiosResponse } from 'axios'
 import { RouteComponentProps } from '@reach/router'
 import { HubConnection } from '@microsoft/signalr'
+import { uniqueId } from 'lodash-es'
 
 import { Settings as SettingsType } from '../../types/Settings'
 import connectToGameHub from '../../utils/signalrConnector'
@@ -10,9 +11,12 @@ import Settings from '../../containers/Settings'
 import PlayersList from '../../containers/PlayersList'
 import './Lobby.scss'
 import Button from '../../components/Button'
+import CardPile from '../../components/CardPile'
 import { GameStatus } from '../../types/GameStatus'
 import { RoundResult } from '../../types/RoundResult'
 import { Player } from '../../types/Player'
+import { CardType } from '../../types/CardType'
+import { Card } from '../../types/Card'
 
 export interface LobbyProps extends RouteComponentProps {
   id?: string
@@ -22,7 +26,7 @@ const Lobby: FC<LobbyProps> = (props: LobbyProps) => {
   const [game, setGame] = useState<Game>()
   const [hubConnection, setHubConnection] = useState<HubConnection>()
   const [currentPlayerId, setCurrentPlayerId] = useState<string>()
-  const [cards, setCards] = useState<Array<string>>([])
+  const [cards, setCards] = useState<Array<Card>>([])
   const [result, setResult] = useState<RoundResult>()
 
   useEffect(() => {
@@ -48,8 +52,10 @@ const Lobby: FC<LobbyProps> = (props: LobbyProps) => {
           setResult(undefined)
           setCards([])
         })
-        connection.on('receiveCard', (receivedCard: string) =>
-          setCards(cards => cards.concat(receivedCard))
+        connection.on('receiveCard', (receivedCard: CardType) =>
+          setCards(cards =>
+            cards.concat({ type: receivedCard, id: uniqueId() })
+          )
         )
         connection.on('roundEnded', (result: RoundResult) => {
           setResult(result)
@@ -127,11 +133,7 @@ const Lobby: FC<LobbyProps> = (props: LobbyProps) => {
           />
           <div>
             <h2>Cartes</h2>
-            {cards.map((card, index) => (
-              <span key={index} style={{ paddingRight: '1rem' }}>
-                {card}
-              </span>
-            ))}
+            <CardPile cards={cards} />
             {result && (
               <>
                 <p>{buildResultText(result, game.players)}</p>

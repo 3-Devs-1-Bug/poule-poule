@@ -11,9 +11,9 @@ const cardToEmoji = (card: CardType) => {
       emoji = '🥚'
       label = 'Egg'
       break
-    case CardType.CHICKEN:
+    case CardType.HEN:
       emoji = '🐔'
-      label = 'Chicken'
+      label = 'Hen'
       break
     case CardType.FOX:
       emoji = '🦊'
