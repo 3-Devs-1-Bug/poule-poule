@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import classnames from 'classnames'
 
-import icon from '../../images/icon.svg'
+import icon from '../../images/icon.jpg'
 import './Header.scss'
 
 export interface HeaderProps {
