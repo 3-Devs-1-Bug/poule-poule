@@ -12,7 +12,7 @@ const Index: FC<IndexProps> = () => {
   const createGame = async () => {
     const postGameResponse: AxiosResponse<Game> = await axios.post(`/games`)
     const game = postGameResponse.data
-    navigate(`/lobby/${game.id}`)
+    navigate(`/game/${game.id}`)
   }
 
   return (

@@ -6,7 +6,6 @@ import BaseLayout from './layouts/BaseLayout'
 import Index from './pages/Index'
 import NotFound from './pages/NotFound'
 import Game from './pages/Game'
-import Lobby from './pages/Lobby'
 
 const App: React.FC = () => {
   axios.defaults.baseURL = process.env.REACT_APP_API_URL
@@ -16,7 +15,6 @@ const App: React.FC = () => {
       <Router>
         <Index path='/' />
         <Game path='/game/:id' />
-        <Lobby path='/lobby/:id' />
         <NotFound path='*' />
       </Router>
     </BaseLayout>

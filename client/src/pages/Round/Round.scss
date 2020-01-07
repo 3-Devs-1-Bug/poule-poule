@@ -1,0 +1,9 @@
+@import 'styles/variables';
+
+.Round {
+  &__Intro,
+  &__Settings,
+  &__Players {
+    margin-top: $spacing-large;
+  }
+}

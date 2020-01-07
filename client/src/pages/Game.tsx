@@ -1,42 +1,99 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
+import axios, { AxiosResponse } from 'axios'
 import { RouteComponentProps } from '@reach/router'
-import { useEffect, useState } from 'react'
-import * as SignalR from '@microsoft/signalr'
-import Button from '../components/Button'
+import { HubConnection } from '@microsoft/signalr'
+import { uniqueId } from 'lodash-es'
+
+import connectToGameHub from '../utils/signalrConnector'
+import { Game as GameType } from '../types/Game'
+import { GameStatus } from '../types/GameStatus'
+import { RoundResult } from '../types/RoundResult'
+import { CardType } from '../types/CardType'
+import { Card } from '../types/Card'
+import Round from './Round/Round'
+import Lobby from './Lobby'
+import { Settings } from '../types/Settings'
 
 export interface GameProps extends RouteComponentProps {
   id?: string
 }
 
 const Game: FC<GameProps> = (props: GameProps) => {
-  const [hubConnection, setHubConnection] = useState()
-  const [counter, setCounter] = useState(0)
+  const [game, setGame] = useState<GameType>()
+  const [hubConnection, setHubConnection] = useState<HubConnection>()
+  const [currentPlayerId, setCurrentPlayerId] = useState<string>()
+  const [cards, setCards] = useState<Array<Card>>([])
+  const [result, setResult] = useState<RoundResult>()
 
   useEffect(() => {
-    const connection = new SignalR.HubConnectionBuilder()
-      .withUrl(process.env.REACT_APP_API_URL || '')
-      .withAutomaticReconnect()
-      .configureLogging(SignalR.LogLevel.Debug)
-      .build()
+    const loadGame = async () => {
+      const getGameResponse: AxiosResponse<GameType> = await axios.get(
+        `/games/${props.id}`
+      )
+      return getGameResponse.data
+    }
+    const onLoad = async () => {
+      var game = await loadGame()
+      setGame(game)
 
-    connection.start().catch(err => console.log(err))
-    connection.on('ReceiveMessage', () => setCounter(count => count + 1))
-    setHubConnection(connection)
-  }, [])
+      if (game.status === GameStatus.PENDING_START) {
+        const connection = connectToGameHub(game.id)
+        connection.start().then(() => {
+          connection.connectionId && setCurrentPlayerId(connection.connectionId)
+        })
+        connection.on('refreshGame', (game: GameType) => {
+          setGame(game)
+        })
+        connection.on('roundStart', () => {
+          setResult(undefined)
+          setCards([])
+        })
+        connection.on('receiveCard', (receivedCard: CardType) =>
+          setCards(cards =>
+            cards.concat({ type: receivedCard, id: uniqueId() })
+          )
+        )
+        connection.on('roundEnded', (result: RoundResult) => {
+          setResult(result)
+        })
 
-  return (
-    <>
-      This is the game with id <em>{props.id}</em>.<br></br>
-      If you open the app in multiple tabs, the counter should increment on
-      every client.
-      <div>
-        <em>{counter}</em>
-      </div>
-      <Button primary onClick={() => hubConnection.invoke('SendMessage')}>
-        Increment
-      </Button>
-    </>
-  )
+        setHubConnection(connection)
+      }
+    }
+
+    onLoad()
+  }, [props.id])
+
+  if (game && currentPlayerId && game.players.length && hubConnection) {
+    // The oldest member of the lobby is the host
+    const isGameHost = game.players[0].id === currentPlayerId
+
+    return (
+      <>
+        <Lobby
+          game={game}
+          currentPlayerId={currentPlayerId}
+          isGameHost={isGameHost}
+          startGame={() => hubConnection.invoke('StartGame')}
+          updateGameSettings={(settings: Settings) =>
+            hubConnection.invoke('UpdateGameSettings', settings)
+          }
+        />
+
+        <Round
+          game={game}
+          currentPlayerId={currentPlayerId}
+          isGameHost={isGameHost}
+          cards={cards}
+          result={result}
+          hitPile={() => hubConnection.invoke('HitPile')}
+          startGame={() => hubConnection.invoke('StartGame')}
+        />
+      </>
+    )
+  } else {
+    return <>Something is wrong</>
+  }
 }
 
 export default Game
