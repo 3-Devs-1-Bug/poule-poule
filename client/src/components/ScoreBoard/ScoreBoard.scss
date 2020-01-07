@@ -13,6 +13,9 @@
   }
 
   &__GridItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     flex-basis: 45%;
     min-width: $spacing-regular * 15;
     margin-top: $spacing-regular;

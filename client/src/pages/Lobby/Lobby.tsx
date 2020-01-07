@@ -17,6 +17,7 @@ import { RoundResult } from '../../types/RoundResult'
 import { Player } from '../../types/Player'
 import { CardType } from '../../types/CardType'
 import { Card } from '../../types/Card'
+import ScoreBoard from '../../components/ScoreBoard'
 
 export interface LobbyProps extends RouteComponentProps {
   id?: string
@@ -127,6 +128,11 @@ const Lobby: FC<LobbyProps> = (props: LobbyProps) => {
           )}
 
           <PlayerList
+            className='Lobby__Players'
+            players={game.players}
+            currentPlayerId={currentPlayerId}
+          />
+          <ScoreBoard
             className='Lobby__Players'
             players={game.players}
             currentPlayerId={currentPlayerId}

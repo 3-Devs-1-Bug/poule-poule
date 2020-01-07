@@ -22,16 +22,15 @@ const ScoreBoard: FC<ScoreBoardProps> = ({
       <h2>Tableau des scores</h2>
       <ul className='ScoreBoard__Grid'>
         {players.map(player => (
-          <div>
+          <li className='ScoreBoard__GridItem' key={player.id}>
             <PlayerItem
               key={player.id}
-              className='ScoreBoard__GridItem'
               name={player.name}
               isSelf={currentPlayerId === player.id}
               isHost={players[0].id === player.id}
             />
             {player.score}
-          </div>
+          </li>
         ))}
       </ul>
     </div>

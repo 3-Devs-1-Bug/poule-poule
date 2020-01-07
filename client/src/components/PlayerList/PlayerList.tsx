@@ -22,13 +22,14 @@ const PlayerList: FC<PlayerListProps> = ({
       <h2>Joueurs</h2>
       <ul className='PlayerList__Grid'>
         {players.map(player => (
-          <PlayerItem
-            key={player.id}
-            className='PlayerList__GridItem'
-            name={player.name}
-            isSelf={currentPlayerId === player.id}
-            isHost={players[0].id === player.id}
-          />
+          <li className='PlayerList__GridItem' key={player.id}>
+            <PlayerItem
+              key={player.id}
+              name={player.name}
+              isSelf={currentPlayerId === player.id}
+              isHost={players[0].id === player.id}
+            />
+          </li>
         ))}
       </ul>
     </div>
