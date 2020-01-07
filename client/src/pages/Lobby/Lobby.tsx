@@ -7,7 +7,6 @@ import Settings from '../../components/Settings'
 import PlayerList from '../../components/PlayerList'
 import './Lobby.scss'
 import Button from '../../components/Button'
-import { GameStatus } from '../../types/GameStatus'
 
 export interface LobbyProps extends RouteComponentProps {
   game: Game
@@ -56,9 +55,7 @@ const Lobby: FC<LobbyProps> = ({
           currentPlayerId={currentPlayerId}
         />
 
-        {game.status === GameStatus.PENDING_START && isGameHost && (
-          <Button onClick={startGame}>Commencer la partie</Button>
-        )}
+        {isGameHost && <Button onClick={startGame}>Commencer la partie</Button>}
       </>
     </div>
   )

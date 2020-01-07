@@ -36,7 +36,7 @@ const Game: FC<GameProps> = (props: GameProps) => {
       var game = await loadGame()
       setGame(game)
 
-      if (game.status === GameStatus.PENDING_START) {
+      if (game.status !== GameStatus.ROUND_IN_PROGRESS) {
         const connection = connectToGameHub(game.id)
         connection.start().then(() => {
           connection.connectionId && setCurrentPlayerId(connection.connectionId)
@@ -68,8 +68,8 @@ const Game: FC<GameProps> = (props: GameProps) => {
     // The oldest member of the lobby is the host
     const isGameHost = game.players[0].id === currentPlayerId
 
-    return (
-      <>
+    if (game.status === GameStatus.WAITING_FOR_PLAYERS) {
+      return (
         <Lobby
           game={game}
           currentPlayerId={currentPlayerId}
@@ -79,7 +79,12 @@ const Game: FC<GameProps> = (props: GameProps) => {
             hubConnection.invoke('UpdateGameSettings', settings)
           }
         />
-
+      )
+    } else if (
+      game.status === GameStatus.ROUND_IN_PROGRESS ||
+      game.status === GameStatus.ROUND_ENDED
+    ) {
+      return (
         <Round
           game={game}
           currentPlayerId={currentPlayerId}
@@ -89,11 +94,10 @@ const Game: FC<GameProps> = (props: GameProps) => {
           hitPile={() => hubConnection.invoke('HitPile')}
           startGame={() => hubConnection.invoke('StartGame')}
         />
-      </>
-    )
-  } else {
-    return <>Something is wrong</>
+      )
+    }
   }
+  return <>La partie est en cours.</>
 }
 
 export default Game

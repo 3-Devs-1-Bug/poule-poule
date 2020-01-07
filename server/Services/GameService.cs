@@ -34,7 +34,7 @@ namespace Api.Services
       var game = new Game();
       game.CreationDate = DateTime.UtcNow;
       game.HostId = Guid.NewGuid().ToString();
-      game.Status = GameStatus.PENDING_START;
+      game.Status = GameStatus.WAITING_FOR_PLAYERS;
 
       game.CardSpeed = new TimeSpan(0, 0, 0, 1, 500);
       game.Difficulty = Difficulty.EASY;
@@ -77,8 +77,8 @@ namespace Api.Services
     {
       var game = _dbContext.Games.Find(gameId);
 
-      if (game.Status != GameStatus.PENDING_START)
-        throw new InvalidOperationException("You can't join a game that has already started");
+      if (game.Status == GameStatus.ROUND_IN_PROGRESS)
+        throw new InvalidOperationException("You can't join a game when a round is in progress");
 
       var player = new Player();
       player.Id = playerId ?? Guid.NewGuid().ToString();
