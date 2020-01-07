@@ -1,5 +1,5 @@
 export enum CardType {
-  EGG,
-  CHICKEN,
-  FOX
+  EGG = 'EGG',
+  HEN = 'HEN',
+  FOX = 'FOX'
 }
