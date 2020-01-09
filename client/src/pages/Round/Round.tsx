@@ -55,9 +55,12 @@ const Round: FC<RoundProps> = (props: RoundProps) => {
         )}
         <div>
           <h2>Cartes</h2>
-          <div onClick={safeHit}>
+          <button onClick={safeHit} className='Round__Cards'>
             <CardPile cards={props.cards} />
-          </div>
+          </button>
+          {props.game.status === GameStatus.ROUND_IN_PROGRESS && (
+            <Button onClick={props.hitPile}>Taper sur la pile</Button>
+          )}
           {props.result && (
             <p>
               {buildResultText(props.result, props.game.players)}

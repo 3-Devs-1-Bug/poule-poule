@@ -1,8 +1,12 @@
 @import 'styles/variables';
 
 .Round {
-  &__Intro,
-  &__Settings,
+  &__Cards {
+    all: unset;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
   &__Players {
     margin-top: $spacing-large;
   }

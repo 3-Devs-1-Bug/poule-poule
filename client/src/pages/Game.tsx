@@ -10,7 +10,7 @@ import { GameStatus } from '../types/GameStatus'
 import { RoundResult } from '../types/RoundResult'
 import { CardType } from '../types/CardType'
 import { Card } from '../types/Card'
-import Round from './Round/Round'
+import Round from './Round'
 import Lobby from './Lobby'
 import { Settings } from '../types/Settings'
 
