@@ -55,7 +55,11 @@ const Round: FC<RoundProps> = (props: RoundProps) => {
         )}
         <div>
           <h2>Cartes</h2>
-          <button onClick={safeHit} className='Round__Cards'>
+          <button
+            aria-label='Taper sur la pile'
+            onClick={safeHit}
+            className='Round__Cards'
+          >
             <CardPile cards={props.cards} />
           </button>
           {props.game.status === GameStatus.ROUND_IN_PROGRESS && (
