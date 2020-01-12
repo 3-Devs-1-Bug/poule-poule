@@ -56,14 +56,16 @@ const Round: FC<RoundProps> = (props: RoundProps) => {
         <div>
           <h2>Cartes</h2>
           <button
-            aria-label='Taper sur la pile'
+            aria-labelledby='hitPile'
             onClick={safeHit}
             className='Round__Cards'
           >
             <CardPile cards={props.cards} />
           </button>
           {props.game.status === GameStatus.ROUND_IN_PROGRESS && (
-            <Button onClick={props.hitPile}>Taper sur la pile</Button>
+            <Button id='hitPile' onClick={props.hitPile} autoFocus>
+              Taper sur la pile
+            </Button>
           )}
           {props.result && (
             <p>
