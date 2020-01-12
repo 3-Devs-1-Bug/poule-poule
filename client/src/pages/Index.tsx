@@ -1,16 +1,23 @@
-import React, { FC } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import axios, { AxiosResponse } from 'axios'
 import { RouteComponentProps, navigate } from '@reach/router'
 
 import Button from '../components/Button'
 
-import { Game } from '../types/Game'
+import { GameItem } from '../types/GameItem'
+import GameList from '../components/GameList'
 
 export interface IndexProps extends RouteComponentProps {}
 
 const Index: FC<IndexProps> = () => {
+  const [games, setGames] = useState<Array<GameItem>>([])
+
+  useEffect(() => {
+    axios.get(`/games`).then(response => setGames(response.data))
+  }, [])
+
   const createGame = async () => {
-    const postGameResponse: AxiosResponse<Game> = await axios.post(`/games`)
+    const postGameResponse: AxiosResponse<GameItem> = await axios.post(`/games`)
     const game = postGameResponse.data
     navigate(`/game/${game.id}`)
   }
@@ -24,10 +31,10 @@ const Index: FC<IndexProps> = () => {
         inventore! Reprehenderit, nulla.
       </p>
 
-      <Button>Rejoindre une partie</Button>
       <Button primary onClick={createGame}>
         Créer une nouvelle partie
       </Button>
+      <GameList games={games} />
     </>
   )
 }

@@ -34,6 +34,26 @@ namespace Api.DTO
     public PlayerDTO[] players { get; set; }
   }
 
+  // A lightweight version of a GameDTO, used to display a list of games
+  public class GameItemDTO
+  {
+    public GameItemDTO(Game game)
+    {
+      id = game.Id;
+      creationDate = game.CreationDate.ToString("o", CultureInfo.InvariantCulture);
+      difficulty = game.Difficulty.ToString();
+      cardSpeed = game.CardSpeed.TotalSeconds;
+      roundsToWin = game.RoundsToWin;
+      playerCount = game.Players.Count;
+    }
+    public int id { get; set; }
+    public string creationDate { get; set; }
+    public string difficulty { get; set; }
+    public double cardSpeed { get; set; }
+    public int roundsToWin { get; set; }
+    public int playerCount { get; set; }
+  }
+
   public class SettingsDTO
   {
     public string difficulty { get; set; }

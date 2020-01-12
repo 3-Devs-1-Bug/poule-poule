@@ -48,5 +48,13 @@ namespace Api.Controllers
         return BadRequest(new { error = exception.Message });
       }
     }
+
+    [HttpGet]
+    public ActionResult GetGames()
+    {
+      var games = _gameService.GetActive();
+      var gameItemsDto = games.Select(game => new GameItemDTO(game));
+      return Ok(gameItemsDto);
+    }
   }
 }

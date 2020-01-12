@@ -12,6 +12,7 @@ namespace Api.Services
   public interface IGameService
   {
     Game Create();
+    List<Game> GetActive();
     Game Get(int gameId);
     Player AddPlayer(int gameId, string playerId = null);
     void RemovePlayer(string playerId);
@@ -53,6 +54,16 @@ namespace Api.Services
         .Where(game => game.Id == gameId)
         .FirstOrDefault();
       return game;
+    }
+
+    public List<Game> GetActive()
+    {
+      var games = _dbContext.Games
+        .Include(game => game.Players)
+        .Where(game => game.Status != GameStatus.ENDED && game.Players.Count > 0)
+        .OrderByDescending(game => game.CreationDate)
+        .ToList();
+      return games;
     }
 
     public Game UpdateSettings(int gameId, Difficulty difficulty, TimeSpan cardSpeed, int roundsToWin)
