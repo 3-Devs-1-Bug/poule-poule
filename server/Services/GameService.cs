@@ -17,6 +17,7 @@ namespace Api.Services
     void RemovePlayer(string playerId);
     Game UpdateSettings(int gameId, Difficulty difficulty, TimeSpan cardSpeed, int roundsToWin);
     Game UpdateStatus(int gameId, GameStatus status);
+    void UpdatePlayerScore(string playerId, int value);
   }
 
   public class GameService : IGameService
@@ -33,7 +34,7 @@ namespace Api.Services
       var game = new Game();
       game.CreationDate = DateTime.UtcNow;
       game.HostId = Guid.NewGuid().ToString();
-      game.Status = GameStatus.PENDING_START;
+      game.Status = GameStatus.WAITING_FOR_PLAYERS;
 
       game.CardSpeed = new TimeSpan(0, 0, 0, 1, 500);
       game.Difficulty = Difficulty.EASY;
@@ -76,8 +77,8 @@ namespace Api.Services
     {
       var game = _dbContext.Games.Find(gameId);
 
-      if (game.Status != GameStatus.PENDING_START)
-        throw new InvalidOperationException("You can't join a game that has already started");
+      if (game.Status == GameStatus.ROUND_IN_PROGRESS)
+        throw new InvalidOperationException("You can't join a game when a round is in progress");
 
       var player = new Player();
       player.Id = playerId ?? Guid.NewGuid().ToString();
@@ -97,6 +98,18 @@ namespace Api.Services
         throw new ArgumentException($"The playerId {playerId} was not found.");
       _dbContext.Players.Remove(player);
       _dbContext.SaveChanges();
+    }
+
+    // A player can win or lose points
+    // If the player can't be found, it means he has left the game: do nothing
+    public void UpdatePlayerScore(string playerId, int value)
+    {
+      var player = _dbContext.Players.Find(playerId);
+      if (player != null)
+      {
+        player.Score = player.Score + value;
+        _dbContext.SaveChanges();
+      }
     }
 
     private string GetRandomName()

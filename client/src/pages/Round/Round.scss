@@ -1,0 +1,12 @@
+@import 'styles/variables';
+
+.Round {
+  &__Cards {
+    display: block;
+    margin: 0 auto;
+  }
+
+  &__Players {
+    margin-top: $spacing-large;
+  }
+}

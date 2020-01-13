@@ -2,8 +2,9 @@ namespace Api
 {
   public enum GameStatus
   {
-    PENDING_START,
-    IN_PROGRESS,
-    ENDED
+    WAITING_FOR_PLAYERS,
+    ROUND_IN_PROGRESS,
+    ROUND_ENDED,
+    GAME_OVER
   }
 }

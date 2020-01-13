@@ -19,10 +19,14 @@ namespace Api.Services
     void HitPile(int gameId, string playerId);
   }
 
+  // This class is responsible for managing all on-going games on the platform.
   public class GameManager : IGameManager
   {
     private IHubContext<GameHub> _hub;
     private readonly IGameService _gameService;
+
+    // Using a static property for keeping all game rounds in memory.
+    // It needs to be thread safe, in case players hit the pile at the same time.
     private readonly static ConcurrentDictionary<int, GameRound> Rounds = new ConcurrentDictionary<int, GameRound>();
 
     public GameManager(IHubContext<GameHub> hub, IGameService gameService)
@@ -42,7 +46,8 @@ namespace Api.Services
     public void HitPile(int gameId, string playerId)
     {
       Rounds.TryGetValue(gameId, out var round);
-      round.EndRound(playerId);
+      int scoreToAdd = round.EndRound(playerId);
+      _gameService.UpdatePlayerScore(playerId, scoreToAdd);
     }
   }
 }

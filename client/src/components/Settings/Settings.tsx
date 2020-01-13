@@ -1,6 +1,6 @@
 import React, { Component, ChangeEvent } from 'react'
 
-import Radio from '../../components/Radio'
+import Radio from '../Radio'
 import { Settings as SettingsType } from '../../types/Settings'
 import { Difficulty } from '../../types/Difficulty'
 
