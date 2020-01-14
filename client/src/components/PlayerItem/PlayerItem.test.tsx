@@ -9,8 +9,7 @@ describe('PlayerItem', () => {
   })
 
   it('identifies myself if isSelf is true', () => {
-    const { getByRole } = render(<PlayerItem name='Martin' isSelf={true} />)
-    const fullName = getByRole('listitem')
-    expect(fullName).toHaveTextContent('Martin (moi)')
+    const { container } = render(<PlayerItem name='Martin' isSelf={true} />)
+    expect(container).toHaveTextContent('Martin (moi)')
   })
 })
