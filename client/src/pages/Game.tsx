@@ -13,6 +13,7 @@ import { Card } from '../types/Card'
 import Round from './Round'
 import Lobby from './Lobby'
 import { Settings } from '../types/Settings'
+import Podium from '../components/Podium'
 
 export interface GameProps extends RouteComponentProps {
   id?: string
@@ -68,33 +69,37 @@ const Game: FC<GameProps> = (props: GameProps) => {
     // The oldest member of the lobby is the host
     const isGameHost = game.players[0].id === currentPlayerId
 
-    if (game.status === GameStatus.WAITING_FOR_PLAYERS) {
-      return (
-        <Lobby
-          game={game}
-          currentPlayerId={currentPlayerId}
-          isGameHost={isGameHost}
-          startGame={() => hubConnection.invoke('StartGame')}
-          updateGameSettings={(settings: Settings) =>
-            hubConnection.invoke('UpdateGameSettings', settings)
-          }
-        />
-      )
-    } else if (
-      game.status === GameStatus.ROUND_IN_PROGRESS ||
-      game.status === GameStatus.ROUND_ENDED
-    ) {
-      return (
-        <Round
-          game={game}
-          currentPlayerId={currentPlayerId}
-          isGameHost={isGameHost}
-          cards={cards}
-          result={result}
-          hitPile={() => hubConnection.invoke('HitPile')}
-          startGame={() => hubConnection.invoke('StartGame')}
-        />
-      )
+    switch (game.status) {
+      case GameStatus.WAITING_FOR_PLAYERS:
+        return (
+          <Lobby
+            game={game}
+            currentPlayerId={currentPlayerId}
+            isGameHost={isGameHost}
+            startGame={() => hubConnection.invoke('StartGame')}
+            updateGameSettings={(settings: Settings) =>
+              hubConnection.invoke('UpdateGameSettings', settings)
+            }
+          />
+        )
+      case GameStatus.ROUND_IN_PROGRESS:
+      case GameStatus.ROUND_ENDED:
+        return (
+          <Round
+            game={game}
+            currentPlayerId={currentPlayerId}
+            isGameHost={isGameHost}
+            cards={cards}
+            result={result}
+            hitPile={() => hubConnection.invoke('HitPile')}
+            startGame={() => hubConnection.invoke('StartGame')}
+          />
+        )
+      case GameStatus.GAME_OVER:
+        const topPlayers = game.players.sort((a, b) =>
+          a.score < b.score ? -1 : a.name > b.name ? 1 : 0
+        )
+        return <Podium players={topPlayers} currentPlayerId={currentPlayerId} />
     }
   }
   return <>La partie est en cours.</>
