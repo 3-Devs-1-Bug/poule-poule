@@ -26,7 +26,7 @@ namespace Api.Services
     public GameRound(IHubContext<GameHub> hub, int gameId, TimeSpan cardSpeed)
     {
       Hub = hub;
-      GroupName = $"game-{gameId}";
+      GroupName = Helpers.GetGroupName(gameId);
 
       Hub.Clients.Group(GroupName).SendAsync("roundStart");
 

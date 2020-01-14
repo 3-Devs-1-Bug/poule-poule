@@ -102,7 +102,6 @@ namespace Api.Hubs
       _gameManager.HitPile(gameId, playerId);
 
       var game = _gameService.Get(gameId);
-      _gameService.UpdateStatus(gameId, GameStatus.ROUND_ENDED);
       var gameDto = new GameDTO(game);
       Clients.Group(groupName).SendAsync("refreshGame", gameDto);
 
