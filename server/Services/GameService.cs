@@ -15,7 +15,7 @@ namespace Api.Services
     List<Game> GetActive();
     Game Get(int gameId);
     Player AddPlayer(int gameId, string playerId = null);
-    void RemovePlayer(string playerId);
+    void RemovePlayer(int gameId, string playerId);
     Game UpdateSettings(int gameId, Difficulty difficulty, TimeSpan cardSpeed, int roundsToWin);
     Game UpdateStatus(int gameId, GameStatus status);
     int? UpdatePlayerScore(string playerId, int value);
@@ -88,8 +88,8 @@ namespace Api.Services
     {
       var game = _dbContext.Games.Find(gameId);
 
-      if (game.Status == GameStatus.ROUND_IN_PROGRESS)
-        throw new InvalidOperationException("You can't join a game when a round is in progress");
+      if (game.Status == GameStatus.GAME_OVER || game.Status == GameStatus.ROUND_IN_PROGRESS)
+        return null;
 
       var player = new Player();
       player.Id = playerId ?? Guid.NewGuid().ToString();
@@ -102,13 +102,20 @@ namespace Api.Services
       return player;
     }
 
-    public void RemovePlayer(string playerId)
+    public void RemovePlayer(int gameId, string playerId)
     {
-      var player = _dbContext.Players.Find(playerId);
+      var game = this.Get(gameId);
+
+      var player = game.Players.Where(player => player.Id == playerId).FirstOrDefault();
       if (player == null)
         throw new ArgumentException($"The playerId {playerId} was not found.");
-      _dbContext.Players.Remove(player);
-      _dbContext.SaveChanges();
+
+      // Keep player if game is over to persist score
+      if (game.Status != GameStatus.GAME_OVER)
+      {
+        _dbContext.Players.Remove(player);
+        _dbContext.SaveChanges();
+      }
     }
 
     // A player can win or lose points
