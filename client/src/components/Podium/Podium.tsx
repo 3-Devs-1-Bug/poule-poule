@@ -5,11 +5,11 @@ import { Player } from '../../types/Player'
 
 export interface PodiumProps {
   players: Array<Player>
-  currentPlayerId: string
+  currentPlayerId?: string
   className?: string
 }
 
-const Podium: FC<PodiumProps> = ({ players, className }) => {
+const Podium: FC<PodiumProps> = ({ players, currentPlayerId, className }) => {
   const classes = classnames(className, 'Podium')
 
   return (
@@ -18,11 +18,13 @@ const Podium: FC<PodiumProps> = ({ players, className }) => {
       <ol>
         {players.map((player, index) => (
           <li key={player.id}>
-            {`${index + 1}. ${player.name} ${player.score}`}
+            {`${index + 1}. ${player.name} ${player.score} ${
+              currentPlayerId && player.id === currentPlayerId ? '(moi)' : ''
+            }`}
           </li>
         ))}
       </ol>
-      <h3>Merci pour votre participation</h3>
+      <p>La partie est terminée</p>
     </div>
   )
 }

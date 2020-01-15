@@ -61,7 +61,7 @@ namespace Api.Hubs
       string groupName = "game-" + gameId;
 
       Groups.RemoveFromGroupAsync(Context.ConnectionId, groupName);
-      _gameService.RemovePlayer(playerId);
+      _gameService.RemovePlayer(gameId, playerId);
 
       var game = _gameService.Get(gameId);
       var gameDto = new GameDTO(game);
