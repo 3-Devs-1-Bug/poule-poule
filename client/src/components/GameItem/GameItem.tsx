@@ -1,9 +1,7 @@
 import React, { FC } from 'react'
-import moment from 'moment'
+import { Link } from '@reach/router'
 
 import { GameItem as GameItemType } from '../../types/GameItem'
-import Button from '../Button'
-import { navigate } from '@reach/router'
 
 export interface GameItemProps {
   game: GameItemType
@@ -11,13 +9,13 @@ export interface GameItemProps {
 }
 
 const GameItem: FC<GameItemProps> = ({ game, className }) => {
+  const linkText = `Partie #${game.id} (${game.playerCount} joueur${
+    game.playerCount > 1 ? 's' : ''
+  })`
   return (
-    <div className={className}>
-      <h3>Partie {game.id}</h3>
-      <p>Créée {moment.utc(game.creationDate).fromNow()}</p>
-      <p>{game.playerCount} joueur(s)</p>
-      <Button onClick={() => navigate(`/lobby/${game.id}`)}>Rejoindre</Button>
-    </div>
+    <Link className={className} to={`/lobby/${game.id}`}>
+      {linkText}
+    </Link>
   )
 }
 

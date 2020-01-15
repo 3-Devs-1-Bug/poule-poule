@@ -40,17 +40,9 @@ namespace Api.DTO
     public GameItemDTO(Game game)
     {
       id = game.Id;
-      creationDate = game.CreationDate.ToString("o", CultureInfo.InvariantCulture);
-      difficulty = game.Difficulty.ToString();
-      cardSpeed = game.CardSpeed.TotalSeconds;
-      roundsToWin = game.RoundsToWin;
       playerCount = game.Players.Count;
     }
     public int id { get; set; }
-    public string creationDate { get; set; }
-    public string difficulty { get; set; }
-    public double cardSpeed { get; set; }
-    public int roundsToWin { get; set; }
     public int playerCount { get; set; }
   }
 
