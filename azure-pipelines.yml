@@ -1,3 +1,5 @@
+# PR pipeline, needs to be in a file named azure-pipelines.yml, located at the root of the projet..
+
 variables:
   clientFolder: client
 
@@ -17,7 +19,7 @@ jobs:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-      - template: install-steps.yml
+      - template: /.azure/install-steps.yml
         parameters:
           clientFolder: $(clientFolder)
 
