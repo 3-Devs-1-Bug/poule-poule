@@ -14,7 +14,8 @@ const GameList: FC<GameListProps> = ({ games, className }) => {
   const classes = classnames(className, 'GameList')
   return (
     <div className={classes}>
-      <h2>List des parties</h2>
+      <h2>Rejoindre une partie</h2>
+      <p>Rejoins directement une partie et joue avec d'autres joueurs.</p>
       {games.length ? (
         <ul className='GameList__Grid'>
           {games.map(game => (

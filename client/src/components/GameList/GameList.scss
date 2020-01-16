@@ -1,7 +1,9 @@
 @import 'styles/variables';
 
 .GameList {
+  padding-top: $spacing-large;
   h2 {
+    font-weight: $font-weight-bold;
     margin-bottom: $spacing-small;
   }
 
@@ -9,7 +11,6 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin-top: (-$spacing-regular);
   }
 
   &__GridItem {
