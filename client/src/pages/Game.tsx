@@ -73,6 +73,9 @@ const Game: FC<GameProps> = (props: GameProps) => {
       return <Podium players={topPlayers} currentPlayerId={currentPlayerId} />
     }
 
+    if (!currentPlayerId && game.status === GameStatus.ROUND_IN_PROGRESS)
+      return <p>La partie est en cours, vous ne pouvez la rejoindre.</p>
+
     if (currentPlayerId && game.players.length && hubConnection) {
       // The oldest member of the lobby is the host
       const isGameHost = game.players[0].id === currentPlayerId
@@ -106,7 +109,7 @@ const Game: FC<GameProps> = (props: GameProps) => {
       }
     }
   }
-  return <>La partie est en cours.</>
+  return null
 }
 
 export default Game

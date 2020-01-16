@@ -12,22 +12,21 @@ export interface PodiumProps {
   className?: string
 }
 
+const victoryMusicUrl =
+  'https://statics.blob.core.windows.net/public/victory.mp3'
+
 const Podium: FC<PodiumProps> = ({ players, currentPlayerId, className }) => {
   const classes = classnames(className, 'Podium')
 
   const isWinner = players[0].id === currentPlayerId
   useEffect(() => {
-    if (isWinner)
-      new Audio(
-        'https://statics.blob.core.windows.net/public/victory.mp3'
-      ).play()
+    if (isWinner) new Audio(victoryMusicUrl).play()
   }, [currentPlayerId, isWinner])
 
   const { width, height } = useWindowSize()
 
   return (
     <div className={classes}>
-      {isWinner && <Confetti width={width} height={height} />}
       <h2>Podium</h2>
       <ol>
         {players.map((player, index) => (
@@ -39,7 +38,10 @@ const Podium: FC<PodiumProps> = ({ players, currentPlayerId, className }) => {
         ))}
       </ol>
       {isWinner ? (
-        <span className='VictoryMessage'>Vous avez gagné !</span>
+        <>
+          <Confetti width={width} height={height} />
+          <span className='VictoryMessage'>Vous avez gagné !</span>
+        </>
       ) : (
         'La partie est terminée'
       )}
