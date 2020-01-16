@@ -60,7 +60,7 @@ namespace Api.Services
     {
       var games = _dbContext.Games
         .Include(game => game.Players)
-        .Where(game => game.Status != GameStatus.ENDED && game.Players.Count > 0)
+        .Where(game => game.Status != GameStatus.GAME_OVER && game.Players.Count > 0)
         .OrderByDescending(game => game.CreationDate)
         .ToList();
       return games;
