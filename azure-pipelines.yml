@@ -1,18 +1,13 @@
-# Node.js with React
-# Build a Node.js project that uses React.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+# PR pipeline, needs to be in a file named azure-pipelines.yml, located at the root of the projet..
 
 variables:
   clientFolder: client
 
-# Disabled CI on every branches...
 trigger:
   branches:
     exclude:
       - '*' 
 
-# ...but enable CI on every PRs
 pr:
   branches:
     include:
@@ -20,38 +15,38 @@ pr:
 
 jobs:
   - job: client_testing
-    displayName: Client App Testing
+    displayName: Client app testing
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-      - task: NodeTool@0
-        inputs:
-          versionSpec: '10.x'
-        displayName: 'Install Node.js'
+      - template: /.azure/install-steps.yml
+        parameters:
+          clientFolder: $(clientFolder)
 
       - script: |
-          yarn install
           yarn add -D jest-junit
         workingDirectory: $(clientFolder)
-        displayName: 'Install dependencies'
+        displayName: 'Install test reporter'
       
       - script : |
           yarn lint
           yarn lint:style
         workingDirectory: $(clientFolder)
-        displayName: 'Lint code'
+        displayName: 'Lint code and styles'
 
       - script: CI=true yarn test --reporters=default --reporters=jest-junit --coverage --coverageReporters=cobertura
         workingDirectory: $(clientFolder)
         displayName: 'Run tests'
 
       - task: PublishTestResults@2
+        displayName: 'Publish test results'
         condition: succeededOrFailed()
         inputs:
           testRunner: JUnit
           testResultsFiles: '$(clientFolder)/junit.xml'
       
       - task: PublishCodeCoverageResults@1
+        displayName: 'Publish code coverage results'
         inputs:
           codeCoverageTool: Cobertura
           summaryFileLocation: '$(clientFolder)/coverage/*coverage.xml'
