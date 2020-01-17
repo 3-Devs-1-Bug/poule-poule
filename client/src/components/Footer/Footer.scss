@@ -1,0 +1,18 @@
+@import 'styles/variables';
+
+.Footer {
+  &__Link {
+    font-size: $font-size-small;
+    display: inline;
+
+    & + & {
+      margin-left: $spacing-regular;
+    }
+
+    svg {
+      margin-left: $spacing-small;
+      height: 1em;
+      width: 1em;
+    }
+  }
+}
