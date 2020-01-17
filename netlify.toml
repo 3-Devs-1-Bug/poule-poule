@@ -1,0 +1,19 @@
+# see https://docs.netlify.com/configure-builds/file-based-configuration/
+
+[build]
+  base = "client/"
+  publish = "client/build/"
+  command = "yarn build"
+
+# Redirect API calls
+[[redirects]]
+  from = "/api/*"
+  to = "https://poule-poule-api.azurewebsites.net/:splat"
+  status = 200
+
+# Explicitely redirect everything else to index.html since we are using
+# client-side routing
+[[redirects]]
+  from = "/*"
+  to = "index.html"
+  status = 200
