@@ -2,21 +2,14 @@
 @import 'styles/helpers';
 
 .Header {
+  align-items: center;
   display: flex;
-
-  @include mobile {
-    display: block;
-  }
 
   &__Icon {
     border-radius: $radius-regular;
-    height: $base-spacing * 12;
+    height: $base-spacing * 6;
     margin-right: $spacing-regular;
     object-fit: cover;
-    width: $base-spacing * 12;
-  }
-
-  &__Subtitle {
-    font-size: $font-size-medium;
+    width: $base-spacing * 6;
   }
 }
