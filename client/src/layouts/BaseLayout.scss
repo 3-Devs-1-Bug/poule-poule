@@ -1,28 +1,20 @@
 @import 'styles/variables';
-@import 'styles/helpers';
 
 .BaseLayout {
-  &__Content {
-    padding: $spacing-regular;
-    // width: 60%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: $spacing-regular;
 
-    // @include mobile() {
-    //   width: auto;
-    // }
+  &__Header {
+    margin-bottom: $spacing-large;
   }
 
-  // &__Background {
-  //   background-image: url('../images/eggs.jpg');
-  //   background-position: center;
-  //   background-size: cover;
-  //   bottom: 0;
-  //   position: fixed;
-  //   right: 0;
-  //   top: 0;
-  //   width: 40%;
+  &__Content {
+    margin-bottom: $spacing-larger;
+  }
 
-  //   @include mobile() {
-  //     display: none;
-  //   }
-  // }
+  &__Footer {
+    margin-top: auto;
+  }
 }
