@@ -8,9 +8,9 @@
 
 [[redirects]]
 from = "/api/*"
-to = "https://poule-poule-api.azurewebsites.net"
+to = "https://poule-poule-api.azurewebsites.net/:splat"
 status = 200
-force = false
+force = true
 
 [[redirects]]
 from = "/*"
