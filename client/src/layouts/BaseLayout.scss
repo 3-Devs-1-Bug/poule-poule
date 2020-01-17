@@ -4,25 +4,25 @@
 .BaseLayout {
   &__Content {
     padding: $spacing-regular;
-    width: 60%;
+    // width: 60%;
 
-    @include mobile() {
-      width: auto;
-    }
+    // @include mobile() {
+    //   width: auto;
+    // }
   }
 
-  &__Background {
-    background-image: url('../images/eggs.jpg');
-    background-position: center;
-    background-size: cover;
-    bottom: 0;
-    position: fixed;
-    right: 0;
-    top: 0;
-    width: 40%;
+  // &__Background {
+  //   background-image: url('../images/eggs.jpg');
+  //   background-position: center;
+  //   background-size: cover;
+  //   bottom: 0;
+  //   position: fixed;
+  //   right: 0;
+  //   top: 0;
+  //   width: 40%;
 
-    @include mobile() {
-      display: none;
-    }
-  }
+  //   @include mobile() {
+  //     display: none;
+  //   }
+  // }
 }
