@@ -5,13 +5,6 @@
   publish = "build/"
   command = "yarn build"
 
-# Explicitely redirect everything else to index.html since we are using
-# client-side routing
-[[redirects]]
-  from = "/*"
-  to = "index.html"
-  status = 200
-
 # Redirect API calls
 [[redirects]]
   from = "/api/*"
