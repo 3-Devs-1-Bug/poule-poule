@@ -2,8 +2,11 @@
 @import 'styles/helpers';
 
 .Header {
-  align-items: center;
-  display: flex;
+  &__Link {
+    align-items: center;
+    display: inline-flex;
+    text-decoration: none;
+  }
 
   &__Icon {
     border-radius: $radius-regular;
