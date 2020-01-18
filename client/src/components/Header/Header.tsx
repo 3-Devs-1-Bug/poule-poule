@@ -3,23 +3,21 @@ import classnames from 'classnames'
 
 import icon from '../../images/icon.jpg'
 import './Header.scss'
+import { Link } from '@reach/router'
 
 export interface HeaderProps {
-  title: string
-  subtitle: string
   className?: string
 }
 
-const Header: FC<HeaderProps> = ({ title, subtitle, className }) => {
+const Header: FC<HeaderProps> = ({ className }) => {
   const classes = classnames(className, 'Header')
 
   return (
     <header className={classes}>
-      <img className='Header__Icon' src={icon} alt='' />
-      <div>
-        <h1>{title}</h1>
-        <span className='Header__Subtitle'>{subtitle}</span>
-      </div>
+      <Link className='Header__Link' to='/'>
+        <img className='Header__Icon' src={icon} alt='' />
+        <h1>Poule Poule</h1>
+      </Link>
     </header>
   )
 }

@@ -21,3 +21,13 @@ legend {
   font-size: $font-size-regular;
   font-weight: $font-weight-medium;
 }
+
+a {
+  color: inherit;
+  text-decoration: underline;
+
+  &:focus,
+  &:hover {
+    color: $color-primary;
+  }
+}
