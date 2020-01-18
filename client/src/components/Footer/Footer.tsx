@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import classnames from 'classnames'
 
 import './Footer.scss'
+import { Link } from '@reach/router'
 
 export interface FooterProps {
   className?: string
@@ -19,7 +20,7 @@ const Footer: FC<FooterProps> = ({ className }) => {
           </a>
         </li>
         <li className='Footer__Link'>
-          <a href='/a-propos'>À propos</a>
+          <Link to='/'>À propos</Link>
         </li>
         <li className='Footer__Link'>
           <a
