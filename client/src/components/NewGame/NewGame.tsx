@@ -20,7 +20,7 @@ const NewGame: FC<NewGameProps> = ({ clickHandler, className }) => {
         amis.
       </p>
       <Button className='NewGame__Button' onClick={clickHandler}>
-        Créer une nouvelle partie
+        Créer une partie
       </Button>
     </div>
   )
