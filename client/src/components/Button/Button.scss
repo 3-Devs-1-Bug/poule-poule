@@ -15,4 +15,16 @@
   &:hover {
     background: darken($color-primary, 5%);
   }
+
+  &:disabled {
+    color: $color-text-disabled;
+    border-color: $color-grey;
+    cursor: not-allowed;
+  }
+
+  &.Button--Small {
+    font-size: $font-size-small;
+    padding: $spacing-small;
+    width: auto;
+  }
 }
