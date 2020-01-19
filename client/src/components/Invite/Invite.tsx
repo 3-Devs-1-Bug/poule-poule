@@ -1,5 +1,4 @@
-import React, { FC } from 'react'
-import CopyToClipboard from 'react-copy-to-clipboard'
+import React, { FC, useRef } from 'react'
 
 import './Invite.scss'
 import Button from '../Button'
@@ -11,18 +10,35 @@ export interface InviteProps {
 
 const Invite: FC<InviteProps> = ({ gameUrl }) => {
   const [isCoolingDown, triggerCooldown] = useCooldown(1500)
+  const linkInputRef = useRef<HTMLInputElement>(null)
+
+  const copyToClipboard = () => {
+    if (linkInputRef && linkInputRef.current) {
+      linkInputRef.current.select()
+      document.execCommand('copy')
+      triggerCooldown()
+    }
+  }
 
   return (
     <div className='Invite'>
       <h2>Inviter des joueurs</h2>
       <p>Pour inviter des joueurs, partagez le lien ci-dessous:</p>
       <div className='Invite__LinkBlock'>
-        <span className='Invite__LinkBlock__Link'>{gameUrl}</span>
-        <CopyToClipboard text={gameUrl} onCopy={triggerCooldown}>
-          <Button disabled={isCoolingDown} className={'Button--Small'}>
-            {isCoolingDown ? 'Copié' : 'Copier'}
-          </Button>
-        </CopyToClipboard>
+        <input
+          ref={linkInputRef}
+          type='text'
+          readOnly
+          className='Invite__LinkBlock__Link'
+          value={gameUrl}
+        />
+        <Button
+          disabled={isCoolingDown}
+          className={'Button--Small'}
+          onClick={copyToClipboard}
+        >
+          {isCoolingDown ? 'Copié' : 'Copier'}
+        </Button>
       </div>
     </div>
   )

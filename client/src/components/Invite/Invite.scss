@@ -10,18 +10,16 @@
     flex-wrap: wrap;
     margin-top: $spacing-small;
     align-items: center;
-    &__Link {
-      background-color: $color-grey;
-      padding: $spacing-small;
-      border-radius: $radius-regular;
+    [type='text'] {
+      flex-grow: 3;
       margin-right: $spacing-small;
-    }
-    &__CopyIcon {
-      width: $base-spacing * 5;
-      height: $base-spacing * 5;
+      background-color: $color-grey;
       border-radius: $radius-regular;
       padding: $spacing-small;
-      border: $border-regular solid $color-black;
+      border: none;
+    }
+    .Button {
+      flex-grow: 1;
     }
   }
 }
