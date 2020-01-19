@@ -13,7 +13,7 @@ const GameItem: FC<GameItemProps> = ({ game, className }) => {
     game.playerCount > 1 ? 's' : ''
   })`
   return (
-    <Link className={className} to={`/lobby/${game.id}`}>
+    <Link className={className} to={`/game/${game.id}`}>
       {linkText}
     </Link>
   )
