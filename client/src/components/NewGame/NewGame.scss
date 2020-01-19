@@ -1,0 +1,7 @@
+@import 'styles/variables';
+
+.NewGame {
+  &__Description {
+    margin-bottom: $spacing-regular;
+  }
+}

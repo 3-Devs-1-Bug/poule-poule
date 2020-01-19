@@ -14,12 +14,7 @@ describe('Button', () => {
   })
 
   it('applies default class', () => {
-    const { container } = render(<Button primary />)
+    const { container } = render(<Button />)
     expect(container.firstElementChild).toHaveClass('Button')
-  })
-
-  it('applies primary class', () => {
-    const { container } = render(<Button primary />)
-    expect(container.firstElementChild).toHaveClass('Button--Primary')
   })
 })

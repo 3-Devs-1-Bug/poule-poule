@@ -13,6 +13,7 @@ h1 {
 h2 {
   font-size: $font-size-large;
   font-weight: $font-weight-medium;
+  margin-bottom: $spacing-small;
 }
 
 label,
@@ -30,4 +31,9 @@ a {
   &:hover {
     color: $color-primary;
   }
+}
+
+.subtitle {
+  font-size: $font-size-medium;
+  margin-bottom: $spacing-large;
 }

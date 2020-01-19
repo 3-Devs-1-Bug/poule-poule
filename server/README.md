@@ -18,10 +18,17 @@ If using Postman, deactivate SSL certificate verification.
 
 ## Switching environments
 
-From a Powershell terminal, you can change environments with the following commands:
+Run the following commands in your terminal to change environments:
+
+### Windows
 
 - `$Env:ASPNETCORE_ENVIRONMENT = "Development"`
 - `$Env:ASPNETCORE_ENVIRONMENT = "Production"`
+
+### Mac OS
+
+- `ASPNETCORE_ENVIRONMENT=Production`
+- `ASPNETCORE_ENVIRONMENT=Development`
 
 ## Database setup
 
