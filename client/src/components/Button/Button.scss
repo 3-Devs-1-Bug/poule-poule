@@ -1,22 +1,20 @@
 @import 'styles/variables';
 
 .Button {
-  background: $color-white;
-  border: $border-regular solid $color-black;
+  background: $color-primary;
+  border: $border-regular solid $color-primary;
   border-radius: $radius-regular;
-  color: $color-black;
+  color: $color-white;
   display: block;
   font-size: $font-size-medium;
   font-weight: $font-weight-bold;
   padding: $spacing-regular $spacing-small;
+  transition: background 0.25s;
   width: 100%;
 
-  &:hover {
+  &:hover,
+  &:focus {
+    background: darken($color-primary, 5%);
     cursor: pointer;
-  }
-
-  &--Primary {
-    background: $color-primary;
-    border-color: $color-primary;
   }
 }
