@@ -28,7 +28,7 @@ const Home: FC<HomeProps> = () => {
       <p className='subtitle'>
         Crée ta propre partie ou rejoins une partie déjà existante !
       </p>
-      <NewGame clickHandler={createGame} />
+      <NewGame createGame={createGame} />
       <GameList className='Home__GameList' games={games} />
     </div>
   )
