@@ -1,21 +1,21 @@
 @import 'styles/variables';
 
 .GameList {
-  padding-top: $spacing-large;
-  h2 {
-    font-weight: $font-weight-bold;
-    margin-bottom: $spacing-small;
+  &__List {
+    padding: 0 0 0 $spacing-regular;
   }
 
-  &__Grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-
-  &__GridItem {
-    flex-basis: 45%;
-    min-width: $spacing-regular * 15;
+  &__Item {
     margin-top: $spacing-regular;
+    position: relative;
+
+    &::before {
+      color: $color-primary;
+      content: '•';
+      left: -$spacing-regular;
+      position: absolute;
+      top: 50%;
+      transform: translate(0, -50%);
+    }
   }
 }

@@ -17,9 +17,9 @@ const GameList: FC<GameListProps> = ({ games, className }) => {
       <h2>Rejoindre une partie</h2>
       <p>Rejoins directement une partie et joue avec d'autres joueurs.</p>
       {games.length ? (
-        <ul className='GameList__Grid'>
+        <ul className='GameList__List'>
           {games.map(game => (
-            <li className='GameList__GridItem' key={game.id}>
+            <li className='GameList__Item' key={game.id}>
               <GameItem game={game} />
             </li>
           ))}
