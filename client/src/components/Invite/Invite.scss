@@ -1,0 +1,27 @@
+@import 'styles/variables';
+@import 'styles/helpers';
+
+.Invite {
+  h2 {
+    margin-bottom: $spacing-small;
+  }
+  &__LinkBlock {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: $spacing-small;
+    align-items: center;
+    &__Link {
+      background-color: $color-grey;
+      padding: $spacing-small;
+      border-radius: $radius-regular;
+      margin-right: $spacing-small;
+    }
+    &__CopyIcon {
+      width: $base-spacing * 5;
+      height: $base-spacing * 5;
+      border-radius: $radius-regular;
+      padding: $spacing-small;
+      border: $border-regular solid $color-black;
+    }
+  }
+}
