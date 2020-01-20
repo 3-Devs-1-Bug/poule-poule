@@ -1,16 +1,16 @@
 import React, { Component, ChangeEvent } from 'react'
 
-import Radio from '../Radio'
+// import Radio from '../Radio'
 import { Settings as SettingsType } from '../../types/Settings'
 import { Difficulty } from '../../types/Difficulty'
 
 import './Settings.scss'
 
-const difficulties = [
-  { value: Difficulty.EASY, label: 'Facile' },
-  { value: Difficulty.MEDIUM, label: 'Intermédiaire' },
-  { value: Difficulty.HARD, label: 'Difficile' }
-]
+// const difficulties = [
+//   { value: Difficulty.EASY, label: 'Facile' },
+//   { value: Difficulty.MEDIUM, label: 'Intermédiaire' },
+//   { value: Difficulty.HARD, label: 'Difficile' }
+// ]
 
 type SettingsProps = SettingsType & {
   className?: string
@@ -73,7 +73,7 @@ class Settings extends Component<SettingsProps, SettingsState> {
     return (
       <div className={this.props.className + ' Settings'}>
         <h2>Paramètres de la partie</h2>
-        <fieldset className='Settings__Field'>
+        {/* <fieldset className='Settings__Field'>
           <legend>Niveau de difficulté</legend>
           {difficulties.map(({ value, label }) => (
             <Radio
@@ -85,9 +85,9 @@ class Settings extends Component<SettingsProps, SettingsState> {
               name='difficulty'
             />
           ))}
-        </fieldset>
+        </fieldset> */}
 
-        <div className='Settings__Field'>
+        {/* <div className='Settings__Field'>
           <label htmlFor='roundsToWin'>Durée de la partie :</label>
           <input
             type='number'
@@ -96,17 +96,18 @@ class Settings extends Component<SettingsProps, SettingsState> {
             onChange={this.handleRoundsToWinChange}
           />
           <span>manches de jeu.</span>
-        </div>
+        </div> */}
 
         <div className='Settings__Field'>
-          <label htmlFor='cardSpeed'>Vitesse de la partie</label>
+          <label htmlFor='cardSpeed'>
+            Temps (en secondes) entre chaque carte :
+          </label>
           <input
             type='number'
             id='cardSpeed'
             value={this.state.cardSpeed}
             onChange={this.handleCardSpeedChange}
           />
-          <span>secondes entre chaque carte.</span>
         </div>
       </div>
     )
