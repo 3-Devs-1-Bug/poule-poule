@@ -5,16 +5,7 @@
     margin-bottom: $spacing-small;
   }
 
-  &__Grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-top: (-$spacing-regular);
-  }
-
-  &__GridItem {
-    flex-basis: 45%;
-    min-width: $spacing-regular * 15;
+  &__Item + &__Item {
     margin-top: $spacing-regular;
   }
 }
