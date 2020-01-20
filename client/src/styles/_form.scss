@@ -1,5 +1,11 @@
 input {
+  border: $border-regular solid $color-black-30;
   border-radius: $radius-regular;
   margin: 0;
-  padding: 0;
+  padding: $spacing-smaller $spacing-small;
+  transition: border-color 0.25s;
+
+  &:focus {
+    border-color: $color-primary;
+  }
 }

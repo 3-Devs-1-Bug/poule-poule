@@ -5,16 +5,14 @@
   border: $border-regular solid $color-primary;
   border-radius: $radius-regular;
   color: $color-white;
+  cursor: pointer;
   display: block;
   font-size: $font-size-medium;
   font-weight: $font-weight-bold;
   padding: $spacing-regular $spacing-small;
-  transition: background 0.25s;
   width: 100%;
 
-  &:hover,
-  &:focus {
+  &:hover {
     background: darken($color-primary, 5%);
-    cursor: pointer;
   }
 }
