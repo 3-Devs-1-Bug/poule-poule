@@ -17,7 +17,8 @@ const PlayerItem: FC<PlayerProps> = ({ name, isHost, isSelf, className }) => {
       <div className='Player__Avatar'>
         {isHost && <div className='Player__Badge' />}
       </div>
-      {name} {isSelf && ' (moi)'}
+      {name} {isSelf && ' (moi)'}{' '}
+      {isHost && <span className='sr-only'>créateur de la partie</span>}
     </div>
   )
 }
