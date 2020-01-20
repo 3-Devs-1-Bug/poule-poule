@@ -11,13 +11,17 @@ export interface InviteProps {
 const Invite: FC<InviteProps> = ({ gameUrl }) => {
   const [isCoolingDown, triggerCooldown] = useCooldown(1500)
   const linkInputRef = useRef<HTMLInputElement>(null)
+  const buttonRef = useRef<HTMLButtonElement>(null)
+
+  const selectLinkText = () => {
+    linkInputRef.current && linkInputRef.current.select()
+  }
 
   const copyToClipboard = () => {
-    if (linkInputRef && linkInputRef.current) {
-      linkInputRef.current.select()
-      document.execCommand('copy')
-      triggerCooldown()
-    }
+    selectLinkText()
+    document.execCommand('copy')
+    buttonRef.current && buttonRef.current.focus()
+    triggerCooldown()
   }
 
   return (
@@ -25,14 +29,18 @@ const Invite: FC<InviteProps> = ({ gameUrl }) => {
       <h2>Inviter des joueurs</h2>
       <p>Pour inviter des joueurs, partagez le lien ci-dessous:</p>
       <div className='Invite__LinkBlock'>
+        <label htmlFor='linkInput'>Lien d'invitation :</label>
         <input
+          id='linkInput'
           ref={linkInputRef}
           type='text'
           readOnly
           className='Invite__LinkBlock__Link'
           value={gameUrl}
+          onClick={() => selectLinkText()}
         />
         <Button
+          ref={buttonRef}
           disabled={isCoolingDown}
           className={'Button--Small'}
           onClick={copyToClipboard}

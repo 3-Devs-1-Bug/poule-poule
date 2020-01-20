@@ -6,11 +6,14 @@ import './Button.scss'
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string
   children?: string
+  ref?: React.RefObject<HTMLButtonElement>
 }
 
-const Button: FC<ButtonProps> = ({ className, ...other }) => {
+const Button: FC<ButtonProps> = ({ className, ...other }, ref) => {
   const classes = classnames(className, 'Button')
-  return <button {...other} className={classes} />
+  return <button ref={ref} {...other} className={classes} />
 }
 
-export default Button
+const forwardButton = React.forwardRef(Button)
+
+export default forwardButton

@@ -7,19 +7,15 @@
   }
   &__LinkBlock {
     display: flex;
-    flex-wrap: wrap;
     margin-top: $spacing-small;
     align-items: center;
     [type='text'] {
-      flex-grow: 3;
+      flex-basis: 75%;
       margin-right: $spacing-small;
       background-color: $color-grey;
       border-radius: $radius-regular;
       padding: $spacing-small;
       border: none;
-    }
-    .Button {
-      flex-grow: 1;
     }
   }
 }
