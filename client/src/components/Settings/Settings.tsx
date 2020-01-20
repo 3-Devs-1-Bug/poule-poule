@@ -88,18 +88,17 @@ class Settings extends Component<SettingsProps, SettingsState> {
         </fieldset> */}
 
         {/* <div className='Settings__Field'>
-          <label htmlFor='roundsToWin'>Durée de la partie :</label>
+          <label htmlFor='roundsToWin' className='Settings__Label'>Nombre de manches :</label>
           <input
             type='number'
             id='roundsToWin'
             value={this.state.roundsToWin}
             onChange={this.handleRoundsToWinChange}
           />
-          <span>manches de jeu.</span>
         </div> */}
 
         <div className='Settings__Field'>
-          <label htmlFor='cardSpeed'>
+          <label htmlFor='cardSpeed' className='Settings__Label'>
             Temps (en secondes) entre chaque carte :
           </label>
           <input

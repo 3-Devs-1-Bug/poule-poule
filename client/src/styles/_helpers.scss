@@ -9,7 +9,7 @@
 @mixin focusStyles {
   outline: 0;
   box-shadow: 0 0 0 0.2rem $color-primary-70;
-  transition: all 0.25s;
+  transition: all $transition-duration-regular;
 }
 
 // Apply focus styles

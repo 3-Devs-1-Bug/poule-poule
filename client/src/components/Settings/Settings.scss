@@ -4,4 +4,12 @@
   h2 {
     margin-bottom: $spacing-small;
   }
+
+  &__Field + &__Field {
+    margin-top: $spacing-regular;
+  }
+
+  &__Label {
+    display: block;
+  }
 }

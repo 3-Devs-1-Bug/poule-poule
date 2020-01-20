@@ -20,7 +20,8 @@
     &-appear-active {
       opacity: 1;
       transform: scale(1);
-      transition: opacity 250ms, transform 250ms;
+      transition: opacity $transition-duration-regular,
+        transform $transition-duration-regular;
     }
   }
 }
