@@ -25,6 +25,11 @@ const Lobby: FC<LobbyProps> = ({
 }) => {
   return (
     <div className='Lobby'>
+      <p className='subtitle'>
+        {isGameHost
+          ? 'Choisis les paramètres, invite d’autres joueurs et lance la partie.'
+          : 'Installe toi bien, le créateur de la partie va la démarrer sous peu...'}
+      </p>
       <>
         {isGameHost ? (
           <Settings
@@ -35,18 +40,15 @@ const Lobby: FC<LobbyProps> = ({
             updateSettings={updateGameSettings}
           />
         ) : (
-          <ul>
-            <li>
-              Niveau de difficulté: <strong>{game.difficulty}</strong>
-            </li>
-            <li>
-              Nombre de manches pour gagner: <strong>{game.roundsToWin}</strong>
-            </li>
-            <li>
-              Temps entre chaque carte: <strong>{game.cardSpeed}</strong>{' '}
-              secondes
-            </li>
-          </ul>
+          <>
+            <h2>Paramètres</h2>
+            <ul className='list'>
+              <li>
+                Temps entre chaque carte : <strong>{game.cardSpeed}</strong>{' '}
+                secondes
+              </li>
+            </ul>
+          </>
         )}
 
         <PlayerList
@@ -55,7 +57,11 @@ const Lobby: FC<LobbyProps> = ({
           currentPlayerId={currentPlayerId}
         />
 
-        {isGameHost && <Button onClick={startGame}>Commencer la partie</Button>}
+        {isGameHost && (
+          <Button className='Lobby__Button' onClick={startGame}>
+            Commencer la partie
+          </Button>
+        )}
       </>
     </div>
   )
