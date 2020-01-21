@@ -37,6 +37,7 @@ namespace server
 
       services.AddSignalR(options => options.EnableDetailedErrors = true);
 
+      /*
       var allowedOrigins = _config["AllowedOrigins"].Split(',');
 
       services.AddCors(options =>
@@ -49,6 +50,7 @@ namespace server
                 .AllowCredentials();
         });
       });
+      */
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
