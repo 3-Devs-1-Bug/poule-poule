@@ -10,13 +10,14 @@ using System.Threading;
 using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
 using System.Collections.Concurrent;
+using Api.DTO;
 
 namespace Api.Services
 {
   public interface IGameManager
   {
     Task StartRound(int gameId);
-    void HitPile(int gameId, string playerId);
+    Task HitPile(int gameId, string playerId);
   }
 
   // This class is responsible for managing all on-going games on the platform.
@@ -43,11 +44,28 @@ namespace Api.Services
       return Task.CompletedTask;
     }
 
-    public void HitPile(int gameId, string playerId)
+    public Task HitPile(int gameId, string playerId)
     {
-      Rounds.TryGetValue(gameId, out var round);
-      int scoreToAdd = round.EndRound(playerId);
-      _gameService.UpdatePlayerScore(playerId, scoreToAdd);
+      if (Rounds.TryGetValue(gameId, out var round))
+      {
+        int scoreToAdd = round.EndRound(playerId);
+        Rounds.TryRemove(gameId, out var deletedRound);
+        int? updatedScore = _gameService.UpdatePlayerScore(playerId, scoreToAdd);
+
+        if (updatedScore.HasValue)
+        {
+          var game = _gameService.Get(gameId);
+          var status = GameStatus.ROUND_ENDED;
+          
+          if (updatedScore.Value >= game.RoundsToWin)
+            status = GameStatus.GAME_OVER;
+
+          var updatedGame = _gameService.UpdateStatus(gameId, status);
+          string groupName = Helpers.GetGroupName(gameId);
+          return _hub.Clients.Group(groupName).SendAsync("refreshGame", new GameDTO(updatedGame));
+        }
+      }
+      return Task.CompletedTask;
     }
   }
 }
