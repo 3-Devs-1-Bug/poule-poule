@@ -2,12 +2,13 @@
 @import 'styles/helpers';
 
 .Podium {
-  .VictoryMessage {
+  &__VictoryMessage {
     font-size: $font-size-larger;
     font-weight: $font-weight-bold;
     color: yellowgreen;
     animation: blinker 1.5s linear infinite;
   }
+
   @keyframes blinker {
     50% {
       opacity: 0;

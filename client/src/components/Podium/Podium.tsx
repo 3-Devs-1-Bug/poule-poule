@@ -1,6 +1,5 @@
 import React, { FC, useEffect } from 'react'
 import classnames from 'classnames'
-import useWindowSize from 'react-use/lib/useWindowSize'
 import Confetti from 'react-confetti'
 
 import { Player } from '../../types/Player'
@@ -23,8 +22,6 @@ const Podium: FC<PodiumProps> = ({ players, currentPlayerId, className }) => {
     if (isWinner) new Audio(victoryMusicUrl).play()
   }, [currentPlayerId, isWinner])
 
-  const { width, height } = useWindowSize()
-
   return (
     <div className={classes}>
       <h2>Podium</h2>
@@ -39,8 +36,8 @@ const Podium: FC<PodiumProps> = ({ players, currentPlayerId, className }) => {
       </ol>
       {isWinner ? (
         <>
-          <Confetti width={width} height={height} />
-          <span className='VictoryMessage'>Vous avez gagné !</span>
+          <Confetti width={window.innerWidth} height={window.innerHeight} />
+          <span className='Podium__VictoryMessage'>Vous avez gagné !</span>
         </>
       ) : (
         'La partie est terminée'
