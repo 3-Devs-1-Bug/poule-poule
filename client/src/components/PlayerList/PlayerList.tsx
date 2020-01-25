@@ -20,9 +20,9 @@ const PlayerList: FC<PlayerListProps> = ({
   return (
     <div className={classes}>
       <h2>Joueurs</h2>
-      <ul className='PlayerList__Grid'>
+      <ul>
         {players.map(player => (
-          <li className='PlayerList__GridItem' key={player.id}>
+          <li className='PlayerList__Item' key={player.id}>
             <PlayerItem
               key={player.id}
               name={player.name}

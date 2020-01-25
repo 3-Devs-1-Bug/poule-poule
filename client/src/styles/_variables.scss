@@ -7,9 +7,11 @@ $spacing-large: $base-spacing * 4;
 $spacing-larger: $base-spacing * 8;
 
 $color-primary: #c03838;
+$color-primary-70: rgba($color-primary, 0.7);
 $color-white: #ffffff;
 $color-black: #050505;
 $color-black-70: rgba($color-black, 0.7);
+$color-black-30: rgba($color-black, 0.3);
 
 $radius-regular: 0.3125rem;
 
@@ -29,5 +31,7 @@ $font-weight-medium: 500;
 $font-weight-regular: 400;
 
 $box-shadow: 0 0 $base-spacing $color-black;
+
+$transition-duration-regular: 0.25s;
 
 $breakpoint-mobile: $base-spacing * 45;

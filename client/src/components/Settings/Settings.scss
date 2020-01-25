@@ -5,28 +5,11 @@
     margin-bottom: $spacing-small;
   }
 
-  legend {
-    margin-bottom: $spacing-smaller;
+  &__Field + &__Field {
+    margin-top: $spacing-regular;
   }
 
-  &__Field {
-    label + label {
-      margin-top: $spacing-small;
-    }
-
-    & + & {
-      display: flex;
-      flex-wrap: wrap;
-      margin-top: $spacing-regular;
-
-      > label {
-        flex-basis: 100%;
-        margin-bottom: $spacing-smaller;
-      }
-    }
-
-    [type='number'] {
-      margin-right: $spacing-small;
-    }
+  &__Label {
+    display: block;
   }
 }

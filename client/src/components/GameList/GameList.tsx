@@ -2,7 +2,6 @@ import React, { FC } from 'react'
 import classnames from 'classnames'
 
 import { GameItem as GameItemType } from '../../types/GameItem'
-import './GameList.scss'
 import GameItem from '../GameItem'
 
 export interface GameListProps {
@@ -17,15 +16,15 @@ const GameList: FC<GameListProps> = ({ games, className }) => {
       <h2>Rejoindre une partie</h2>
       <p>Rejoins directement une partie et joue avec d'autres joueurs.</p>
       {games.length ? (
-        <ul className='GameList__List'>
+        <ul className='list'>
           {games.map(game => (
-            <li className='GameList__Item' key={game.id}>
+            <li key={game.id}>
               <GameItem game={game} />
             </li>
           ))}
         </ul>
       ) : (
-        <p>Aucune partie en cours.</p>
+        <span>Aucune partie en cours.</span>
       )}
     </div>
   )

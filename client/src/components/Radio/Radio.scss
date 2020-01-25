@@ -11,20 +11,32 @@
   }
 
   &__Input + &__Label::before {
-    border: $border-regular solid $color-black;
+    background: $color-black-30;
     border-radius: 50%;
     content: '';
-    display: block;
     height: $spacing-regular;
     left: 0;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+    transition: background $transition-duration-regular;
     width: $spacing-regular;
   }
 
   &__Input:checked + &__Label::before {
-    background: $color-black;
+    background: $color-primary;
+  }
+
+  &__Input:checked + &__Label::after {
+    background: $color-white;
+    border-radius: 50%;
+    content: '';
+    height: $spacing-small;
+    left: $spacing-smaller;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: $spacing-small;
   }
 
   &__Input:focus + &__Label::before {
