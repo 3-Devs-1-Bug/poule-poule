@@ -1,0 +1,12 @@
+# see https://docs.netlify.com/configure-builds/file-based-configuration/
+
+[build]
+  base = "client"
+  publish = "build"
+  command = "yarn build"
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
+force = false 
