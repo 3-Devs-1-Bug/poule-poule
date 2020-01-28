@@ -1,9 +1,12 @@
 @import 'styles/variables';
 
 .CardPile {
+  align-items: center;
+  display: flex;
+  justify-content: center;
   position: relative;
-  width: $base-spacing * 25;
-  height: $base-spacing * 25;
+  width: $base-spacing * 34;
+  height: $base-spacing * 46;
 
   &__Card {
     position: absolute;
