@@ -3,10 +3,14 @@
 .Round {
   &__Cards {
     display: block;
-    margin: 0 auto;
+    margin: 0 auto $spacing-regular;
   }
 
   &__Players {
+    margin-top: $spacing-large;
+  }
+
+  &__NewRoundButton {
     margin-top: $spacing-large;
   }
 }

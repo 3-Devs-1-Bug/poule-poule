@@ -45,35 +45,52 @@ const Round: FC<RoundProps> = (props: RoundProps) => {
   return (
     <div className='Round'>
       <>
-        <ScoreBoard
-          className='Round__Players'
-          players={props.game.players}
-          currentPlayerId={props.currentPlayerId}
-        />
-        {props.game.status === GameStatus.ROUND_ENDED && props.isGameHost && (
-          <Button onClick={props.startGame}>Commencer la manche</Button>
-        )}
-        <div>
-          <h2>Cartes</h2>
-          <button
-            aria-labelledby='hitPile'
-            onClick={safeHit}
-            className='Round__Cards'
-          >
-            <CardPile cards={props.cards} />
-          </button>
-          {props.game.status === GameStatus.ROUND_IN_PROGRESS && (
-            <Button id='hitPile' onClick={props.hitPile} autoFocus>
-              Taper sur la pile
-            </Button>
-          )}
-          {props.result && (
-            <p>
-              {buildResultText(props.result, props.game.players)}
-              {`il y avait ${props.result.count} oeuf(s).`}
+        {props.result ? (
+          <>
+            {' '}
+            {/* Score view */}
+            <p className='subtitle'>
+              {buildResultText(props.result, props.game.players)}{' '}
+              {`il y avait ${props.result.count} oeuf(s)`}. La manche est
+              terminée, voici l’état actuel des scores. Prépare toi pour la
+              suivante !
             </p>
-          )}
-        </div>
+            <ScoreBoard
+              className='Round__Players'
+              players={props.game.players}
+              currentPlayerId={props.currentPlayerId}
+            />
+            {props.game.status === GameStatus.ROUND_ENDED && props.isGameHost && (
+              <Button
+                className='Round__NewRoundButton'
+                onClick={props.startGame}
+              >
+                Lancer la prochaine manche
+              </Button>
+            )}
+          </>
+        ) : (
+          <>
+            {' '}
+            {/* Game view */}
+            <p className='subtitle'>
+              La partie est lancée ! Tape sur le tas dès qu’il y a{' '}
+              <strong>5 oeufs ou plus</strong> !
+            </p>
+            <button
+              aria-labelledby='hitPile'
+              onClick={safeHit}
+              className='Round__Cards'
+            >
+              <CardPile cards={props.cards} />
+            </button>
+            {props.game.status === GameStatus.ROUND_IN_PROGRESS && (
+              <Button id='hitPile' onClick={props.hitPile} autoFocus>
+                Taper sur la pile
+              </Button>
+            )}
+          </>
+        )}
       </>
     </div>
   )
