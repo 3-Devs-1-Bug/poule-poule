@@ -103,15 +103,17 @@ const Game: FC<GameProps> = (props: GameProps) => {
             />
           )
         case GameStatus.ROUND_ENDED:
-          return (
-            <Scores
-              game={game}
-              currentPlayerId={currentPlayerId}
-              isGameHost={isGameHost}
-              result={result}
-              startGame={() => hubConnection.invoke('StartGame')}
-            />
-          )
+          if (result) {
+            return (
+              <Scores
+                game={game}
+                currentPlayerId={currentPlayerId}
+                isGameHost={isGameHost}
+                result={result}
+                startGame={() => hubConnection.invoke('StartGame')}
+              />
+            )
+          }
       }
     }
   }

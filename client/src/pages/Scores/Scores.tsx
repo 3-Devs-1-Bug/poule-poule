@@ -12,11 +12,17 @@ export interface ScoresProps extends RouteComponentProps {
   game: Game
   currentPlayerId: string
   isGameHost: boolean
-  result?: RoundResult | undefined
+  result: RoundResult
   startGame: () => void
 }
 
-const Scores: FC<ScoresProps> = (props: ScoresProps) => {
+const Scores: FC<ScoresProps> = ({
+  game,
+  currentPlayerId,
+  isGameHost,
+  result,
+  startGame
+}) => {
   const buildResultText = (
     result: RoundResult,
     players: Array<Player>
@@ -24,7 +30,7 @@ const Scores: FC<ScoresProps> = (props: ScoresProps) => {
     if (!result.playerId) return `Personne n'a tapé sur la pile`
     else {
       let firstPart = ''
-      if (result.playerId === props.currentPlayerId) {
+      if (result.playerId === currentPlayerId) {
         firstPart = 'Vous avez'
       } else {
         const player = players.find(player => player.id === result.playerId)
@@ -36,28 +42,20 @@ const Scores: FC<ScoresProps> = (props: ScoresProps) => {
 
   return (
     <div className='Scores'>
-      {props.result && (
-        <>
-          <p className='subtitle'>
-            {buildResultText(props.result, props.game.players)}{' '}
-            {`il y avait ${props.result.count} oeuf(s)`}. La manche est
-            terminée, voici l’état actuel des scores. Prépare toi pour la
-            suivante !
-          </p>
-          <ScoreBoard
-            className='Scores__Players'
-            players={props.game.players}
-            currentPlayerId={props.currentPlayerId}
-          />
-          {props.game.status === GameStatus.ROUND_ENDED && props.isGameHost && (
-            <Button
-              className='Scores__NewRoundButton'
-              onClick={props.startGame}
-            >
-              Lancer la prochaine manche
-            </Button>
-          )}
-        </>
+      <p className='subtitle'>
+        {buildResultText(result, game.players)} il y avait {result.count}{' '}
+        oeuf(s). La manche est terminée, voici l’état actuel des scores. Prépare
+        toi pour la suivante !
+      </p>
+      <ScoreBoard
+        className='Scores__Players'
+        players={game.players}
+        currentPlayerId={currentPlayerId}
+      />
+      {game.status === GameStatus.ROUND_ENDED && isGameHost && (
+        <Button className='Scores__NewRoundButton' onClick={startGame}>
+          Lancer la prochaine manche
+        </Button>
       )}
     </div>
   )
