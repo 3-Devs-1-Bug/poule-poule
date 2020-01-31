@@ -6,8 +6,8 @@
   position: relative;
   box-shadow: $box-shadow-card;
   overflow: hidden;
-  width: $base-spacing * 31.25;
-  height: $base-spacing * 43.75;
+  width: $base-spacing * 31.25; // 250px
+  height: $base-spacing * 43.75; // 350px
 
   &__Stripe {
     background: $color-black;

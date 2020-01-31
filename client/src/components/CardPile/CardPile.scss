@@ -5,8 +5,8 @@
   display: flex;
   justify-content: center;
   position: relative;
-  width: $base-spacing * 34;
-  height: $base-spacing * 46;
+  width: $base-spacing * 31.25 + $spacing-regular; // 250px + padding
+  height: $base-spacing * 46 + $spacing-regular; // 350px + padding
 
   &__Card {
     position: absolute;
