@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import { times } from 'lodash-es'
 
 import './PlayingCard.scss'
 import { CardType } from '../../types/CardType'
@@ -20,19 +21,17 @@ const Card: FC<CardProps> = ({ type, className }) => {
   return (
     <div className={classes} aria-label={currentCard && currentCard.label}>
       <div className='Card__Stripe Card__Stripe--Left'>
-        {[...Array(11)].map((_, i) => {
-          return <div className='Card__Stripe--Hole' key={i} />
-        })}
+        {times(11, i => (
+          <div className='Card__Stripe--Hole' key={i} />
+        ))}
       </div>
 
       <div className='Card__Content'>
-        {[...Array(3)].map((_, i) => {
-          return (
-            <span role='img' key={i}>
-              {currentCard && currentCard.emoji}
-            </span>
-          )
-        })}
+        {times(3, i => (
+          <span role='img' key={i}>
+            {currentCard && currentCard.emoji}
+          </span>
+        ))}
       </div>
 
       <div className='Card__Stripe Card__Stripe--Right'>
