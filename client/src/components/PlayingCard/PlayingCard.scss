@@ -1,10 +1,10 @@
 @import 'styles/variables';
 
 .Card {
-  background: #f2efe7;
-  border-radius: 10px;
+  background: $color-pale;
+  border-radius: $radius-large;
   position: relative;
-  box-shadow: 1px 2px 7px rgba($color-black, 0.5);
+  box-shadow: $box-shadow-card;
   overflow: hidden;
   width: $base-spacing * 31.25;
   height: $base-spacing * 43.75;
@@ -22,17 +22,17 @@
     z-index: 1;
 
     &--Left {
-      left: 10px;
-      top: -1.8rem;
+      left: $spacing-small;
+      top: -$spacing-large;
     }
 
     &--Right {
-      right: 10px;
+      right: $spacing-small;
     }
 
     &--Hole {
-      border-radius: 3px;
-      background: #f2efe7;
+      border-radius: $radius-small;
+      background: $color-pale;
       min-height: $base-spacing * 3;
       width: calc(100% - #{$spacing-regular});
 
@@ -49,18 +49,18 @@
     background: $color-black;
     position: absolute;
     display: flex;
-    left: calc(10px + #{$base-spacing * 3});
-    right: calc(10px + #{$base-spacing * 3});
-    top: -5rem;
-    bottom: -3.5rem;
+    left: calc(#{$spacing-small} + #{$base-spacing * 3});
+    right: calc(#{$spacing-small} + #{$base-spacing * 3});
+    top: $base-spacing * -10;
+    bottom: $base-spacing * -7;
     flex-direction: column;
     padding: 0 $spacing-smaller;
-    width: calc(100% - 10px - #{$spacing-larger});
+    width: calc(100% - #{$spacing-small} - #{$spacing-larger});
 
     span {
-      background: #f2efe7;
-      border-radius: 3px;
-      font-size: 5rem;
+      background: $color-pale;
+      border-radius: $radius-small;
+      font-size: $base-spacing * 10;
       text-align: center;
       padding: $spacing-large;
       user-select: none;
