@@ -10,8 +10,8 @@
     display: flex;
     justify-content: space-between;
 
-    & + & {
-      margin-top: $spacing-regular;
+    &:not(:last-child) {
+      margin-bottom: $spacing-regular;
     }
   }
 }
