@@ -20,7 +20,7 @@ const Footer: FC<FooterProps> = ({ className }) => {
           </a>
         </li>
         <li className='Footer__Link'>
-          <Link to='/'>À propos</Link>
+          <Link to='/a-propos'>À propos</Link>
         </li>
         <li className='Footer__Link'>
           <a
