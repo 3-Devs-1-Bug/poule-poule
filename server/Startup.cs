@@ -37,7 +37,6 @@ namespace server
 
       services.AddSignalR(options => options.EnableDetailedErrors = true);
 
-      /*
       var allowedOrigins = _config["AllowedOrigins"].Split(',');
 
       services.AddCors(options =>
@@ -45,12 +44,12 @@ namespace server
         options.AddPolicy("default", policy =>
         {
           policy.WithOrigins(allowedOrigins)
+                .SetIsOriginAllowedToAllowWildcardSubdomains()
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials();
         });
       });
-      */
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
