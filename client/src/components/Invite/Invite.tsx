@@ -14,13 +14,13 @@ const Invite: FC<InviteProps> = ({ gameUrl }) => {
   const buttonRef = useRef<HTMLButtonElement>(null)
 
   const selectLinkText = () => {
-    linkInputRef.current && linkInputRef.current.select()
+    linkInputRef.current!.select()
   }
 
   const copyToClipboard = () => {
     selectLinkText()
     document.execCommand('copy')
-    buttonRef.current && buttonRef.current.focus()
+    buttonRef.current!.focus()
     triggerCooldown()
   }
 
@@ -28,21 +28,23 @@ const Invite: FC<InviteProps> = ({ gameUrl }) => {
     <div className='Invite'>
       <h2>Inviter des joueurs</h2>
       <p>Pour inviter des joueurs, partagez le lien ci-dessous:</p>
-      <div className='Invite__LinkBlock'>
-        <label htmlFor='linkInput'>Lien d'invitation :</label>
+      <div className='Invite__Form'>
+        <label htmlFor='linkInput' className='Invite__FormLabel'>
+          Lien d'invitation :
+        </label>
         <input
           id='linkInput'
           ref={linkInputRef}
           type='text'
           readOnly
-          className='Invite__LinkBlock__Link'
+          className='Invite__FormInput'
           value={gameUrl}
-          onClick={() => selectLinkText()}
+          onClick={selectLinkText}
         />
         <Button
           ref={buttonRef}
-          disabled={isCoolingDown}
-          className={'Button--Small'}
+          small
+          className='Invite__FormButton'
           onClick={copyToClipboard}
         >
           {isCoolingDown ? 'Copié' : 'Copier'}

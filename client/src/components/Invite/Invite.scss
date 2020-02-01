@@ -5,17 +5,27 @@
   h2 {
     margin-bottom: $spacing-small;
   }
-  &__LinkBlock {
+
+  &__Form {
     display: flex;
-    margin-top: $spacing-small;
-    align-items: center;
-    [type='text'] {
-      flex-basis: 75%;
-      margin-right: $spacing-small;
-      background-color: $color-grey;
-      border-radius: $radius-regular;
-      padding: $spacing-small;
-      border: none;
-    }
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  &__FormLabel {
+    flex-basis: 100%;
+    margin: $spacing-small 0 0.25rem;
+  }
+
+  &__FormInput {
+    flex-basis: 65%;
+    background-color: $color-grey;
+    border-radius: $radius-regular;
+    padding: $spacing-small;
+    border: none;
+  }
+
+  &__FormButton {
+    flex-basis: 30%;
   }
 }

@@ -32,7 +32,7 @@ const Lobby: FC<LobbyProps> = ({
           : 'Installe toi bien, le créateur de la partie va la démarrer sous peu...'}
       </p>
       <>
-        <Invite gameUrl={`${window.location}`} />
+        <Invite gameUrl={window.location.href} />
         {isGameHost ? (
           <Settings
             className='Lobby__Settings'
