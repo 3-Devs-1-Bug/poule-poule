@@ -27,7 +27,6 @@ const Invite: FC<InviteProps> = ({ gameUrl }) => {
   return (
     <div className='Invite'>
       <h2>Inviter des joueurs</h2>
-      <p>Pour inviter des joueurs, partagez le lien ci-dessous:</p>
       <div className='Invite__Form'>
         <label htmlFor='linkInput' className='Invite__FormLabel'>
           Lien d'invitation :

@@ -14,12 +14,12 @@
 
   &__FormLabel {
     flex-basis: 100%;
-    margin: $spacing-small 0 0.25rem;
+    margin-top: $spacing-small 0;
   }
 
   &__FormInput {
     flex-basis: 65%;
-    background-color: $color-grey;
+    background-color: $color-black-10;
     border-radius: $radius-regular;
     padding: $spacing-small;
     border: none;

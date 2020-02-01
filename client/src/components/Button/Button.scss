@@ -16,12 +16,6 @@
     background: darken($color-primary, 5%);
   }
 
-  &:disabled {
-    color: $color-text-disabled;
-    border-color: $color-grey;
-    cursor: not-allowed;
-  }
-
   &--Small {
     font-size: $font-size-small;
     padding: $spacing-small;
