@@ -11,6 +11,7 @@ import { RoundResult } from '../types/RoundResult'
 import { CardType } from '../types/CardType'
 import { Card } from '../types/Card'
 import Round from './Round'
+import Scores from './Scores'
 import Lobby from './Lobby'
 import { Settings } from '../types/Settings'
 import Podium from '../components/Podium'
@@ -94,18 +95,25 @@ const Game: FC<GameProps> = (props: GameProps) => {
             />
           )
         case GameStatus.ROUND_IN_PROGRESS:
-        case GameStatus.ROUND_ENDED:
           return (
             <Round
               game={game}
-              currentPlayerId={currentPlayerId}
-              isGameHost={isGameHost}
               cards={cards}
-              result={result}
               hitPile={() => hubConnection.invoke('HitPile')}
-              startGame={() => hubConnection.invoke('StartGame')}
             />
           )
+        case GameStatus.ROUND_ENDED:
+          if (result) {
+            return (
+              <Scores
+                game={game}
+                currentPlayerId={currentPlayerId}
+                isGameHost={isGameHost}
+                result={result}
+                startGame={() => hubConnection.invoke('StartGame')}
+              />
+            )
+          }
       }
     }
   }

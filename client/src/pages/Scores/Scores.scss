@@ -1,0 +1,11 @@
+@import 'styles/variables';
+
+.Scores {
+  &__Players {
+    margin-top: $spacing-large;
+  }
+
+  &__NewRoundButton {
+    margin-top: $spacing-large;
+  }
+}

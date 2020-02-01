@@ -3,10 +3,6 @@
 .Round {
   &__Cards {
     display: block;
-    margin: 0 auto;
-  }
-
-  &__Players {
-    margin-top: $spacing-large;
+    margin: 0 auto $spacing-regular;
   }
 }

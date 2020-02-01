@@ -1,19 +1,72 @@
 @import 'styles/variables';
 
 .Card {
-  &__Container {
+  background: $color-pale;
+  border-radius: $radius-large;
+  position: relative;
+  box-shadow: $box-shadow-card;
+  overflow: hidden;
+  width: $base-spacing * 31.25; // 250px
+  height: $base-spacing * 43.75; // 350px
+
+  &__Stripe {
+    background: $color-black;
+    width: $spacing-large;
     align-items: center;
-    background-color: $color-white;
-    border: $border-large solid $color-primary;
-    border-radius: $radius-regular;
-    box-shadow: $box-shadow;
+    flex-direction: column;
     display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
+    position: absolute;
+    top: -$spacing-regular;
+    transform: rotate(4deg);
+    bottom: -$spacing-regular;
+
+    &--Left {
+      left: $spacing-small;
+      top: -$spacing-large;
+    }
+
+    &--Right {
+      right: $spacing-small;
+    }
+
+    &--Hole {
+      border-radius: $radius-small;
+      background: $color-pale;
+      min-height: $base-spacing * 3;
+      width: calc(100% - #{$spacing-regular});
+
+      & + & {
+        margin-top: $spacing-regular;
+      }
+    }
   }
 
-  &__Emoji {
-    font-size: 500%;
+  &__Content {
+    transform: rotate(4deg);
+    min-height: 100%;
+    margin: 0 auto;
+    background: $color-black;
+    position: absolute;
+    display: flex;
+    left: calc(#{$spacing-small} + #{$base-spacing * 3});
+    right: calc(#{$spacing-small} + #{$base-spacing * 3});
+    top: $base-spacing * -10;
+    bottom: $base-spacing * -7;
+    flex-direction: column;
+    padding: 0 $spacing-smaller;
+    width: calc(100% - #{$spacing-small} - #{$spacing-larger});
+
+    span {
+      background: $color-pale;
+      border-radius: $radius-small;
+      font-size: $base-spacing * 10;
+      text-align: center;
+      padding: $spacing-large;
+      user-select: none;
+
+      & + span {
+        margin-top: $spacing-regular;
+      }
+    }
   }
 }

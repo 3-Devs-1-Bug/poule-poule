@@ -5,19 +5,13 @@
     margin-bottom: $spacing-small;
   }
 
-  &__Grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-top: (-$spacing-regular);
-  }
-
   &__GridItem {
-    display: flex;
     align-items: center;
+    display: flex;
     justify-content: space-between;
-    flex-basis: 45%;
-    min-width: $spacing-regular * 15;
-    margin-top: $spacing-regular;
+
+    &:not(:last-child) {
+      margin-bottom: $spacing-regular;
+    }
   }
 }
