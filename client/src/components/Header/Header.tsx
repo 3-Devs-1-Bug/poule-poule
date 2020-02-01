@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import classnames from 'classnames'
 
-import icon from '../../images/icon.jpg'
 import './Header.scss'
 import { Link } from '@reach/router'
 
@@ -15,7 +14,7 @@ const Header: FC<HeaderProps> = ({ className }) => {
   return (
     <header className={classes}>
       <Link className='Header__Link' to='/'>
-        <img className='Header__Icon' src={icon} alt='' />
+        <img className='Header__Icon' src='/icon-512x512.png' alt='' />
         <h1>Poule Poule</h1>
       </Link>
     </header>
