@@ -15,4 +15,10 @@
   &:hover {
     background: darken($color-primary, 5%);
   }
+
+  &--Small {
+    font-size: $font-size-small;
+    padding: $spacing-small;
+    width: auto;
+  }
 }

@@ -7,6 +7,7 @@ import Settings from '../../components/Settings'
 import PlayerList from '../../components/PlayerList'
 import './Lobby.scss'
 import Button from '../../components/Button'
+import Invite from '../../components/Invite'
 
 export interface LobbyProps extends RouteComponentProps {
   game: Game
@@ -31,6 +32,7 @@ const Lobby: FC<LobbyProps> = ({
           : 'Installe toi bien, le créateur de la partie va la démarrer sous peu...'}
       </p>
       <>
+        <Invite gameUrl={window.location.href} />
         {isGameHost ? (
           <Settings
             className='Lobby__Settings'

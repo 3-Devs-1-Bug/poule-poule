@@ -1,0 +1,30 @@
+@import 'styles/variables';
+@import 'styles/helpers';
+
+.Invite {
+  h2 {
+    margin-bottom: $spacing-small;
+  }
+
+  &__Form {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  &__FormLabel {
+    flex-basis: 100%;
+  }
+
+  &__FormInput {
+    flex-basis: 65%;
+    background-color: $color-black-10;
+    border-radius: $radius-regular;
+    padding: $spacing-small;
+    border: none;
+  }
+
+  &__FormButton {
+    flex-basis: 30%;
+  }
+}
