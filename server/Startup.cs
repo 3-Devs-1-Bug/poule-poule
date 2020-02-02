@@ -44,6 +44,7 @@ namespace server
         options.AddPolicy("default", policy =>
         {
           policy.WithOrigins(allowedOrigins)
+                .SetIsOriginAllowedToAllowWildcardSubdomains()
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials();
