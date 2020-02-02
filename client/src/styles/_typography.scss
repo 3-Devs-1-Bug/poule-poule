@@ -52,8 +52,7 @@ ul.list {
       content: '•';
       left: -$spacing-regular;
       position: absolute;
-      top: 50%;
-      transform: translate(0, -50%);
+      top: 0;
     }
   }
 }
