@@ -1,0 +1,45 @@
+@import 'styles/variables';
+
+.Countdown {
+  position: relative;
+
+  &__Count {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition-property: opacity, transform;
+    transition-duration: $transition-duration;
+    transition-timing-function: $transition-timing;
+  }
+
+  .countdown-animation {
+    &-enter {
+      transform: scale(2);
+    }
+
+    &-enter-active {
+      transform: none;
+    }
+
+    &-exit {
+      transform: none;
+      opacity: 1;
+    }
+
+    &-exit-active {
+      transform: scale(0);
+      opacity: 0;
+    }
+    //   &-enter,
+    //   &-appear {
+    //     opacity: 0;
+    //     transform: scale(2);
+    //   }
+
+    //   &-enter-active,
+    //   &-appear-active {
+    //     opacity: 1;
+    //     transform: scale(1);
+    //   }
+  }
+}
