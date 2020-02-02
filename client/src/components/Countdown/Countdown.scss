@@ -1,0 +1,39 @@
+@import 'styles/variables';
+
+$countdown-default-tranform: translateX(-50%);
+
+.Countdown {
+  position: relative;
+  height: $base-spacing * 46 + $spacing-regular;
+
+  &__Count {
+    position: absolute;
+    font-size: $font-size-gigantic;
+    left: 50%;
+    transform: $countdown-default-tranform;
+
+    transition-property: opacity, transform;
+    transition-duration: $transition-duration;
+    transition-timing-function: $transition-timing;
+  }
+
+  .countdown-animation {
+    &-enter {
+      transform: $countdown-default-tranform scale(2);
+    }
+
+    &-enter-active {
+      transform: $countdown-default-tranform;
+    }
+
+    &-exit {
+      transform: $countdown-default-tranform;
+      opacity: 1;
+    }
+
+    &-exit-active {
+      transform: $countdown-default-tranform scale(0);
+      opacity: 0;
+    }
+  }
+}
