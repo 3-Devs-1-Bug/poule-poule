@@ -1,12 +1,17 @@
 @import 'styles/variables';
 
+$countdown-default-tranform: translateX(-50%);
+
 .Countdown {
   position: relative;
+  height: $base-spacing * 46 + $spacing-regular;
 
   &__Count {
     position: absolute;
-    top: 0;
-    left: 0;
+    font-size: $font-size-gigantic;
+    left: 50%;
+    transform: $countdown-default-tranform;
+
     transition-property: opacity, transform;
     transition-duration: $transition-duration;
     transition-timing-function: $transition-timing;
@@ -14,32 +19,21 @@
 
   .countdown-animation {
     &-enter {
-      transform: scale(2);
+      transform: $countdown-default-tranform scale(2);
     }
 
     &-enter-active {
-      transform: none;
+      transform: $countdown-default-tranform;
     }
 
     &-exit {
-      transform: none;
+      transform: $countdown-default-tranform;
       opacity: 1;
     }
 
     &-exit-active {
-      transform: scale(0);
+      transform: $countdown-default-tranform scale(0);
       opacity: 0;
     }
-    //   &-enter,
-    //   &-appear {
-    //     opacity: 0;
-    //     transform: scale(2);
-    //   }
-
-    //   &-enter-active,
-    //   &-appear-active {
-    //     opacity: 1;
-    //     transform: scale(1);
-    //   }
   }
 }
