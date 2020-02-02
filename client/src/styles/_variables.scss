@@ -31,3 +31,6 @@ $font-weight-regular: 400;
 $box-shadow: 0 0 $base-spacing $color-black;
 
 $breakpoint-mobile: $base-spacing * 45;
+
+$transition-duration: 0.25s;
+$transition-timing: ease-in-out;
