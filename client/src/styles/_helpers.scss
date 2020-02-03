@@ -1,6 +1,6 @@
 // Mobile related styles
-@mixin mobile {
-  @media (max-width: 700px) {
+@mixin desktop {
+  @media (min-width: $breakpoint-desktop) {
     @content;
   }
 }

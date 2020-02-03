@@ -20,7 +20,6 @@ $radius-regular: 0.3125rem;
 $radius-large: 0.625rem;
 
 $border-regular: 0.0625rem;
-$border-large: $border-regular * 4;
 
 $font-family-regular: Roboto, Arial, sans-serif;
 
@@ -39,4 +38,4 @@ $box-shadow-card: 0.0625rem 0.125rem 0.5rem rgba($color-black, 0.5);
 
 $transition-duration-regular: 0.25s;
 
-$breakpoint-mobile: $base-spacing * 45;
+$breakpoint-desktop: $base-spacing * 75;

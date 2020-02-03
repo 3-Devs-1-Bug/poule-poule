@@ -31,7 +31,7 @@ const Scores: FC<ScoresProps> = ({
     else {
       let firstPart = ''
       if (result.playerId === currentPlayerId) {
-        firstPart = 'Vous avez'
+        firstPart = 'Tu as'
       } else {
         const player = players.find(player => player.id === result.playerId)
         firstPart = `${(player && player.name) || 'Un joueur inconnu'} a`
