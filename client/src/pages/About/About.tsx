@@ -51,7 +51,9 @@ const About: FC<AboutProps> = () => {
             Stephen
             <External />
           </a>
-          .
+          . Pour toute question, suggestion d'amélioration ou remontée de bugs,
+          n'hésitez pas à nous contacter à cette adresse :{' '}
+          <a href='mailto:contact@poule-poule.com'>contact@poule-poule.com</a>.
         </p>
         <p>
           Le code du site est <span lang='en'>open source</span> et disponible
@@ -60,13 +62,13 @@ const About: FC<AboutProps> = () => {
             GitHub.com
             <External />
           </a>
-          .
+          . Le site a été réalisé avec les technologies suivantes :
         </p>
-        <p>
-          Pour toute question, suggestion d'amélioration ou remontée de bugs,
-          n'hésitez pas à nous contacter à cette adresse :{' '}
-          <a href='mailto:contact@poule-poule.com'>contact@poule-poule.com</a>.
-        </p>
+        <ul className='list'>
+          <li>Front-end : React et Typescript.</li>
+          <li>Back-end : .NET Core.</li>
+          <li>Gestion du temps réel : signalr</li>
+        </ul>
       </div>
 
       <div className='About__Section'>
