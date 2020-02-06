@@ -16,7 +16,7 @@ body {
   max-width: $breakpoint-desktop;
   margin: 0 auto;
   min-height: 100vh;
-  padding: $spacing-regular;
+  padding: $spacing-large;
 
   @include desktop {
     border-radius: $radius-regular;
