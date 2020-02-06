@@ -1,6 +1,7 @@
 import React, { FC, useState, useEffect } from 'react'
 import axios, { AxiosResponse } from 'axios'
 import { RouteComponentProps, navigate } from '@reach/router'
+import { Helmet } from 'react-helmet'
 
 import './Home.scss'
 
@@ -24,13 +25,18 @@ const Home: FC<HomeProps> = () => {
   }
 
   return (
-    <div className='Home'>
-      <p className='subtitle'>
-        Crée ta propre partie ou rejoins une partie déjà existante !
-      </p>
-      <NewGame createGame={createGame} />
-      <GameList className='Home__GameList' games={games} />
-    </div>
+    <>
+      <Helmet>
+        <title>Poule Poule</title>
+      </Helmet>
+      <div className='Home'>
+        <p className='subtitle'>
+          Crée ta propre partie ou rejoins une partie déjà existante !
+        </p>
+        <NewGame createGame={createGame} />
+        <GameList className='Home__GameList' games={games} />
+      </div>
+    </>
   )
 }
 
