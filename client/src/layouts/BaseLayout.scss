@@ -2,7 +2,9 @@
 @import 'styles/helpers';
 
 body {
-  background-color: $color-primary;
+  background-image: url('../images/backgound-light-grey.png');
+  background-repeat: repeat-x repeat-y;
+  background-size: 90px;
 
   @include desktop {
     padding: $spacing-regular;
@@ -17,6 +19,7 @@ body {
   margin: 0 auto;
   min-height: 100vh;
   padding: $spacing-regular;
+  border: 2px solid lightgrey;
 
   @include desktop {
     border-radius: $radius-regular;
