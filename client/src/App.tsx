@@ -4,6 +4,7 @@ import { Router } from '@reach/router'
 
 import BaseLayout from './layouts/BaseLayout'
 import Home from './pages/Home'
+import About from './pages/About'
 import NotFound from './pages/NotFound'
 import Game from './pages/Game'
 
@@ -14,6 +15,7 @@ const App: React.FC = () => {
     <BaseLayout>
       <Router>
         <Home path='/' />
+        <About path='/a-propos' />
         <Game path='/game/:id' />
         <NotFound path='*' />
       </Router>

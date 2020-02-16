@@ -1,0 +1,11 @@
+@import 'styles/variables';
+
+.About {
+  &__Section + &__Section {
+    margin-top: $spacing-large;
+  }
+
+  p + p {
+    margin-top: $spacing-regular;
+  }
+}
