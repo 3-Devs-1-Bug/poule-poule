@@ -1,10 +1,26 @@
 @import 'styles/variables';
+@import 'styles/helpers';
+
+body {
+  background-color: $color-primary;
+
+  @include desktop {
+    padding: $spacing-regular;
+  }
+}
 
 .BaseLayout {
+  background: $color-white;
   display: flex;
   flex-direction: column;
+  max-width: $breakpoint-desktop;
+  margin: 0 auto;
   min-height: 100vh;
-  padding: $spacing-regular;
+  padding: $spacing-large;
+
+  @include desktop {
+    border-radius: $radius-regular;
+  }
 
   &__Header {
     margin-bottom: $spacing-regular;
