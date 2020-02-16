@@ -52,8 +52,7 @@ const About: FC<AboutProps> = () => {
             <External />
           </a>
           . Pour toute question, suggestion d'amélioration ou remontée de bugs,
-          n'hésitez pas à nous contacter à cette adresse :{' '}
-          <a href='mailto:contact@poule-poule.com'>contact@poule-poule.com</a>.
+          n'hésitez pas à nous contacter via les liens ci-dessus.
         </p>
         <p>
           Le code du site est <span lang='en'>open source</span> et disponible
@@ -88,7 +87,7 @@ const About: FC<AboutProps> = () => {
             . Merci à eux !
           </li>
           <li>
-            L'icône de poule a été réalisé par Freepik sur{' '}
+            L'icône de poule a été réalisée par Freepik sur{' '}
             <a href='https://www.flaticon.com/free-icon/hen_1864470?term=hen&page=1&position=8'>
               flaticon.com
               <External />
