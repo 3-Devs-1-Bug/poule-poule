@@ -87,7 +87,7 @@ const Game: FC<GameProps> = (props: GameProps) => {
           return (
             <>
               <Helmet>
-                <title>{`Partie #${game.id} : accueil`}</title>
+                <title>{`Partie n°${game.id}`}</title>
               </Helmet>
               <Lobby
                 game={game}
@@ -104,7 +104,7 @@ const Game: FC<GameProps> = (props: GameProps) => {
           return (
             <>
               <Helmet>
-                <title>{`Partie #${game.id} : manche en cours`}</title>
+                <title>{`Partie n°${game.id}`}</title>
               </Helmet>
               <Round
                 game={game}
@@ -118,7 +118,7 @@ const Game: FC<GameProps> = (props: GameProps) => {
             return (
               <>
                 <Helmet>
-                  <title>{`Partie #${game.id} : fin de la manche`}</title>
+                  <title>{`Partie n°${game.id}`}</title>
                 </Helmet>
                 <Scores
                   game={game}

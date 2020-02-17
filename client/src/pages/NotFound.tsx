@@ -7,10 +7,16 @@ export interface NotFoundProps extends RouteComponentProps {}
 const NotFound: FC<NotFoundProps> = () => (
   <>
     <Helmet>
-      <title>Erreur 404 : page non trouvée</title>
+      <title>Page introuvable</title>
     </Helmet>
-    <h2>Page Not Found</h2>
-    <Link to='/'>Go to homepage</Link>
+    <p>
+      La page que vous recherchez n'existe pas ou a été supprimée. Si vous
+      cherchiez à rejoindre une partie, vérifiez bien son numéro.
+    </p>
+    <br />
+    <p>
+      Vous pouvez <Link to='/'>retourner à la page d'accueil</Link>.
+    </p>
   </>
 )
 
