@@ -16,10 +16,11 @@ body {
   max-width: $breakpoint-desktop;
   margin: 0 auto;
   min-height: 100vh;
-  padding: $spacing-large;
+  padding: $spacing-regular;
 
   @include desktop {
     border-radius: $radius-regular;
+    padding: $spacing-large;
   }
 
   &__Header {
