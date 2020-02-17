@@ -6,7 +6,7 @@ import './BaseLayout.scss'
 
 const BaseLayout: FC = ({ children }) => (
   <main className='BaseLayout'>
-    <Header className='BaseLayout__Header' />
+    <Header title={document.title} className='BaseLayout__Header' />
     <div className='BaseLayout__Content'>{children}</div>
     <Footer className='BaseLayout__Footer' />
   </main>

@@ -6,17 +6,18 @@ import './Header.scss'
 import { Link } from '@reach/router'
 
 export interface HeaderProps {
+  title: string
   className?: string
 }
 
-const Header: FC<HeaderProps> = ({ className }) => {
+const Header: FC<HeaderProps> = ({ title = 'Poule poule', className }) => {
   const classes = classnames(className, 'Header')
 
   return (
     <header className={classes}>
       <Link className='Header__Link' to='/'>
         <img className='Header__Icon' src={logo} alt='' />
-        <h1>Poule Poule</h1>
+        <h1>{title}</h1>
       </Link>
     </header>
   )
