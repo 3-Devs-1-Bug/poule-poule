@@ -21,7 +21,7 @@ const Home: FC<HomeProps> = () => {
   const createGame = async () => {
     const postGameResponse: AxiosResponse<GameItem> = await axios.post(`/games`)
     const game = postGameResponse.data
-    navigate(`/game/${game.id}`)
+    navigate(`/partie/${game.id}`)
   }
 
   return (

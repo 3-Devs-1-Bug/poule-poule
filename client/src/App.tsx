@@ -8,19 +8,15 @@ import About from './pages/About'
 import NotFound from './pages/NotFound'
 import Game from './pages/Game'
 
-interface helmetProps {
-  title: string
-}
-
 const App: React.FC = () => {
   axios.defaults.baseURL = process.env.REACT_APP_API_URL
 
   return (
     <BaseLayout>
-      <Router>
+      <Router style={{ boxShadow: 'none' }}>
         <Home path='/' />
         <About path='/a-propos' />
-        <Game path='/game/:id' />
+        <Game path='/partie/:id' />
         <NotFound path='*' />
       </Router>
     </BaseLayout>
