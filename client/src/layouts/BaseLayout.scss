@@ -20,6 +20,7 @@ body {
 
   @include desktop {
     border-radius: $radius-regular;
+    min-height: calc(100vh - #{$spacing-large});
     padding: $spacing-large;
   }
 
