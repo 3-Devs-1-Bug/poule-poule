@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import { RouteComponentProps } from '@reach/router'
+import { Helmet } from 'react-helmet'
 
 import { Settings as SettingsType } from '../../types/Settings'
 import { Game } from '../../types/Game'
@@ -25,47 +26,52 @@ const Lobby: FC<LobbyProps> = ({
   updateGameSettings
 }) => {
   return (
-    <div className='Lobby'>
-      <p className='subtitle'>
-        {isGameHost
-          ? 'Choisis les paramètres, invite d’autres joueurs et lance la partie.'
-          : 'Installe toi bien, le créateur de la partie va la démarrer sous peu...'}
-      </p>
-      <>
-        <Invite gameUrl={window.location.href} />
-        {isGameHost ? (
-          <Settings
-            className='Lobby__Settings'
-            difficulty={game.difficulty}
-            roundsToWin={game.roundsToWin}
-            cardSpeed={game.cardSpeed}
-            updateSettings={updateGameSettings}
+    <>
+      <Helmet>
+        <title>{`Partie n°${game.id}`}</title>
+      </Helmet>
+      <div className='Lobby'>
+        <p className='subtitle'>
+          {isGameHost
+            ? 'Choisis les paramètres, invite d’autres joueurs et lance la partie.'
+            : 'Installe toi bien, le créateur de la partie va la démarrer sous peu...'}
+        </p>
+        <>
+          <Invite gameUrl={window.location.href} />
+          {isGameHost ? (
+            <Settings
+              className='Lobby__Settings'
+              difficulty={game.difficulty}
+              roundsToWin={game.roundsToWin}
+              cardSpeed={game.cardSpeed}
+              updateSettings={updateGameSettings}
+            />
+          ) : (
+            <>
+              <h2>Paramètres</h2>
+              <ul className='list'>
+                <li>
+                  Temps entre chaque carte : <strong>{game.cardSpeed}</strong>{' '}
+                  secondes
+                </li>
+              </ul>
+            </>
+          )}
+
+          <PlayerList
+            className='Lobby__Players'
+            players={game.players}
+            currentPlayerId={currentPlayerId}
           />
-        ) : (
-          <>
-            <h2>Paramètres</h2>
-            <ul className='list'>
-              <li>
-                Temps entre chaque carte : <strong>{game.cardSpeed}</strong>{' '}
-                secondes
-              </li>
-            </ul>
-          </>
-        )}
 
-        <PlayerList
-          className='Lobby__Players'
-          players={game.players}
-          currentPlayerId={currentPlayerId}
-        />
-
-        {isGameHost && (
-          <Button className='Lobby__Button' onClick={startGame}>
-            Commencer la partie
-          </Button>
-        )}
-      </>
-    </div>
+          {isGameHost && (
+            <Button className='Lobby__Button' onClick={startGame}>
+              Commencer la partie
+            </Button>
+          )}
+        </>
+      </div>
+    </>
   )
 }
 

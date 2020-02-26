@@ -3,7 +3,6 @@ import axios, { AxiosResponse } from 'axios'
 import { RouteComponentProps } from '@reach/router'
 import { HubConnection } from '@microsoft/signalr'
 import { uniqueId } from 'lodash-es'
-import { Helmet } from 'react-helmet'
 
 import connectToGameHub from '../utils/signalrConnector'
 import { Game as GameType } from '../types/Game'
@@ -85,49 +84,34 @@ const Game: FC<GameProps> = (props: GameProps) => {
       switch (game.status) {
         case GameStatus.WAITING_FOR_PLAYERS:
           return (
-            <>
-              <Helmet>
-                <title>{`Partie n°${game.id}`}</title>
-              </Helmet>
-              <Lobby
-                game={game}
-                currentPlayerId={currentPlayerId}
-                isGameHost={isGameHost}
-                startGame={() => hubConnection.invoke('StartGame')}
-                updateGameSettings={(settings: Settings) =>
-                  hubConnection.invoke('UpdateGameSettings', settings)
-                }
-              />
-            </>
+            <Lobby
+              game={game}
+              currentPlayerId={currentPlayerId}
+              isGameHost={isGameHost}
+              startGame={() => hubConnection.invoke('StartGame')}
+              updateGameSettings={(settings: Settings) =>
+                hubConnection.invoke('UpdateGameSettings', settings)
+              }
+            />
           )
         case GameStatus.ROUND_IN_PROGRESS:
           return (
-            <>
-              <Helmet>
-                <title>{`Partie n°${game.id}`}</title>
-              </Helmet>
-              <Round
-                game={game}
-                cards={cards}
-                hitPile={() => hubConnection.invoke('HitPile')}
-              />
-            </>
+            <Round
+              game={game}
+              cards={cards}
+              hitPile={() => hubConnection.invoke('HitPile')}
+            />
           )
         case GameStatus.ROUND_ENDED:
           if (result) {
             return (
-              <>
-                <Helmet>
-                  <title>{`Partie n°${game.id}`}</title>
-                </Helmet>
-                <Scores
-                  game={game}
-                  currentPlayerId={currentPlayerId}
-                  isGameHost={isGameHost}
-                  result={result}
-                  startGame={() => hubConnection.invoke('StartGame')}
-                />
-              </>
+              <Scores
+                game={game}
+                currentPlayerId={currentPlayerId}
+                isGameHost={isGameHost}
+                result={result}
+                startGame={() => hubConnection.invoke('StartGame')}
+              />
             )
           }
       }
