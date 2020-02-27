@@ -18,7 +18,7 @@ const Header: FC<HeaderProps> = ({ className }) => {
 
   useEffect(() => {
     if (titleRef.current) titleRef.current.focus()
-  })
+  }, [])
 
   return (
     <header className={classes}>
