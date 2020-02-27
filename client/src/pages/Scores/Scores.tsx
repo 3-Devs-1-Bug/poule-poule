@@ -1,5 +1,7 @@
 import React, { FC } from 'react'
 import { RouteComponentProps } from '@reach/router'
+import { Helmet } from 'react-helmet'
+
 import { Game } from '../../types/Game'
 import './Scores.scss'
 import Button from '../../components/Button'
@@ -41,23 +43,28 @@ const Scores: FC<ScoresProps> = ({
   }
 
   return (
-    <div className='Scores'>
-      <p className='subtitle'>
-        {buildResultText(result, game.players)} il y avait {result.count}{' '}
-        oeuf(s). La manche est terminée, voici l’état actuel des scores. Prépare
-        toi pour la suivante !
-      </p>
-      <ScoreBoard
-        className='Scores__Players'
-        players={game.players}
-        currentPlayerId={currentPlayerId}
-      />
-      {game.status === GameStatus.ROUND_ENDED && isGameHost && (
-        <Button className='Scores__NewRoundButton' onClick={startGame}>
-          Lancer la prochaine manche
-        </Button>
-      )}
-    </div>
+    <>
+      <Helmet>
+        <title>{`Partie n°${game.id}`}</title>
+      </Helmet>
+      <div className='Scores'>
+        <p className='subtitle'>
+          {buildResultText(result, game.players)} il y avait {result.count}{' '}
+          oeuf(s). La manche est terminée, voici l’état actuel des scores.
+          Prépare toi pour la suivante !
+        </p>
+        <ScoreBoard
+          className='Scores__Players'
+          players={game.players}
+          currentPlayerId={currentPlayerId}
+        />
+        {game.status === GameStatus.ROUND_ENDED && isGameHost && (
+          <Button className='Scores__NewRoundButton' onClick={startGame}>
+            Lancer la prochaine manche
+          </Button>
+        )}
+      </div>
+    </>
   )
 }
 

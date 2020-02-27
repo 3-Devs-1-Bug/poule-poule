@@ -13,10 +13,10 @@ const App: React.FC = () => {
 
   return (
     <BaseLayout>
-      <Router>
+      <Router style={{ boxShadow: 'none' }}>
         <Home path='/' />
         <About path='/a-propos' />
-        <Game path='/game/:id' />
+        <Game path='/partie/:id' />
         <NotFound path='*' />
       </Router>
     </BaseLayout>
