@@ -71,7 +71,13 @@ const Game: FC<GameProps> = (props: GameProps) => {
       const topPlayers = game.players.sort((a, b) =>
         a.score > b.score ? -1 : a.score < b.score ? 1 : 0
       )
-      return <Podium players={topPlayers} currentPlayerId={currentPlayerId} />
+      return (
+        <Podium
+          game={game}
+          players={topPlayers}
+          currentPlayerId={currentPlayerId}
+        />
+      )
     }
 
     if (!currentPlayerId && game.status === GameStatus.ROUND_IN_PROGRESS)
