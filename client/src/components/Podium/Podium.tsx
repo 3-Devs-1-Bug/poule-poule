@@ -11,7 +11,7 @@ import ScoreBoard from '../ScoreBoard'
 export interface PodiumProps {
   players: Array<Player>
   game: Game
-  currentPlayerId: string
+  currentPlayerId?: string
   className?: string
 }
 
@@ -37,15 +37,17 @@ const Podium: FC<PodiumProps> = ({
         <title>{`Partie n°${game.id}`}</title>
       </Helmet>
       <div className={classes}>
-        <p className='Podium__Result'>
-          <span className='Podium__Emoji' aria-hidden='true'>
-            {isWinner ? '🏆' : '😭'}
-          </span>
-          {isWinner ? 'Vous avez gagné !' : 'Vous avez perdu !'}
-          <span className='Podium__Emoji' aria-hidden='true'>
-            {isWinner ? '🏆' : '😭'}
-          </span>
-        </p>
+        {currentPlayerId && (
+          <p className='Podium__Result'>
+            <span className='Podium__Emoji' aria-hidden='true'>
+              {isWinner ? '🏆' : '😭'}
+            </span>
+            {isWinner ? 'Vous avez gagné !' : 'Vous avez perdu !'}
+            <span className='Podium__Emoji' aria-hidden='true'>
+              {isWinner ? '🏆' : '😭'}
+            </span>
+          </p>
+        )}
         <ScoreBoard players={players} currentPlayerId={currentPlayerId} />
         {isWinner && (
           <Confetti width={window.innerWidth} height={window.innerHeight} />
