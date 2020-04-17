@@ -38,7 +38,10 @@ const Game: FC<GameProps> = (props: GameProps) => {
       var game = await loadGame()
       setGame(game)
 
-      if (game.status !== GameStatus.ROUND_IN_PROGRESS) {
+      if (
+        game.status === GameStatus.WAITING_FOR_PLAYERS ||
+        game.status === GameStatus.ROUND_ENDED
+      ) {
         const connection = connectToGameHub(game.id)
         connection.start().then(() => {
           connection.connectionId && setCurrentPlayerId(connection.connectionId)
