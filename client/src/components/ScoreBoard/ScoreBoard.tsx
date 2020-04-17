@@ -7,7 +7,7 @@ import './ScoreBoard.scss'
 
 export interface ScoreBoardProps {
   players: Array<Player>
-  currentPlayerId: string
+  currentPlayerId?: string
   className?: string
 }
 

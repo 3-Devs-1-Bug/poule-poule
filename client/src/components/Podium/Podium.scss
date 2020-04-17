@@ -2,16 +2,21 @@
 @import 'styles/helpers';
 
 .Podium {
-  &__VictoryMessage {
-    font-size: $font-size-larger;
-    font-weight: $font-weight-bold;
-    color: yellowgreen;
-    animation: blinker 1.5s linear infinite;
+  &__Result {
+    align-items: center;
+    display: flex;
+    justify-content: center;
   }
 
-  @keyframes blinker {
-    50% {
-      opacity: 0;
+  &__Emoji {
+    font-size: $font-size-larger;
+
+    &:first-of-type {
+      margin-right: $spacing-small;
+    }
+
+    &:last-of-type {
+      margin-left: $spacing-small;
     }
   }
 }

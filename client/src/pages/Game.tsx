@@ -38,7 +38,10 @@ const Game: FC<GameProps> = (props: GameProps) => {
       var game = await loadGame()
       setGame(game)
 
-      if (game.status !== GameStatus.ROUND_IN_PROGRESS) {
+      if (
+        game.status === GameStatus.WAITING_FOR_PLAYERS ||
+        game.status === GameStatus.ROUND_ENDED
+      ) {
         const connection = connectToGameHub(game.id)
         connection.start().then(() => {
           connection.connectionId && setCurrentPlayerId(connection.connectionId)
@@ -71,7 +74,13 @@ const Game: FC<GameProps> = (props: GameProps) => {
       const topPlayers = game.players.sort((a, b) =>
         a.score > b.score ? -1 : a.score < b.score ? 1 : 0
       )
-      return <Podium players={topPlayers} currentPlayerId={currentPlayerId} />
+      return (
+        <Podium
+          game={game}
+          players={topPlayers}
+          currentPlayerId={currentPlayerId}
+        />
+      )
     }
 
     if (!currentPlayerId && game.status === GameStatus.ROUND_IN_PROGRESS)
